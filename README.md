@@ -1,2 +1,15 @@
-# Links
-A Majority of links that u can use whenever you want.
+# Links for me ✿
+
+Uma coleção de links em uma página estática, pronta para o GitHub Pages. Alguns links foram creditados pelo autor ao ByePassHub no GitHub.
+
+## Publicação
+
+Após integrar os arquivos à branch de publicação, abra **Settings → Pages**, selecione **Deploy from a branch**, escolha a branch e a pasta `/ (root)` e salve. O endereço aparecerá na própria página de configurações. Não é necessário instalar dependências ou compilar o site.
+
+## Editar a coleção
+
+Os dados ficam em `assets/links.js`. Cada grupo tem `category`, `name` e `links`: coloque um endereço por linha dentro das crases. Endereços sem protocolo recebem `https://`; protocolos explícitos são preservados. Links duplicados dentro de um grupo são removidos na apresentação.
+
+A coleção reúne os endereços fornecidos e elimina repetições dentro de cada grupo. Os rótulos sem endereço não foram transformados em links. O código HTML “GN-Math Single File” não foi incorporado: ele baixa e executa código de terceiros e precisa ser analisado antes de ser usado. Links de terceiros não foram verificados e podem mudar ou deixar de funcionar. Endereços HTTP explícitos foram preservados e não oferecem conexão segura.
+
+O botão de som no topo ativa ou desativa um efeito curto, desligado por padrão.
