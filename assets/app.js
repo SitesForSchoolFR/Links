@@ -3,7 +3,10 @@ const filters = document.querySelector('#filters');
 const search = document.querySelector('#search');
 const groups = LINK_GROUPS.map(group => ({ ...group, urls: [...new Set(group.links.split('\n').map(x => x.trim()).filter(Boolean).map(x => /^https?:\/\//i.test(x) ? x : `https://${x}`))] }));
 let category = 'Todos';
-const categories = ['Todos', ...new Set(groups.map(g => g.category))];
+const favoritesKey = 'links-for-me-favorites-v1';
+let favorites = new Set();
+try { const saved = JSON.parse(localStorage.getItem(favoritesKey) || '[]'); if (Array.isArray(saved)) favorites = new Set(saved.filter(item => typeof item === 'string')); } catch (_) { /* navegação privada ou armazenamento indisponível */ }
+const categories = ['Todos', 'Favoritos', ...new Set(groups.map(g => g.category))];
 const icons = { 'Jogos': '✳', 'Estudos': '✿', 'Filmes e séries': '♡' };
 for (const name of categories) {
   const button = document.createElement('button');
@@ -19,8 +22,8 @@ function render() {
   grid.replaceChildren();
   let count = 0;
   for (const group of groups) {
-    if (category !== 'Todos' && group.category !== category) continue;
-    const matching = group.urls.filter(url => `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
+    if (category !== 'Todos' && category !== 'Favoritos' && group.category !== category) continue;
+    const matching = group.urls.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
     if (!matching.length) continue;
     count++;
     const card = document.createElement('article'); card.className = 'card';
@@ -37,11 +40,27 @@ function render() {
       const li = document.createElement('li'); const link = document.createElement('a');
       link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer';
       link.textContent = url.replace(/^https?:\/\//, '');
-      li.append(link); list.append(li);
+      const favorite = document.createElement('button'); favorite.type = 'button'; favorite.className = 'favorite';
+      function updateFavorite() {
+        const active = favorites.has(url); favorite.textContent = active ? '♥' : '♡';
+        favorite.setAttribute('aria-pressed', String(active));
+        favorite.setAttribute('aria-label', `${active ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}: ${link.textContent}`);
+      }
+      updateFavorite();
+      favorite.addEventListener('click', () => {
+        if (favorites.has(url)) favorites.delete(url); else favorites.add(url);
+        try { localStorage.setItem(favoritesKey, JSON.stringify([...favorites])); }
+        catch (_) { document.querySelector('#favorite-status').textContent = 'Não foi possível salvar favoritos neste navegador.'; }
+        if (category === 'Favoritos') render();
+        else document.querySelectorAll('.favorite').forEach(button => { if (button.dataset.url === url) { const active = favorites.has(url); button.textContent = active ? '♥' : '♡'; button.setAttribute('aria-pressed', String(active)); button.setAttribute('aria-label', `${active ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}: ${link.textContent}`); } });
+      });
+      favorite.dataset.url = url;
+      li.append(link, favorite); list.append(li);
     }
     details.append(summary, list); card.append(head, details); grid.append(card);
   }
   document.querySelector('#results').textContent = `${count} ${count === 1 ? 'coleção encontrada' : 'coleções encontradas'}`;
+  document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : 'Nenhum link encontrado. Tente outra busca ♡';
   document.querySelector('#empty').hidden = count !== 0;
 }
 search.addEventListener('input', render); render();
@@ -112,3 +131,32 @@ document.addEventListener('pointermove', event => {
   particle.textContent = '✦'; particle.style.left = `${event.clientX}px`; particle.style.top = `${event.clientY}px`;
   document.body.append(particle); setTimeout(() => particle.remove(), 500);
 }, { passive: true });
+
+// Cada abertura ou retorno do cache começa em estudos; o modo nunca é salvo.
+const studyPage = document.querySelector('#study');
+const linksSite = document.querySelector('#links-site');
+function showMode(showLinks) {
+  studyPage.hidden = showLinks; linksSite.hidden = !showLinks;
+  document.title = showLinks ? 'Links for me ✿' : 'Estação de estudos';
+  window.scrollTo(0, 0);
+}
+window.addEventListener('pageshow', event => { if (event.persisted) showMode(false); });
+const heldKeys = new Set();
+document.addEventListener('keydown', event => {
+  if (event.code === 'KeyA' || event.code === 'KeyY') heldKeys.add(event.code);
+  if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyY') && !event.repeat) {
+    event.preventDefault(); heldKeys.clear(); showMode(linksSite.hidden);
+  }
+});
+document.addEventListener('keyup', event => heldKeys.delete(event.code));
+window.addEventListener('blur', () => heldKeys.clear());
+// Evita fragmentos na URL sem quebrar a navegação por teclado.
+document.querySelectorAll('[data-scroll]').forEach(link => link.addEventListener('click', event => {
+  event.preventDefault();
+  if (link.dataset.scroll === 'top') window.scrollTo({ top: 0, behavior: 'smooth' });
+  else document.getElementById(link.dataset.scroll).scrollIntoView({ behavior: 'smooth' });
+}));
+// Só normaliza o endereço no domínio oficial; previews locais continuam utilizáveis.
+if (location.hostname.toLowerCase() === 'sitesforschoolfr.github.io' && location.pathname.toLowerCase().startsWith('/links/')) {
+  history.replaceState(null, '', '/Links/');
+}

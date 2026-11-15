@@ -17,3 +17,9 @@ O botão de som no topo ativa ou desativa um efeito curto, desligado por padrão
 ### Sugerir coleção para um novo link
 
 No terminal, com Node.js instalado, execute `node scripts/adicionar-link.cjs https://exemplo.com "nome ou tema"`. A ferramenta compara nome, algumas variações e domínio com os grupos existentes, mostra a sugestão e pede confirmação antes de salvar. Se não encontrar correspondência, sugere uma nova coleção; em caso de empate, pede um tema mais específico. Dê o tema sempre que possível: domínios compartilhados e mirrors podem ser ambíguos, e a sugestão deve ser revisada. Para cancelar, responda `n` ou pressione Enter. Isso é uma ferramenta local de manutenção, não uma edição automática feita pelos visitantes do Pages.
+
+## Modo de estudos e favoritos
+
+Toda abertura da página começa no modo de estudos, mesmo quando há dados salvos no navegador. Segure **Shift + A + Y** simultaneamente para trocar entre o modo de estudos e a coleção. O modo atual não é salvo. Os exercícios cobrem do 1º ao 9º ano e as três séries do ensino médio; escolha o ano e clique nas alternativas para receber feedback.
+
+Na coleção, o coração ao lado de cada endereço adiciona ou remove o favorito; o filtro **Favoritos** reúne os endereços salvos. Eles ficam no armazenamento local do navegador e podem não persistir se o armazenamento estiver bloqueado ou for apagado. O atalho exige um teclado físico. A navegação interna não adiciona fragmentos à URL; links externos continuam abrindo seus próprios endereços em outra aba. O site não controla URLs digitadas manualmente, domínios alternativos, nem páginas que o GitHub Pages não encontra.
