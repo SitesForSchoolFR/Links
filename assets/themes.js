@@ -1,4 +1,4 @@
-// Ilustrações originais em estilo anime, uma para cada tema Tomboy.
+// Uma arte original e nove ilustrações inspiradas em Tomo Aizawa, uma para cada tema.
 const themes = [
   {id:'kawaii',name:'Kawaii original',note:'a clássica',color:'#e598aa'},
   {id:'catboy',name:'Tomboy Café',note:'energia de protagonista',color:'#bd8399',bg:'#fff3f1',panel:'#f3dee3',ink:'#573d50',accent:'#b96784',image:'01'},
