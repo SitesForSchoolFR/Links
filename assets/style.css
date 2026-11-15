@@ -45,13 +45,13 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:10;op
 @media(prefers-reduced-motion:reduce){.cursor-ring span{transition:none}}
 
 /* Uma imagem própria para cada variação. */
-#links-site[data-art="01"] .hero{--theme-image:url("tomboy-01.jpg")}
-#links-site[data-art="02"] .hero{--theme-image:url("tomboy-02.jpg")}
+#links-site[data-art="01"] .hero{--theme-image:url("tomboy-01-new.jpg")}
+#links-site[data-art="02"] .hero{--theme-image:url("tomboy-02-new.jpg")}
 #links-site[data-art="03"] .hero{--theme-image:url("tomboy-03.jpg")}
-#links-site[data-art="04"] .hero{--theme-image:url("tomboy-04.jpg")}
-#links-site[data-art="05"] .hero{--theme-image:url("tomboy-05.jpg")}
-#links-site[data-art="06"] .hero{--theme-image:url("tomboy-06.jpg")}
-#links-site[data-art="07"] .hero{--theme-image:url("tomboy-07.jpg")}
-#links-site[data-art="08"] .hero{--theme-image:url("tomboy-08.jpg")}
-#links-site[data-art="09"] .hero{--theme-image:url("tomboy-09.jpg")}
-#links-site[data-art="10"] .hero{--theme-image:url("tomboy-10.jpg")}
+#links-site[data-art="04"] .hero{--theme-image:url("tomboy-04-new.jpg")}
+#links-site[data-art="05"] .hero{--theme-image:url("tomboy-05-new.jpg")}
+#links-site[data-art="06"] .hero{--theme-image:url("tomboy-06-new.jpg")}
+#links-site[data-art="07"] .hero{--theme-image:url("tomboy-07-new.jpg")}
+#links-site[data-art="08"] .hero{--theme-image:url("tomboy-08-new.jpg")}
+#links-site[data-art="09"] .hero{--theme-image:url("tomboy-09-new.jpg")}
+#links-site[data-art="10"] .hero{--theme-image:url("tomboy-10-new.jpg")}
