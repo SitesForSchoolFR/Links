@@ -23,3 +23,11 @@ No terminal, com Node.js instalado, execute `node scripts/adicionar-link.cjs htt
 Toda abertura da página começa no modo de estudos, mesmo quando há dados salvos no navegador. Segure **Shift + A + Y** simultaneamente para trocar entre o modo de estudos e a coleção. O modo atual não é salvo. Os exercícios cobrem do 1º ao 9º ano e as três séries do ensino médio; escolha o ano e clique nas alternativas para receber feedback.
 
 Na coleção, o coração ao lado de cada endereço adiciona ou remove o favorito; o filtro **Favoritos** reúne os endereços salvos. Eles ficam no armazenamento local do navegador e podem não persistir se o armazenamento estiver bloqueado ou for apagado. O atalho exige um teclado físico. A navegação interna não adiciona fragmentos à URL; links externos continuam abrindo seus próprios endereços em outra aba. O site não controla URLs digitadas manualmente, domínios alternativos, nem páginas que o GitHub Pages não encontra.
+
+### Estação de estudos e temas
+
+A estação oferece quizzes de matemática, português e ciências, seleção de ano, pontuação, pesquisa dos conteúdos da área de estudos e personagens fictícios identificados como tal. Português e ciências compartilham exercícios por etapa escolar; matemática tem exercícios específicos por ano. As preferências de ano e matéria ficam no navegador, mas não alteram o modo inicial de estudos.
+
+Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` continua alternando os modos; `Shift + A + P` abre a coleção com o tema Catboy Café. Em Temas, há a opção Kawaii e 11 variações Catboy. As variações usam duas ilustrações geradas para o projeto e paletas diferentes; o tema é salvo localmente sem alterar o modo inicial.
+
+O ponteiro nativo é mantido e um ponto decorativo o acompanha em dispositivos com mouse, para não depender do suporte do navegador a cursores personalizados.
