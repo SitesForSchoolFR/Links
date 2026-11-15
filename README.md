@@ -13,3 +13,7 @@ Os dados ficam em `assets/links.js`. Cada grupo tem `category`, `name` e `links`
 A coleção reúne os endereços fornecidos e elimina repetições dentro de cada grupo. Os rótulos sem endereço não foram transformados em links. O código HTML “GN-Math Single File” não foi incorporado: ele baixa e executa código de terceiros e precisa ser analisado antes de ser usado. Links de terceiros não foram verificados e podem mudar ou deixar de funcionar. Endereços HTTP explícitos foram preservados e não oferecem conexão segura.
 
 O botão de som no topo ativa ou desativa um efeito curto, desligado por padrão.
+
+### Sugerir coleção para um novo link
+
+No terminal, com Node.js instalado, execute `node scripts/adicionar-link.cjs https://exemplo.com "nome ou tema"`. A ferramenta compara nome, algumas variações e domínio com os grupos existentes, mostra a sugestão e pede confirmação antes de salvar. Se não encontrar correspondência, sugere uma nova coleção; em caso de empate, pede um tema mais específico. Dê o tema sempre que possível: domínios compartilhados e mirrors podem ser ambíguos, e a sugestão deve ser revisada. Para cancelar, responda `n` ou pressione Enter. Isso é uma ferramenta local de manutenção, não uma edição automática feita pelos visitantes do Pages.

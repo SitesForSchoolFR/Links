@@ -79,3 +79,36 @@ soundButton.addEventListener('click', () => {
 document.addEventListener('click', event => {
   if (event.target.closest('#filters button, summary, .hero-button')) chime();
 });
+
+// A busca pode ser aberta também pelo teclado; permanece aberta enquanto houver texto.
+const searchBox = document.querySelector('#search-box');
+const searchToggle = document.querySelector('#search-toggle');
+let searchCloseTimer;
+searchToggle.addEventListener('click', () => {
+  const open = searchToggle.getAttribute('aria-expanded') !== 'true';
+  clearTimeout(searchCloseTimer);
+  searchToggle.setAttribute('aria-expanded', String(open));
+  searchToggle.setAttribute('aria-label', open ? 'Fechar busca' : 'Abrir busca');
+  if (open) {
+    search.hidden = false;
+    requestAnimationFrame(() => { if (searchToggle.getAttribute('aria-expanded') === 'true') { searchBox.classList.add('is-open'); search.focus(); } });
+  } else {
+    search.value = ''; render();
+    searchBox.classList.remove('is-open');
+    searchCloseTimer = setTimeout(() => { search.hidden = true; }, 250);
+  }
+});
+search.addEventListener('keydown', event => { if (event.key === 'Escape') { searchToggle.click(); searchToggle.focus(); } });
+
+// Rastro limitado em frequência; nunca interfere em cliques, toque ou movimento reduzido.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const finePointer = window.matchMedia('(pointer: fine)');
+let lastSparkle = 0;
+document.addEventListener('pointermove', event => {
+  if (event.pointerType !== 'mouse' || reducedMotion.matches || !finePointer.matches || event.timeStamp - lastSparkle < 80) return;
+  lastSparkle = event.timeStamp;
+  const particle = document.createElement('span');
+  particle.className = 'sparkle-particle'; particle.setAttribute('aria-hidden', 'true');
+  particle.textContent = '✦'; particle.style.left = `${event.clientX}px`; particle.style.top = `${event.clientY}px`;
+  document.body.append(particle); setTimeout(() => particle.remove(), 500);
+}, { passive: true });
