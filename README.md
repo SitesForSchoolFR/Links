@@ -35,3 +35,7 @@ Em dispositivos com mouse, um cursor personalizado substitui temporariamente o p
 ### Study Hobby
 
 A página inicial do modo de estudos oferece acesso rápido aos quizzes, pesquisa, uma turma fictícia, cronômetro de foco e bloquinho de notas. O cronômetro não é salvo ao fechar a página. As notas, preferências e o progresso de questões diferentes acertadas são guardados localmente no navegador quando permitido. O progresso pode ser limpo no cartão correspondente; limpar os dados do navegador também o apaga. Os quizzes permitem misturar e reiniciar questões e consultar explicações. São 150 questões distintas: matemática por ano e português e ciências por etapa escolar.
+
+## Testes de desenvolvimento
+
+Com Node.js 18 ou superior, execute `npm ci` e `npm test`. As dependências são necessárias apenas para os testes; o site publicado continua estático e não precisa de instalação ou compilação. Os testes verificam os principais fluxos, formatos de links, temas e cenários com armazenamento local bloqueado, mas não verificam a disponibilidade dos sites externos.
