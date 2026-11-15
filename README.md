@@ -31,3 +31,7 @@ A estação oferece quizzes de matemática, português e ciências, seleção de
 Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` continua alternando os modos; `Shift + A + P` abre a coleção com o tema Tomboy Café. Em Temas, há a opção Kawaii e dez variações Tomboy. Cada variação usa uma ilustração em estilo anime gerada para o projeto (uma original e nove inspiradas em Tomo Aizawa) e uma paleta própria; o tema é salvo localmente sem alterar o modo inicial.
 
 Em dispositivos com mouse, um cursor personalizado substitui temporariamente o ponteiro nativo, com um anel que o segue e reage ao clique. O ponteiro nativo volta quando o mouse sai da página ou se o JavaScript estiver desativado. A preferência de movimento reduzido é respeitada.
+
+### Study Hobby
+
+A página inicial do modo de estudos oferece acesso rápido aos quizzes, pesquisa, uma turma fictícia, cronômetro de foco e bloquinho de notas. O cronômetro não é salvo ao fechar a página. As notas, preferências e o progresso de questões diferentes acertadas são guardados localmente no navegador quando permitido. O progresso pode ser limpo no cartão correspondente; limpar os dados do navegador também o apaga. Os quizzes permitem misturar e reiniciar questões e consultar explicações. São 150 questões distintas: matemática por ano e português e ciências por etapa escolar.

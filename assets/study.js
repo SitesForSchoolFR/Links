@@ -89,14 +89,37 @@ const otherSubjects = {
  ]
 };
 function getStudyQuestions(grade, subject) {
- if (subject === 'math') return studyQuestions[grade];
+ if (subject === 'math') return [...studyQuestions[grade], ...extraStudyQuestions.math[grade]];
  const gradeIndex = Object.keys(studyQuestions).indexOf(grade);
  const stage = gradeIndex < 4 ? 0 : gradeIndex < 8 ? 1 : 2;
- return otherSubjects[subject][stage];
+ return [...otherSubjects[subject][stage], ...extraStudyQuestions[subject][stage]];
 }
-function showQuestions() {
+const progressKey = 'study-progress-v1';
+let progress = new Set();
+try { const saved = JSON.parse(localStorage.getItem(progressKey) || '[]'); if (Array.isArray(saved)) progress = new Set(saved.filter(item => typeof item === 'string')); } catch (_) {}
+const questionKeys = new Set();
+for (const grade of Object.keys(studyQuestions)) for (const subject of ['math', 'portuguese', 'science']) {
+ for (const [question] of getStudyQuestions(grade, subject)) questionKeys.add(JSON.stringify([subject, question]));
+}
+function updateProgress() {
+ const count = [...progress].filter(key => questionKeys.has(key)).length;
+ document.querySelector('#progress-total').textContent = String(count);
+ document.querySelector('#progress-label').textContent = `de ${questionKeys.size} questões diferentes acertadas`;
+ const bar = document.querySelector('.progress-bar');
+ bar.setAttribute('aria-valuemax', String(questionKeys.size)); bar.setAttribute('aria-valuenow', String(count));
+ bar.firstElementChild.style.width = `${questionKeys.size ? count / questionKeys.size * 100 : 0}%`;
+}
+updateProgress();
+document.querySelector('#progress-reset').addEventListener('click', () => {
+ if (!window.confirm('Limpar seu progresso de questões acertadas neste navegador?')) return;
+ progress.clear(); updateProgress();
+ try { localStorage.removeItem(progressKey); document.querySelector('#progress-status').textContent = 'Progresso limpo.'; }
+ catch (_) { document.querySelector('#progress-status').textContent = 'Não foi possível limpar o progresso salvo.'; }
+});
+function showQuestions(shuffle = false) {
   questionContainer.replaceChildren();
   const questions = getStudyQuestions(gradeSelect.value, document.querySelector('#subject').value);
+  if (shuffle) for (let i = questions.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [questions[i], questions[j]] = [questions[j], questions[i]]; }
   const solved = new Set();
   const updateCount = () => { document.querySelector('#quiz-count').textContent = `${solved.size} de ${questions.length} corretas · ${subjectSelect.selectedOptions[0].textContent}`; };
   updateCount();
@@ -111,24 +134,36 @@ function showQuestions() {
       button.addEventListener('click', () => {
         for (const other of options.children) { other.classList.remove('correct', 'incorrect'); other.removeAttribute('aria-pressed'); }
         const isCorrect = answerIndex === correct;
-        if (isCorrect) solved.add(index); else solved.delete(index);
+        if (isCorrect) {
+          solved.add(index);
+          const key = JSON.stringify([subjectSelect.value, question]);
+          if (!progress.has(key)) {
+            progress.add(key); updateProgress();
+            try { localStorage.setItem(progressKey, JSON.stringify([...progress])); } catch (_) { document.querySelector('#progress-status').textContent = 'Não foi possível salvar seu progresso neste navegador.'; }
+          }
+        } else solved.delete(index);
         updateCount();
         button.classList.add(isCorrect ? 'correct' : 'incorrect'); button.setAttribute('aria-pressed', 'true');
         feedback.textContent = isCorrect ? `Muito bem! ${explanation}` : 'Ainda não! Tente outra alternativa.';
         feedback.className = `answer-feedback ${isCorrect ? 'success' : 'retry'}`;
       }); options.append(button);
     });
-    card.append(number, title, options, feedback); questionContainer.append(card);
+    const explanationButton = document.createElement('button'); explanationButton.type = 'button'; explanationButton.className = 'explanation-toggle'; explanationButton.textContent = 'Ver explicação'; explanationButton.setAttribute('aria-expanded', 'false');
+    const explanationText = document.createElement('p'); explanationText.className = 'explanation-text'; explanationText.textContent = explanation; explanationText.hidden = true;
+    explanationButton.addEventListener('click', () => { explanationText.hidden = !explanationText.hidden; explanationButton.setAttribute('aria-expanded', String(!explanationText.hidden)); explanationButton.textContent = explanationText.hidden ? 'Ver explicação' : 'Ocultar explicação'; });
+    card.append(number, title, options, feedback, explanationButton, explanationText); questionContainer.append(card);
   });
 }
-gradeSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); subjectSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); document.querySelector('#quiz-reset').addEventListener('click', showQuestions); showQuestions();
+gradeSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); subjectSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); document.querySelector('#quiz-reset').addEventListener('click', () => showQuestions()); document.querySelector('#quiz-shuffle').addEventListener('click', () => showQuestions(true)); showQuestions();
 
 const studyTabs = document.querySelectorAll('[data-study-tab]');
 function openStudyTab(name) {
  for (const tab of studyTabs) tab.setAttribute('aria-pressed', String(tab.dataset.studyTab === name));
- for (const [key, id] of [['practice','study-practice'],['search','study-search-panel'],['companions','study-companions']]) document.getElementById(id).hidden = key !== name;
+ for (const [key, id] of [['home','study-home'],['practice','study-practice'],['search','study-search-panel'],['companions','study-companions']]) document.getElementById(id).hidden = key !== name;
 }
 for (const tab of studyTabs) tab.addEventListener('click', () => openStudyTab(tab.dataset.studyTab));
+for (const button of document.querySelectorAll('[data-study-go]')) button.addEventListener('click', () => { openStudyTab(button.dataset.studyGo); window.scrollTo({top: 0, behavior: 'smooth'}); });
+for (const button of document.querySelectorAll('[data-subject-go]')) button.addEventListener('click', () => { subjectSelect.value = button.dataset.subjectGo; saveStudyPreferences(); showQuestions(); openStudyTab('practice'); window.scrollTo({top: 0, behavior: 'smooth'}); });
 const searchForm = document.querySelector('#study-search-form');
 const studySearchInput = document.querySelector('#study-search-input');
 const studyResults = document.querySelector('#study-results');
@@ -152,6 +187,7 @@ searchForm.addEventListener('submit', event => {
  }
  const companions = [...document.querySelectorAll('.companions article')].filter(item => fold(item.textContent).includes(query));
  const sections = [
+   {label:'Início', text:'Study Hobby início anotações bloquinho cronômetro foco progresso'},
    {label:'Praticar', text:'Exercícios quiz matemática português ciências escolha assunto matéria ano escolar'},
    {label:'Companheiros', text:'Companheiros personagens fictícios criados por inteligência artificial ajuda jornada de estudos'}
  ].filter(item => fold(item.text).includes(query));
@@ -168,7 +204,7 @@ searchForm.addEventListener('submit', event => {
   const button = document.createElement('button'); button.type = 'button'; button.className = 'study-result';
   const label = document.createElement('small'); label.textContent = 'Área de estudos';
   const title = document.createElement('strong'); title.textContent = item.label; button.append(label, title);
-  button.addEventListener('click', () => openStudyTab(item.label === 'Praticar' ? 'practice' : 'companions')); studyResults.append(button);
+  button.addEventListener('click', () => openStudyTab(item.label === 'Praticar' ? 'practice' : item.label === 'Início' ? 'home' : 'companions')); studyResults.append(button);
  }
  for (const result of results) {
   const button = document.createElement('button'); button.type = 'button'; button.className = 'study-result';
@@ -177,4 +213,36 @@ searchForm.addEventListener('submit', event => {
   button.addEventListener('click', () => { gradeSelect.value = result.grade; subjectSelect.value = result.subject; saveStudyPreferences(); showQuestions(); openStudyTab('practice'); questionContainer.children[result.index].scrollIntoView({behavior:'smooth',block:'center'}); });
   studyResults.append(button);
  }
+});
+
+// Ferramentas locais: não dependem de servidor nem alteram a URL.
+const studyNotes = document.querySelector('#study-notes');
+try { studyNotes.value = localStorage.getItem('study-notes-v1') || ''; } catch (_) { document.querySelector('#notes-status').textContent = 'Anotações disponíveis apenas durante esta visita.'; }
+studyNotes.addEventListener('input', () => {
+ try { localStorage.setItem('study-notes-v1', studyNotes.value); document.querySelector('#notes-status').textContent = 'Salvo neste navegador ♡'; }
+ catch (_) { document.querySelector('#notes-status').textContent = 'Não foi possível salvar neste navegador.'; }
+});
+const timerDisplay = document.querySelector('#timer-display');
+const timerDuration = document.querySelector('#timer-duration');
+const timerToggle = document.querySelector('#timer-toggle');
+const timerStatus = document.querySelector('#timer-status');
+let remainingMs = Number(timerDuration.value) * 60000;
+let deadline = null, timerInterval = null;
+function paintTimer() {
+ const seconds = Math.ceil(remainingMs / 1000);
+ timerDisplay.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+}
+function stopTimer() { if (timerInterval !== null) clearInterval(timerInterval); timerInterval = null; deadline = null; timerToggle.textContent = 'Começar'; }
+function tickTimer() {
+ remainingMs = Math.max(0, deadline - Date.now()); paintTimer();
+ if (!remainingMs) { stopTimer(); timerStatus.textContent = 'Tempo concluído! Que tal uma pausa?'; }
+}
+function resetTimer() { stopTimer(); remainingMs = Number(timerDuration.value) * 60000; timerStatus.textContent = ''; paintTimer(); }
+timerDuration.addEventListener('change', resetTimer);
+document.querySelector('#timer-reset').addEventListener('click', resetTimer);
+timerToggle.addEventListener('click', () => {
+ if (timerInterval !== null) { tickTimer(); if (remainingMs > 0) { stopTimer(); timerStatus.textContent = 'Pausado.'; } return; }
+ if (!remainingMs) remainingMs = Number(timerDuration.value) * 60000;
+ deadline = Date.now() + remainingMs; timerToggle.textContent = 'Pausar'; timerStatus.textContent = 'Foco iniciado.';
+ timerInterval = setInterval(tickTimer, 250); paintTimer();
 });
