@@ -19,6 +19,7 @@ for (const name of categories) {
 document.querySelector('#total').textContent = `♡ ${groups.reduce((n,g) => n + g.urls.length, 0)} links na coleção`;
 function render() {
   const query = search.value.trim().toLocaleLowerCase('pt-BR');
+  const openGroups = new Set([...grid.querySelectorAll('.card')].filter(card => card.querySelector('details').open).map(card => card.dataset.group));
   grid.replaceChildren();
   let count = 0;
   for (const group of groups) {
@@ -26,14 +27,14 @@ function render() {
     const matching = group.urls.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
     if (!matching.length) continue;
     count++;
-    const card = document.createElement('article'); card.className = 'card';
+    const card = document.createElement('article'); card.className = 'card'; card.dataset.group = JSON.stringify([group.category, group.name]);
     const head = document.createElement('div'); head.className = 'card-head';
     const icon = document.createElement('span'); icon.className = 'card-icon'; icon.textContent = icons[group.category] || '✦';
     const info = document.createElement('div');
     const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = group.category;
     const title = document.createElement('h3'); title.textContent = group.name;
     info.append(tag, title); head.append(icon, info);
-    const details = document.createElement('details');
+    const details = document.createElement('details'); details.open = openGroups.has(card.dataset.group);
     const summary = document.createElement('summary'); summary.textContent = `Ver ${matching.length} ${matching.length === 1 ? 'link' : 'links'}`;
     const list = document.createElement('ul');
     for (const url of matching) {
@@ -51,7 +52,18 @@ function render() {
         if (favorites.has(url)) favorites.delete(url); else favorites.add(url);
         try { localStorage.setItem(favoritesKey, JSON.stringify([...favorites])); }
         catch (_) { document.querySelector('#favorite-status').textContent = 'Não foi possível salvar favoritos neste navegador.'; }
-        if (category === 'Favoritos') render();
+        if (category === 'Favoritos') {
+          const hadFocus = document.activeElement === favorite;
+          const groupKey = card.dataset.group;
+          render();
+          if (hadFocus) {
+            // Mantém o teclado dentro da lista, ou no filtro se não houver outro favorito.
+            const sameGroup = [...grid.querySelectorAll('.card')].find(item => item.dataset.group === groupKey);
+            const next = sameGroup?.querySelector('.favorite') || grid.querySelector('.favorite');
+            if (next) { next.closest('details').open = true; next.focus(); }
+            else [...filters.children].find(button => button.textContent === 'Favoritos')?.focus();
+          }
+        }
         else document.querySelectorAll('.favorite').forEach(button => { if (button.dataset.url === url) { const active = favorites.has(url); button.textContent = active ? '♥' : '♡'; button.setAttribute('aria-pressed', String(active)); button.setAttribute('aria-label', `${active ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}: ${link.textContent}`); } });
       });
       favorite.dataset.url = url;

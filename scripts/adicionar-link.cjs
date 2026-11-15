@@ -14,6 +14,9 @@ if (!rawUrl) {
 }
 let url;
 try {
+  // Não trate esquemas explícitos como FTP ou javascript: como se fossem domínios HTTPS.
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(rawUrl) && !/^https?:\/\//i.test(rawUrl)) throw new Error();
+  if (/^(?:javascript|data|file|mailto):/i.test(rawUrl) || /\s/.test(rawUrl)) throw new Error();
   url = new URL(/^https?:\/\//i.test(rawUrl) ? rawUrl : `https://${rawUrl}`);
   if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error();
 } catch {
