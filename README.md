@@ -28,6 +28,6 @@ Na coleção, o coração ao lado de cada endereço adiciona ou remove o favorit
 
 A estação oferece quizzes de matemática, português e ciências, seleção de ano, pontuação, pesquisa dos conteúdos da área de estudos e personagens fictícios identificados como tal. Português e ciências compartilham exercícios por etapa escolar; matemática tem exercícios específicos por ano. As preferências de ano e matéria ficam no navegador, mas não alteram o modo inicial de estudos.
 
-Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` continua alternando os modos; `Shift + A + P` abre a coleção com o tema Catboy Café. Em Temas, há a opção Kawaii e 11 variações Catboy. As variações usam duas ilustrações geradas para o projeto e paletas diferentes; o tema é salvo localmente sem alterar o modo inicial.
+Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` continua alternando os modos; `Shift + A + P` abre a coleção com o tema Catboy Café. Em Temas, há a opção Kawaii e 11 variações Catboy. As variações usam duas ilustrações originais em estilo anime geradas para o projeto e paletas diferentes; o tema é salvo localmente sem alterar o modo inicial.
 
 O ponteiro nativo é mantido e um ponto decorativo o acompanha em dispositivos com mouse, para não depender do suporte do navegador a cursores personalizados.
