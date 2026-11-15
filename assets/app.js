@@ -137,7 +137,7 @@ const studyPage = document.querySelector('#study');
 const linksSite = document.querySelector('#links-site');
 function showMode(showLinks) {
   studyPage.hidden = showLinks; linksSite.hidden = !showLinks;
-  document.title = showLinks ? 'Links for me ✿' : 'Estação de estudos';
+  document.title = showLinks ? 'Links for me ✿' : 'Study Hobby | Seu site de estudos para o Brasil';
   window.scrollTo(0, 0);
 }
 window.addEventListener('pageshow', event => { if (event.persisted) showMode(false); });
