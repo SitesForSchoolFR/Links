@@ -164,10 +164,39 @@ if (location.hostname.toLowerCase() === 'sitesforschoolfr.github.io' && location
   history.replaceState(null, '', '/Links/');
 }
 
-// Um ponto visual acompanha o mouse sem ocultar o cursor nativo, para manter o fallback visível.
+// Ponteiro próprio e anel com leve atraso; o ponteiro nativo volta caso o mouse saia da página.
 if (finePointer.matches) {
- const cursorDot = document.createElement('span'); cursorDot.className = 'cursor-dot'; cursorDot.setAttribute('aria-hidden','true'); document.body.append(cursorDot);
- document.addEventListener('pointermove', event => { if (event.pointerType !== 'mouse') return; cursorDot.hidden = false; cursorDot.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`; }, {passive:true});
- document.addEventListener('pointerout', event => { if (!event.relatedTarget) cursorDot.hidden = true; });
- cursorDot.hidden = true;
+ const pointer = document.createElement('span'); pointer.className = 'cursor-pointer'; pointer.setAttribute('aria-hidden','true'); pointer.hidden = true;
+ const ring = document.createElement('span'); ring.className = 'cursor-ring'; ring.setAttribute('aria-hidden','true'); ring.hidden = true;
+ const ringShape = document.createElement('span'); ring.append(ringShape); document.body.append(ring, pointer);
+ let x = 0, y = 0, ringX = 0, ringY = 0, visible = false, frame = null;
+ function draw() {
+   frame = null;
+   if (!visible) return;
+   if (reducedMotion.matches) { ringX = x; ringY = y; }
+   else { ringX += (x - ringX) * .22; ringY += (y - ringY) * .22; }
+   ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+   if (Math.abs(x - ringX) + Math.abs(y - ringY) > .3) frame = requestAnimationFrame(draw);
+ }
+ function move(event) {
+   if (event.pointerType !== 'mouse') return;
+   x = event.clientX; y = event.clientY;
+   if (!visible) { ringX = x; ringY = y; visible = true; pointer.hidden = false; ring.hidden = false; document.documentElement.classList.add('custom-cursor-active'); }
+   pointer.style.transform = `translate(${x}px, ${y}px) translate(-10px, -10px)`;
+   const interactive = event.target instanceof Element && !!event.target.closest('a,button,summary,select,input,textarea,label');
+   ring.classList.toggle('is-interactive', interactive);
+   if (frame === null) frame = requestAnimationFrame(draw);
+ }
+ function resetCursor() {
+   visible = false; pointer.hidden = true; ring.hidden = true; ring.classList.remove('is-pressed');
+   document.documentElement.classList.remove('custom-cursor-active');
+   if (frame !== null) { cancelAnimationFrame(frame); frame = null; }
+ }
+ document.addEventListener('pointermove', move, {passive:true});
+ document.addEventListener('pointerdown', event => { if (event.pointerType === 'mouse') { move(event); ring.classList.add('is-pressed'); } });
+ document.addEventListener('pointerup', event => { if (event.pointerType === 'mouse') ring.classList.remove('is-pressed'); });
+ document.addEventListener('pointercancel', resetCursor);
+ document.addEventListener('pointerout', event => { if (!event.relatedTarget) resetCursor(); });
+ window.addEventListener('blur', resetCursor);
+ document.addEventListener('visibilitychange', () => { if (document.hidden) resetCursor(); });
 }
