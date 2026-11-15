@@ -67,9 +67,40 @@ for (const name of Object.keys(studyQuestions)) {
   const option = document.createElement('option'); option.value = name; option.textContent = name; gradeSelect.append(option);
 }
 gradeSelect.value = '5º ano';
+const subjectSelect = document.querySelector('#subject');
+try {
+ const preferences = JSON.parse(localStorage.getItem('study-preferences-v1') || '{}');
+ if ([...gradeSelect.options].some(option => option.value === preferences.grade)) gradeSelect.value = preferences.grade;
+ if ([...subjectSelect.options].some(option => option.value === preferences.subject)) subjectSelect.value = preferences.subject;
+} catch (_) { /* Sem armazenamento, a página continua utilizável. */ }
+function saveStudyPreferences() { try { localStorage.setItem('study-preferences-v1', JSON.stringify({grade: gradeSelect.value, subject: subjectSelect.value})); } catch (_) {} }
+
+// Coleções introdutórias por etapa para complementar matemática.
+const otherSubjects = {
+ portuguese: [
+  [['Qual palavra rima com gato?', ['Pato','Bola','Casa','Sol'], 0, 'Gato e pato terminam com o mesmo som: ato.'], ['Qual frase termina com uma pergunta?', ['O gato dorme.', 'Onde está o gato?', 'Que lindo!', 'Bom dia.'], 1, 'O ponto de interrogação indica uma pergunta.'], ['Qual palavra é o nome de um animal?', ['Correr','Gato','Azul','Ontem'], 1, 'Gato nomeia um animal.']],
+  [['Qual palavra é um adjetivo em “a casa azul”?', ['casa','a','azul','em'], 2, 'Azul caracteriza a casa.'], ['Qual é o plural de cidadão?', ['cidadões','cidadãos','cidadães','cidadão'], 1, 'O plural de cidadão é cidadãos.'], ['Em “ela correu”, o verbo indica:', ['uma ação','uma cor','um lugar','um objeto'], 0, 'Correu indica a ação de correr.']],
+  [['Em “estudei, mas estava cansado”, a palavra “mas” indica:', ['adição','oposição','explicação','tempo'], 1, 'A conjunção mas expressa oposição.'], ['Qual frase usa linguagem figurada?', ['A água ferveu.','Ele tem um coração de pedra.','A janela abriu.','O livro caiu.'], 1, 'Coração de pedra é uma metáfora para insensibilidade.'], ['Em “estudaremos”, o verbo está no:', ['passado','presente','futuro','infinitivo'], 2, 'Estudaremos está no futuro do presente.']]
+ ],
+ science: [
+  [['Qual parte da planta geralmente absorve água do solo?', ['Raiz','Flor','Fruto','Folha'], 0, 'As raízes absorvem água e sais minerais.'], ['Qual destes é um ser vivo?', ['Pedra','Árvore','Copo','Mesa'], 1, 'Uma árvore nasce, cresce e é um ser vivo.'], ['O Sol é:', ['uma estrela','um planeta','um satélite','um oceano'], 0, 'O Sol é a estrela do nosso sistema planetário.']],
+  [['Que mudança transforma água líquida em vapor?', ['Fusão','Evaporação','Solidificação','Condensação'], 1, 'A evaporação transforma líquido em gás.'], ['Qual órgão bombeia sangue pelo corpo?', ['Pulmão','Fígado','Coração','Estômago'], 2, 'O coração bombeia o sangue pelo sistema circulatório.'], ['Qual fonte de energia é renovável?', ['Carvão','Petróleo','Vento','Gás natural'], 2, 'O vento é uma fonte renovável de energia.']],
+  [['Qual é a unidade básica dos seres vivos?', ['Átomo','Célula','Órgão','Molécula'], 1, 'A célula é a unidade estrutural e funcional dos seres vivos.'], ['Na fotossíntese, plantas utilizam principalmente luz, água e:', ['oxigênio','gás carbônico','nitrogênio puro','sal de cozinha'], 1, 'A fotossíntese usa gás carbônico e água, com energia da luz.'], ['Qual é o pH de uma solução neutra a 25 °C?', ['0','7','10','14'], 1, 'A 25 °C, uma solução neutra tem pH 7.']]
+ ]
+};
+function getStudyQuestions(grade, subject) {
+ if (subject === 'math') return studyQuestions[grade];
+ const gradeIndex = Object.keys(studyQuestions).indexOf(grade);
+ const stage = gradeIndex < 4 ? 0 : gradeIndex < 8 ? 1 : 2;
+ return otherSubjects[subject][stage];
+}
 function showQuestions() {
   questionContainer.replaceChildren();
-  studyQuestions[gradeSelect.value].forEach(([question, answers, correct, explanation], index) => {
+  const questions = getStudyQuestions(gradeSelect.value, document.querySelector('#subject').value);
+  const solved = new Set();
+  const updateCount = () => { document.querySelector('#quiz-count').textContent = `${solved.size} de ${questions.length} corretas · ${subjectSelect.selectedOptions[0].textContent}`; };
+  updateCount();
+  questions.forEach(([question, answers, correct, explanation], index) => {
     const card = document.createElement('article'); card.className = 'question';
     const number = document.createElement('span'); number.className = 'question-number'; number.textContent = `QUESTÃO ${String(index + 1).padStart(2, '0')}`;
     const title = document.createElement('h3'); title.textContent = question;
@@ -80,6 +111,8 @@ function showQuestions() {
       button.addEventListener('click', () => {
         for (const other of options.children) { other.classList.remove('correct', 'incorrect'); other.removeAttribute('aria-pressed'); }
         const isCorrect = answerIndex === correct;
+        if (isCorrect) solved.add(index); else solved.delete(index);
+        updateCount();
         button.classList.add(isCorrect ? 'correct' : 'incorrect'); button.setAttribute('aria-pressed', 'true');
         feedback.textContent = isCorrect ? `Muito bem! ${explanation}` : 'Ainda não! Tente outra alternativa.';
         feedback.className = `answer-feedback ${isCorrect ? 'success' : 'retry'}`;
@@ -88,4 +121,60 @@ function showQuestions() {
     card.append(number, title, options, feedback); questionContainer.append(card);
   });
 }
-gradeSelect.addEventListener('change', showQuestions); showQuestions();
+gradeSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); subjectSelect.addEventListener('change', () => { saveStudyPreferences(); showQuestions(); }); document.querySelector('#quiz-reset').addEventListener('click', showQuestions); showQuestions();
+
+const studyTabs = document.querySelectorAll('[data-study-tab]');
+function openStudyTab(name) {
+ for (const tab of studyTabs) tab.setAttribute('aria-pressed', String(tab.dataset.studyTab === name));
+ for (const [key, id] of [['practice','study-practice'],['search','study-search-panel'],['companions','study-companions']]) document.getElementById(id).hidden = key !== name;
+}
+for (const tab of studyTabs) tab.addEventListener('click', () => openStudyTab(tab.dataset.studyTab));
+const searchForm = document.querySelector('#study-search-form');
+const studySearchInput = document.querySelector('#study-search-input');
+const studyResults = document.querySelector('#study-results');
+const fold = text => text.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+searchForm.addEventListener('submit', event => {
+ event.preventDefault();
+ if (studySearchInput.value === 'Obrigado, Ryan') { studySearchInput.value = ''; studyResults.replaceChildren(); document.dispatchEvent(new Event('open-links')); return; }
+ const query = fold(studySearchInput.value.trim()); studyResults.replaceChildren();
+ if (!query) { studyResults.textContent = 'Digite algo para pesquisar.'; return; }
+ const results = [];
+ for (const grade of Object.keys(studyQuestions)) for (const [subject, label] of [['math','Matemática'],['portuguese','Português'],['science','Ciências']]) {
+   getStudyQuestions(grade, subject).forEach(([question, answers, , explanation], index) => {
+     const text = `${grade} ${label} ${question} ${answers.join(' ')} ${explanation}`;
+     const topics = [];
+     if (subject === 'math' && /\d\s*\/\s*\d/.test(text)) topics.push('fração frações');
+     if (subject === 'math' && /[+−×÷]/.test(text)) topics.push('operações cálculo contas');
+     if (subject === 'math' && /triângulo|retângulo|ângulo|perímetro|área/i.test(text)) topics.push('geometria figuras');
+     if (subject === 'science' && /planta|raiz|árvore|fotossíntese/i.test(text)) topics.push('plantas natureza');
+     if (fold(`${text} ${topics.join(' ')}`).includes(query)) results.push({grade, subject, label, question, index});
+   });
+ }
+ const companions = [...document.querySelectorAll('.companions article')].filter(item => fold(item.textContent).includes(query));
+ const sections = [
+   {label:'Praticar', text:'Exercícios quiz matemática português ciências escolha assunto matéria ano escolar'},
+   {label:'Companheiros', text:'Companheiros personagens fictícios criados por inteligência artificial ajuda jornada de estudos'}
+ ].filter(item => fold(item.text).includes(query));
+ const total = results.length + companions.length + sections.length;
+ if (!total) { studyResults.textContent = 'Nenhum resultado encontrado. Tente outra palavra.'; return; }
+ const count = document.createElement('p'); count.className = 'study-muted'; count.textContent = `${total} resultado${total === 1 ? '' : 's'} na área de estudos`; studyResults.append(count);
+ for (const item of companions) {
+  const button = document.createElement('button'); button.type = 'button'; button.className = 'study-result';
+  const label = document.createElement('small'); label.textContent = 'Companheiro fictício';
+  const title = document.createElement('strong'); title.textContent = item.querySelector('h3').textContent; button.append(label, title);
+  button.addEventListener('click', () => { openStudyTab('companions'); item.scrollIntoView({behavior:'smooth',block:'center'}); }); studyResults.append(button);
+ }
+ for (const item of sections) {
+  const button = document.createElement('button'); button.type = 'button'; button.className = 'study-result';
+  const label = document.createElement('small'); label.textContent = 'Área de estudos';
+  const title = document.createElement('strong'); title.textContent = item.label; button.append(label, title);
+  button.addEventListener('click', () => openStudyTab(item.label === 'Praticar' ? 'practice' : 'companions')); studyResults.append(button);
+ }
+ for (const result of results) {
+  const button = document.createElement('button'); button.type = 'button'; button.className = 'study-result';
+  const label = document.createElement('small'); label.textContent = `${result.label} · ${result.grade}`;
+  const title = document.createElement('strong'); title.textContent = result.question; button.append(label,title);
+  button.addEventListener('click', () => { gradeSelect.value = result.grade; subjectSelect.value = result.subject; saveStudyPreferences(); showQuestions(); openStudyTab('practice'); questionContainer.children[result.index].scrollIntoView({behavior:'smooth',block:'center'}); });
+  studyResults.append(button);
+ }
+});

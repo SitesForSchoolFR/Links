@@ -141,10 +141,13 @@ function showMode(showLinks) {
   window.scrollTo(0, 0);
 }
 window.addEventListener('pageshow', event => { if (event.persisted) showMode(false); });
+document.addEventListener('open-links', () => showMode(true));
 const heldKeys = new Set();
 document.addEventListener('keydown', event => {
-  if (event.code === 'KeyA' || event.code === 'KeyY') heldKeys.add(event.code);
-  if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyY') && !event.repeat) {
+  if (['KeyA', 'KeyY', 'KeyP'].includes(event.code)) heldKeys.add(event.code);
+  if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyP') && !event.repeat) {
+    event.preventDefault(); heldKeys.clear(); applyTheme('catboy'); showMode(true);
+  } else if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyY') && !event.repeat) {
     event.preventDefault(); heldKeys.clear(); showMode(linksSite.hidden);
   }
 });
@@ -159,4 +162,12 @@ document.querySelectorAll('[data-scroll]').forEach(link => link.addEventListener
 // Só normaliza o endereço no domínio oficial; previews locais continuam utilizáveis.
 if (location.hostname.toLowerCase() === 'sitesforschoolfr.github.io' && location.pathname.toLowerCase().startsWith('/links/')) {
   history.replaceState(null, '', '/Links/');
+}
+
+// Um ponto visual acompanha o mouse sem ocultar o cursor nativo, para manter o fallback visível.
+if (finePointer.matches) {
+ const cursorDot = document.createElement('span'); cursorDot.className = 'cursor-dot'; cursorDot.setAttribute('aria-hidden','true'); document.body.append(cursorDot);
+ document.addEventListener('pointermove', event => { if (event.pointerType !== 'mouse') return; cursorDot.hidden = false; cursorDot.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`; }, {passive:true});
+ document.addEventListener('pointerout', event => { if (!event.relatedTarget) cursorDot.hidden = true; });
+ cursorDot.hidden = true;
 }
