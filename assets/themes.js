@@ -1,23 +1,24 @@
-// As variações compartilham duas ilustrações originais geradas para este site.
+// Ilustrações originais em estilo anime, uma para cada tema Tomboy.
 const themes = [
-  {id:'kawaii',name:'Kawaii original',note:'a clássica', color:'#e598aa'},
-  {id:'catboy',name:'Catboy Café',note:'main character energy',color:'#bd8399',bg:'#fff3f1',panel:'#f3dee3',ink:'#573d50',accent:'#b96784',image:'cafe'},
-  {id:'midnight',name:'Midnight Meow',note:'3 da manhã core',color:'#7b729d',bg:'#eae8f3',panel:'#dedbf0',ink:'#414061',accent:'#625786',image:'night'},
-  {id:'matcha',name:'Matcha Neko',note:'matcha e caos',color:'#8daa8d',bg:'#f1f7ee',panel:'#e0ede0',ink:'#365443',accent:'#59866a',image:'cafe'},
-  {id:'strawberry',name:'Strawberry Paw',note:'sweet but feral',color:'#df8a99',bg:'#fff1f3',panel:'#f9dfe4',ink:'#674052',accent:'#bb6279',image:'cafe'},
-  {id:'cloud',name:'Cloud Nap',note:'offline por motivos',color:'#8daeca',bg:'#f0f7fc',panel:'#deecf7',ink:'#3a526a',accent:'#5984a8',image:'night'},
-  {id:'lavender',name:'Lavender Haze',note:'delulu com calma',color:'#ad98cd',bg:'#f6f0fc',panel:'#ebdef5',ink:'#58466d',accent:'#8b6aaf',image:'night'},
-  {id:'moka',name:'Moka Paws',note:'café e teoria',color:'#b6947e',bg:'#faf4ee',panel:'#f1e4d8',ink:'#604b42',accent:'#97705b',image:'cafe'},
-  {id:'pixel',name:'Pixel Neko',note:'terminalmente online',color:'#79a7a4',bg:'#eff8f6',panel:'#d9eeeb',ink:'#355955',accent:'#4e8b84',image:'night'},
-  {id:'moon',name:'Moon Milk',note:'lunar e distraído',color:'#9a9ab8',bg:'#f1f1f8',panel:'#e4e3f1',ink:'#474968',accent:'#77749c',image:'night'},
-  {id:'sunset',name:'Sunset Zoomies',note:'zoomies às 18h',color:'#d6a182',bg:'#fff5ee',panel:'#fae4d8',ink:'#684c43',accent:'#bc795c',image:'cafe'},
-  {id:'void',name:'Soft Void',note:'pequeno caos cósmico',color:'#897ba1',bg:'#efedf4',panel:'#e2dcea',ink:'#4c4359',accent:'#7a638b',image:'night'}
+  {id:'kawaii',name:'Kawaii original',note:'a clássica',color:'#e598aa'},
+  {id:'catboy',name:'Tomboy Café',note:'energia de protagonista',color:'#bd8399',bg:'#fff3f1',panel:'#f3dee3',ink:'#573d50',accent:'#b96784',image:'01'},
+  {id:'midnight',name:'Arcade à meia-noite',note:'mais uma ficha?',color:'#7b729d',bg:'#eae8f3',panel:'#dedbf0',ink:'#414061',accent:'#625786',image:'02'},
+  {id:'matcha',name:'Estufa Matcha',note:'plantas e chuva',color:'#8daa8d',bg:'#f1f7ee',panel:'#e0ede0',ink:'#365443',accent:'#59866a',image:'03'},
+  {id:'strawberry',name:'Diner de Morango',note:'quadrinhos e sobremesa',color:'#df8a99',bg:'#fff1f3',panel:'#f9dfe4',ink:'#674052',accent:'#bb6279',image:'04'},
+  {id:'cloud',name:'Costa Nublada',note:'skate e maresia',color:'#8daeca',bg:'#f0f7fc',panel:'#deecf7',ink:'#3a526a',accent:'#5984a8',image:'05'},
+  {id:'lavender',name:'Discos e Lavanda',note:'só mais uma música',color:'#ad98cd',bg:'#f6f0fc',panel:'#ebdef5',ink:'#58466d',accent:'#8b6aaf',image:'06'},
+  {id:'moka',name:'Oficina Moka',note:'café e bicicletas',color:'#b6947e',bg:'#faf4ee',panel:'#f1e4d8',ink:'#604b42',accent:'#97705b',image:'07'},
+  {id:'pixel',name:'Pixel Arcade',note:'terminalmente online',color:'#79a7a4',bg:'#eff8f6',panel:'#d9eeeb',ink:'#355955',accent:'#4e8b84',image:'08'},
+  {id:'moon',name:'Biblioteca Lunar',note:'livros e luar',color:'#9a9ab8',bg:'#f1f1f8',panel:'#e4e3f1',ink:'#474968',accent:'#77749c',image:'09'},
+  {id:'sunset',name:'Pôr do Sol',note:'hora de fotografar',color:'#d6a182',bg:'#fff5ee',panel:'#fae4d8',ink:'#684c43',accent:'#bc795c',image:'10'}
 ];
 const themeOptions = document.querySelector('#theme-options');
 const themeSettings = document.querySelector('#theme-settings');
 const themeToggle = document.querySelector('#settings-toggle');
 const linksShell = document.querySelector('#links-site');
 function applyTheme(id) {
+ // Preserva preferências de versões anteriores; o antigo tema Soft Void usa a arte noturna.
+ if (id === 'void') id = 'midnight';
  const theme = themes.find(item => item.id === id) || themes[0];
  linksShell.dataset.theme = theme.id;
  for (const [property, value] of Object.entries({'--theme-bg':theme.bg,'--theme-panel':theme.panel,'--theme-ink':theme.ink,'--theme-accent':theme.accent})) {
