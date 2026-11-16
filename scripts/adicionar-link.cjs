@@ -27,15 +27,12 @@ const source = fs.readFileSync(file, 'utf8');
 const groups = vm.runInNewContext(`${source}\nLINK_GROUPS`, Object.create(null), { timeout: 1000 });
 const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 const theme = themeWords.join(' ').trim();
-const normalizedTheme = normalize(theme);
-const aliases = { 'therook': 'rook', 'gnmathv20': 'gnmathv2', 'studyhub': 'studyhub', 'frogies': 'frogiesarcade' };
-const canonical = value => aliases[normalize(value)] || normalize(value).replace(/^the/, '');
 const host = url.hostname.toLowerCase();
 const candidates = groups.map(group => {
-  const groupName = canonical(group.name);
+  const groupName = normalize(group.name);
+  // Um nome informado é literal: não trocar por apelidos nem nomes semelhantes.
+  if (theme) return { group, score: group.name === theme ? 100 : 0 };
   let score = 0;
-  if (normalizedTheme && canonical(theme) === groupName) score = 100;
-  else if (normalizedTheme.length > 3 && groupName.length > 3 && (canonical(theme).includes(groupName) || groupName.includes(canonical(theme)))) score = 75;
   const hosts = group.links.split('\n').map(line => {
     try { return new URL(/^https?:\/\//i.test(line) ? line : `https://${line}`).hostname.toLowerCase(); } catch { return ''; }
   });
@@ -45,10 +42,11 @@ const candidates = groups.map(group => {
 }).filter(item => item.score).sort((a, b) => b.score - a.score);
 const uniqueBest = candidates.length && (candidates.length === 1 || candidates[0].score > candidates[1].score);
 const proposed = uniqueBest ? candidates[0].group : null;
-const inferred = theme || url.hostname.split('.')[0];
+const inferred = theme;
 const same = (a, b) => { try { return new URL(/^https?:\/\//i.test(a) ? a : `https://${a}`).href === b.href; } catch { return false; } };
-const existing = groups.find(g => g.links.split('\n').some(link => same(link, url)));
+const existing = groups.find(g => (!theme || g.name === theme) && g.links.split('\n').some(link => same(link, url)));
 if (existing) { console.log(`Este endereço já existe na coleção “${existing.name}”. Nenhuma alteração foi feita.`); process.exit(0); }
+if (!proposed && !candidates.length && !theme) { console.error('Informe o nome exato da nova coleção como tema; nenhum arquivo foi alterado.'); process.exit(1); }
 if (!stdin.isTTY) { console.error('A confirmação exige um terminal interativo; nenhum arquivo foi alterado.'); process.exit(1); }
 (async () => {
   const rl = readline.createInterface({ input: stdin, output: stdout });

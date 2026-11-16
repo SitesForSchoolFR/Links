@@ -16,7 +16,7 @@ O botão de som no topo ativa ou desativa um efeito curto, desligado por padrão
 
 ### Sugerir coleção para um novo link
 
-No terminal, com Node.js instalado, execute `node scripts/adicionar-link.cjs https://exemplo.com "nome ou tema"`. A ferramenta compara nome, algumas variações e domínio com os grupos existentes, mostra a sugestão e pede confirmação antes de salvar. Se não encontrar correspondência, sugere uma nova coleção; em caso de empate, pede um tema mais específico. Dê o tema sempre que possível: domínios compartilhados e mirrors podem ser ambíguos, e a sugestão deve ser revisada. Para cancelar, responda `n` ou pressione Enter. Isso é uma ferramenta local de manutenção, não uma edição automática feita pelos visitantes do Pages.
+No terminal, com Node.js instalado, execute `node scripts/adicionar-link.cjs https://exemplo.com "nome ou tema"`. Quando um nome é informado, a ferramenta o preserva exatamente: usa uma coleção com esse nome ou sugere criá-la. Sem nome, procura possíveis coleções pelo domínio; caso não encontre uma correspondência única, peça um nome exato. Antes de salvar, revise e confirme a sugestão: domínios compartilhados e mirrors podem ser ambíguos. Para cancelar, responda `n` ou pressione Enter. Isso é uma ferramenta local de manutenção, não uma edição automática feita pelos visitantes do Pages.
 
 ## Modo de estudos e favoritos
 
@@ -39,3 +39,5 @@ A página inicial do modo de estudos oferece acesso rápido aos quizzes, pesquis
 ## Testes de desenvolvimento
 
 Com Node.js 18 ou superior, execute `npm ci` e `npm test`. As dependências são necessárias apenas para os testes; o site publicado continua estático e não precisa de instalação ou compilação. Os testes verificam os principais fluxos, formatos de links, temas e cenários com armazenamento local bloqueado, mas não verificam a disponibilidade dos sites externos.
+
+Quando o usuário informar nomes para novas coleções, use exatamente esses nomes; não substitua por apelidos ou nomes semelhantes sem uma solicitação explícita.
