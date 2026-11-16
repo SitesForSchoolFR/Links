@@ -747,3 +747,41 @@ http://s3.amazonaws.com/sumimath/index.html
 http://sumimath.s3.amazonaws.com/index.html`},
 {category:'Mais links',name:'Boba',links:`http://boba.elysiumeco.net`}
 );
+
+// Coleções adicionadas com os nomes informados pelo usuário.
+LINK_GROUPS.push(
+{category:'Mais links',name:'BrowOS',links:`http://dqfl8ajrzillq.cloudfront.net/
+http://browos678.s3.amazonaws.com/index.html
+http://browos678.s3-website-us-east-1.amazonaws.com/index.html
+http://s3.amazonaws.com/browos678/index.html
+http://browos678.s3.amazonaws.com/index.svg
+http://browos678.s3-website-us-east-1.amazonaws.com/index.svg
+http://s3.amazonaws.com/browos678/index.svg
+http://os.daylit.net/
+http://cdn.jsdelivr.net/gh/picoskids/browos@v1.0.0/index.svg`},
+{category:'Mais links',name:'Zodiac',links:`http://xju.veranda.co.id/
+http://bqgyq.veranda.co.id/
+http://mfci.veranda.co.id/
+http://ysj.veranda.co.id/
+http://zlci.corea.is/
+http://nqoqk.corea.is/
+http://hkjl.corea.is/
+http://zodiac.mlr.ar/
+http://sfmqa.mlr.ar/
+http://rwly.mlr.ar/
+http://dxpfv.mlr.ar/`},
+{category:'Mais links',name:'Zaka',links:`http://zakasotuff.s3.us-east-2.amazonaws.com/index.html
+http://s3.us-east-2.amazonaws.com/zakasotuff/study
+http://zakasotuff.s3.us-east-2.amazonaws.com/index.xml
+http://s3.us-east-2.amazonaws.com/zakasotuff/index.xml
+http://thepawnshop.s3.us-east-2.amazonaws.com/index.html
+http://s3.us-east-2.amazonaws.com/thepawnshop/index.html
+http://s3.us-east-2.amazonaws.com/thepawnshop/study
+http://thepawnshop.s3.us-east-2.amazonaws.com/index.xml
+http://s3.us-east-2.amazonaws.com/thepawnshop/index.xml
+http://algebrarelay.s3.us-east-2.amazonaws.com/index.html
+http://s3.us-east-2.amazonaws.com/algebrarelay/index.html
+http://s3.us-east-2.amazonaws.com/algebrarelay/study
+http://algebrarelay.s3.us-east-2.amazonaws.com/index.xml
+http://s3.us-east-2.amazonaws.com/algebrarelay/index.xml`}
+);

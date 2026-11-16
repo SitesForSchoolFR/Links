@@ -214,3 +214,17 @@ test('os novos links completos estão nas coleções confirmadas', () => {
     for (const address of addresses) assert.ok(urls.includes(destination(address)), `${name}: ${address}`);
   }
 });
+
+test('BrowOS, Zodiac e Zaka preservam nomes e endereços fornecidos', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const expected = {
+    BrowOS: ['http://dqfl8ajrzillq.cloudfront.net/', 'http://browos678.s3.amazonaws.com/index.html', 'http://browos678.s3-website-us-east-1.amazonaws.com/index.html', 'http://s3.amazonaws.com/browos678/index.html', 'http://browos678.s3.amazonaws.com/index.svg', 'http://browos678.s3-website-us-east-1.amazonaws.com/index.svg', 'http://s3.amazonaws.com/browos678/index.svg', 'http://os.daylit.net/', 'http://cdn.jsdelivr.net/gh/picoskids/browos@v1.0.0/index.svg'],
+    Zodiac: ['http://xju.veranda.co.id/', 'http://bqgyq.veranda.co.id/', 'http://mfci.veranda.co.id/', 'http://ysj.veranda.co.id/', 'http://zlci.corea.is/', 'http://nqoqk.corea.is/', 'http://hkjl.corea.is/', 'http://zodiac.mlr.ar/', 'http://sfmqa.mlr.ar/', 'http://rwly.mlr.ar/', 'http://dxpfv.mlr.ar/'],
+    Zaka: ['http://zakasotuff.s3.us-east-2.amazonaws.com/index.html', 'http://s3.us-east-2.amazonaws.com/zakasotuff/study', 'http://zakasotuff.s3.us-east-2.amazonaws.com/index.xml', 'http://s3.us-east-2.amazonaws.com/zakasotuff/index.xml', 'http://thepawnshop.s3.us-east-2.amazonaws.com/index.html', 'http://s3.us-east-2.amazonaws.com/thepawnshop/index.html', 'http://s3.us-east-2.amazonaws.com/thepawnshop/study', 'http://thepawnshop.s3.us-east-2.amazonaws.com/index.xml', 'http://s3.us-east-2.amazonaws.com/thepawnshop/index.xml', 'http://algebrarelay.s3.us-east-2.amazonaws.com/index.html', 'http://s3.us-east-2.amazonaws.com/algebrarelay/index.html', 'http://s3.us-east-2.amazonaws.com/algebrarelay/study', 'http://algebrarelay.s3.us-east-2.amazonaws.com/index.xml', 'http://s3.us-east-2.amazonaws.com/algebrarelay/index.xml']
+  };
+  for (const [name, addresses] of Object.entries(expected)) {
+    const matching = groups.filter(group => group.name === name);
+    assert.equal(matching.length, 1, name);
+    assert.deepEqual(Array.from(matching[0].links.split('\n')), addresses);
+  }
+});
