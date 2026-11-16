@@ -85,7 +85,8 @@ aurora.yowie.me
 aurora.zubex.net
 aurora.xzolx.org
 aurora.trustpty.com
-aurora.rublconxray.com` },
+aurora.rublconxray.com
+http://aurora.elysiumeco.net` },
 { category:'Estudos', name:'Galaxy V7', links:`glxy.b-cdn.net/
 hope.onlyforscholarship.online/
 k-12.kwgranitecountertops.com/
@@ -167,7 +168,13 @@ s3.amazonaws.com/solaraos/index.html
 solara.trustpty.com
 solara.rublconxray.com
 s3.amazonaws.com/studycove/index.svg
-studycove.s3.amazonaws.com/index.svg` },
+studycove.s3.amazonaws.com/index.svg
+http://solara.elysiumeco.net
+http://quizharbor.s3.amazonaws.com/index.svg
+http://quizharbor.s3.us-east-1.amazonaws.com/index.svg
+http://s3.amazonaws.com/quizharbor/index.svg
+http://s3.us-east-1.amazonaws.com/quizharbor/index.svg
+http://d352b4vzc2msxr.cloudfront.net/index.svg` },
 { category:'Estudos', name:'Astra', links:`sixseven.chanka.com
 astra-bull.noble-house.tk
 animals.solidaritysafaris.com
@@ -215,13 +222,25 @@ vbzatuq.s3.amazonaws.com/index.html
 d12whv3rc86mrm.cloudfront.net
 https://de65f25rwcp70.cloudfront.net/
 tungtung.trustpty.com
-tungtung.rublconxray.com` },
+tungtung.rublconxray.com
+https://tungtung.beauty
+https://tungtung.top
+http://tungtung.elysiumeco.net
+http://s3.amazonaws.com/pinepractice/index.html
+http://s3.us-east-1.amazonaws.com/pinepractice/index.html
+http://s3-external-1.amazonaws.com/pinepractice/index.html
+http://pinepractice.s3.amazonaws.com/index.html` },
 { category:'Estudos', name:'StudyHub', links:`dt7z8lnu7fv0r.cloudfront.net/
 lumivex.s3.amazonaws.com/index.html
 studyhub.trustpty.com
 studyhub.rublconxray.com
 shub.zubex.net
-shub.xzolx.org` },
+shub.xzolx.org
+http://studyhub.elysiumeco.net
+http://dzbjxct0c9fxq.cloudfront.net/
+http://brightdesk.s3.us-east-1.amazonaws.com/index.html
+http://s3.amazonaws.com/brightdesk/index.html
+http://brightdesk.s3.amazonaws.com/index.html` },
 { category:'Filmes e séries', name:'Cinera', links:`cinera.zubex.net
 cinera.yowie.me
 cinera.zarins.eu
@@ -231,7 +250,8 @@ cinera.trustpty.com` },
 { category:'Filmes e séries', name:'Triple T HD', links:`triplet.zubex.net
 triplet.xzolx.org
 triplethd.trustpty.com
-triplethd.rublconxray.com` },
+triplethd.rublconxray.com
+http://triplethd.elysiumeco.net` },
 ];
 
 LINK_GROUPS.push(
@@ -268,7 +288,8 @@ https://void.bagatz.com/
 https://lunaris.bagatz.com/
 https://re-vault.bagatz.com/`},
 {category:'Mais links',name:'Space',links:`space.trustpty.com
-space.rublconxray.com`},
+space.rublconxray.com
+http://space.elysiumeco.net`},
 {category:'Mais links',name:'Lunar',links:`lunar.rublconxray.com
 lunar.trustpty.com`},
 {category:'Mais links',name:'Rook',links:`d1lm38j3y7voha.cloudfront.net
@@ -277,7 +298,12 @@ rook.zdertis.net
 rook.zarins.eu
 rook.trustpty.com
 rook.rublconxray.com
-https://d3v9i36n9qwn0t.cloudfront.net/`},
+https://d3v9i36n9qwn0t.cloudfront.net/
+http://rook.proasist.cl
+http://s3.amazonaws.com/rooklearn/index.svg
+http://s3.us-east-1.amazonaws.com/rooklearn/index.svg
+http://rooklearn.s3.amazonaws.com/index.svg
+http://rooklearn.s3.us-east-1.amazonaws.com/index.svg`},
 {category:'Mais links',name:'N7x',links:`s3.amazonaws.com/history-classroom/index.html
 d329oui0a76my.cloudfront.net/
 nyxlearning.plan-ted.com/
@@ -288,14 +314,16 @@ kite.xzolx.org
 s3.amazonaws.com/kitestudy/index.html
 kitestudy.s3.amazonaws.com/index.html
 kite.trustpty.com
-kite.rublconxray.com`},
+kite.rublconxray.com
+http://kite.elysiumeco.net`},
 {category:'Mais links',name:'DogeUB',links:`doge.zubex.net
 doge.zdertis.net
 doge.zarins.eu
 doge.yowie.me
 doge.xzolx.org
 dogeub.trustpty.com
-dogeub.rublconxray.com`},
+dogeub.rublconxray.com
+http://dogeub.elysiumeco.net`},
 {category:'Mais links',name:'Flight Academy Pack',links:`galaxy.apexflightacademy.com
 imp-v2.apexflightacademy.com
 triple-t-hd.apexflightacademy.com
@@ -346,14 +374,18 @@ https://c00lkid.belyfit.cl/
 https://c00lkid.sunil7.com.np/
 https://c00lkid.eglobaltravelmedia.asia/`},
 {category:'Mais links',name:'Glim',links:`sz1n.s3.amazonaws.com/index.html
-s3.amazonaws.com/axk4/index.html`},
+s3.amazonaws.com/axk4/index.html
+http://deskloft.s3.us-east-1.amazonaws.com/index.html
+http://deskloft.s3.amazonaws.com/index.html
+http://s3.amazonaws.com/deskloft/index.html`},
 {category:'Mais links',name:'Interstellar',links:`interstellar.zubex.net
 interstellar.zarins.eu
 interstellar.xzolx.org
 zzqf.z19.web.core.windows.net
 gnd9.z13.web.core.windows.net
 interstellar.trustpty.com
-interstellar.rublconxray.com`},
+interstellar.rublconxray.com
+http://interstellar.elysiumeco.net`},
 {category:'Mais links',name:'Velara',links:`uva.jashish.com.np
 yigim.jashish.com.np
 uavar.jashish.com.np
@@ -413,7 +445,11 @@ stroberri.xzolx.org
 s3.amazonaws.com/strawberrii/index.svg
 s3.amazonaws.com/strawberrii/index.html
 stroberri.trustpty.com
-stroberri.rublconxray.com`},
+stroberri.rublconxray.com
+https://d3ff66h1gfilcx.cloudfront.net
+http://strobi.elysiumeco.net
+http://strawberrii.s3.amazonaws.com/index.svg
+http://strawberrii.s3.amazonaws.com/index.html`},
 {category:'Mais links',name:'Galaxy',links:`main.elor.site
 books.securewebhosting.site
 naytd.woodvilleweather.com
@@ -428,7 +464,8 @@ docs.sunil7.com.np/
 host.dentist4you.com.au/
 blog.i-umix.com.ar/`},
 {category:'Mais links',name:'Flver',links:`flver.trustpty.com
-flver.rublconxray.com`},
+flver.rublconxray.com
+http://flver.elysiumeco.net`},
 {category:'Mais links',name:'Selenite',links:`iceland.is.a.goated.country-bull.corea.is
 bull-gives.freedom-tw.com
 iwant.freedom-tw.com
@@ -456,7 +493,8 @@ niigo.s3-fips.dualstack.us-east-1.amazonaws.com/index.html`},
 voya.xzolx.org
 voya.zarins.eu
 voya.rublconxray.com
-voya.trustpty.com`},
+voya.trustpty.com
+http://voya.elysiumeco.net`},
 {category:'Mais links',name:'Nebulo',links:`loft-kept8.naughtybaptistbrewery.com
 page-jail1.naughtybaptistbrewery.co
 loaf-tiny8.naughtybaptistbrewery.com
@@ -700,3 +738,12 @@ https://s3.dualstack.us-east-1.amazonaws.com/bullsobk/index.html
 https://bullsobk.s3.amazonaws.com/logo.svg
 https://bullsobk.s3.us-east-1.amazonaws.com/logo.svg
 https://s3.amazonaws.com/bullsobk/logo.svg`;
+
+// Coleções confirmadas para os novos endereços.
+LINK_GROUPS.push(
+{category:'Mais links',name:'Onyx',links:`http://onyx.elysiumeco.net`},
+{category:'Mais links',name:'Sumi',links:`http://sumi.elysiumeco.net
+http://s3.amazonaws.com/sumimath/index.html
+http://sumimath.s3.amazonaws.com/index.html`},
+{category:'Mais links',name:'Boba',links:`http://boba.elysiumeco.net`}
+);

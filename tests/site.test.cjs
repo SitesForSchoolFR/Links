@@ -189,3 +189,28 @@ test('navega e apresenta avisos quando o armazenamento local está bloqueado', (
     assert.deepEqual(errors, []);
   } finally { dom.window.close(); }
 });
+
+test('os novos links completos estão nas coleções confirmadas', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const expected = {
+    StudyHub: ['studyhub.elysiumeco.net', 'dzbjxct0c9fxq.cloudfront.net/', 'brightdesk.s3.us-east-1.amazonaws.com/index.html', 's3.amazonaws.com/brightdesk/index.html', 'brightdesk.s3.amazonaws.com/index.html'],
+    Glim: ['deskloft.s3.us-east-1.amazonaws.com/index.html', 'deskloft.s3.amazonaws.com/index.html', 's3.amazonaws.com/deskloft/index.html'],
+    'Tung Tung': ['tungtung.beauty', 'tungtung.top', 'tungtung.elysiumeco.net', 's3.amazonaws.com/pinepractice/index.html', 's3.us-east-1.amazonaws.com/pinepractice/index.html', 's3-external-1.amazonaws.com/pinepractice/index.html', 'pinepractice.s3.amazonaws.com/index.html'],
+    Solara: ['solara.elysiumeco.net', 'quizharbor.s3.amazonaws.com/index.svg', 'quizharbor.s3.us-east-1.amazonaws.com/index.svg', 's3.amazonaws.com/quizharbor/index.svg', 's3.us-east-1.amazonaws.com/quizharbor/index.svg', 'd352b4vzc2msxr.cloudfront.net/index.svg'],
+    Stroberri: ['d3ff66h1gfilcx.cloudfront.net', 'strobi.elysiumeco.net', 's3.amazonaws.com/strawberrii/index.svg', 'strawberrii.s3.amazonaws.com/index.svg', 's3.amazonaws.com/strawberrii/index.html', 'strawberrii.s3.amazonaws.com/index.html'],
+    Rook: ['rook.proasist.cl', 's3.amazonaws.com/rooklearn/index.svg', 's3.us-east-1.amazonaws.com/rooklearn/index.svg', 'rooklearn.s3.amazonaws.com/index.svg', 'rooklearn.s3.us-east-1.amazonaws.com/index.svg', 'd1lm38j3y7voha.cloudfront.net/', 'd8eyjoox1mb9w.cloudfront.net/'],
+    Sumi: ['sumi.elysiumeco.net', 's3.amazonaws.com/sumimath/index.html', 'sumimath.s3.amazonaws.com/index.html'],
+    Onyx: ['onyx.elysiumeco.net'], Boba: ['boba.elysiumeco.net'],
+    Voya: ['voya.elysiumeco.net'], Kite: ['kite.elysiumeco.net'], DogeUB: ['dogeub.elysiumeco.net'], 'Triple T HD': ['triplethd.elysiumeco.net'], Space: ['space.elysiumeco.net'], Flver: ['flver.elysiumeco.net'], Interstellar: ['interstellar.elysiumeco.net'], Aurora: ['aurora.elysiumeco.net']
+  };
+  const destination = value => {
+    const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return `${url.host}${url.pathname}${url.search}${url.hash}`;
+  };
+  for (const [name, addresses] of Object.entries(expected)) {
+    const matching = groups.filter(group => group.name === name);
+    assert.equal(matching.length, 1, `coleção única: ${name}`);
+    const urls = matching[0].links.split('\n').filter(Boolean).map(destination);
+    for (const address of addresses) assert.ok(urls.includes(destination(address)), `${name}: ${address}`);
+  }
+});
