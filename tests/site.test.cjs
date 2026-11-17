@@ -265,3 +265,34 @@ test('C00lKid Tech em Jogos preserva os 3459 links fornecidos', () => {
     assert.equal(links[i], `https://fastly.jsdelivr.net/gh/seattleschools/media@main/batch/Linklet/hourly/20261113000117873/f6b8a5cf4254e295.svg?id=${i + 2}`);
   }
 });
+
+test('NYX em Jogos preserva as 2500 URLs na ordem fornecida', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const matching = groups.filter(group => group.name === 'NYX');
+  assert.equal(matching.length, 1);
+  assert.equal(matching[0].category, 'Jogos');
+  const origins = [
+    'https://cdn.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+    'https://fastly.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+    'https://gcore.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+    'https://testingcf.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+    'https://cdn.statically.io/gh/Firemon303Real/nyx-sf34n/main/',
+    'https://rawcdn.githack.com/Firemon303Real/nyx-sf34n/main/',
+    'https://raw.githack.com/Firemon303Real/nyx-sf34n/main/',
+    'https://raw.githubusercontent.com/Firemon303Real/nyx-sf34n/main/',
+    'https://esm.sh/gh/Firemon303Real/nyx-sf34n@main/',
+    'https://raw.esm.sh/gh/Firemon303Real/nyx-sf34n@main/'
+  ];
+  const expected = [];
+  for (const dir of ['assets', 'dist', 'links', 'public', 'cdn']) {
+    for (let version = 1; version <= 25; version++) {
+      for (const file of ['nyx.svg', 'app.svg']) {
+        for (const origin of origins) expected.push(`${origin}${dir}/v${String(version).padStart(4, '0')}/${file}`);
+      }
+    }
+  }
+  const links = matching[0].links.split('\n');
+  assert.equal(links.length, 2500);
+  assert.equal(new Set(links).size, 2500);
+  assert.deepEqual(Array.from(links), expected);
+});
