@@ -252,3 +252,16 @@ test('P2P em Jogos contém as 3000 URLs da lista', () => {
   }
   assert.ok(links.includes('https://cdn.jsdelivr.net/gh/xzvtps/index-dn372@main/v0100/index.svg?usp=drive_web&authuser=9810813&resourcekey=Yxo7YCSS&id=246'));
 });
+
+test('C00lKid Tech em Jogos preserva os 3459 links fornecidos', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const matching = groups.filter(group => group.name === 'C00lKid Tech');
+  assert.equal(matching.length, 1);
+  assert.equal(matching[0].category, 'Jogos');
+  const links = matching[0].links.split('\n');
+  assert.equal(links.length, 3459);
+  assert.equal(new Set(links).size, 3459);
+  for (let i = 0; i < links.length; i++) {
+    assert.equal(links[i], `https://fastly.jsdelivr.net/gh/seattleschools/media@main/batch/Linklet/hourly/20261113000117873/f6b8a5cf4254e295.svg?id=${i + 2}`);
+  }
+});

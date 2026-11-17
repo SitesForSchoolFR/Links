@@ -1020,3 +1020,10 @@ for (let version = 1; version <= 100; version++) {
     }
   }
 }
+
+// Lista fornecida para C00lKid Tech: IDs 2 a 3460, inclusive.
+LINK_GROUPS.push({
+  category: 'Jogos',
+  name: 'C00lKid Tech',
+  links: Array.from({ length: 3459 }, (_, index) => `https://fastly.jsdelivr.net/gh/seattleschools/media@main/batch/Linklet/hourly/20261113000117873/f6b8a5cf4254e295.svg?id=${index + 2}`).join('\n')
+});
