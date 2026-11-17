@@ -1027,3 +1027,25 @@ LINK_GROUPS.push({
   name: 'C00lKid Tech',
   links: Array.from({ length: 3459 }, (_, index) => `https://fastly.jsdelivr.net/gh/seattleschools/media@main/batch/Linklet/hourly/20261113000117873/f6b8a5cf4254e295.svg?id=${index + 2}`).join('\n')
 });
+
+// NYX: cinco diretórios, 25 versões, dois arquivos e dez origens fornecidos.
+const nyxOrigins = [
+  'https://cdn.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+  'https://fastly.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+  'https://gcore.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+  'https://testingcf.jsdelivr.net/gh/Firemon303Real/nyx-sf34n@main/',
+  'https://cdn.statically.io/gh/Firemon303Real/nyx-sf34n/main/',
+  'https://rawcdn.githack.com/Firemon303Real/nyx-sf34n/main/',
+  'https://raw.githack.com/Firemon303Real/nyx-sf34n/main/',
+  'https://raw.githubusercontent.com/Firemon303Real/nyx-sf34n/main/',
+  'https://esm.sh/gh/Firemon303Real/nyx-sf34n@main/',
+  'https://raw.esm.sh/gh/Firemon303Real/nyx-sf34n@main/'
+];
+LINK_GROUPS.push({
+  category: 'Jogos', name: 'NYX',
+  links: ['assets', 'dist', 'links', 'public', 'cdn'].flatMap(directory =>
+    Array.from({ length: 25 }, (_, index) => `v${String(index + 1).padStart(4, '0')}`).flatMap(version =>
+      ['nyx.svg', 'app.svg'].flatMap(file => nyxOrigins.map(origin => `${origin}${directory}/${version}/${file}`))
+    )
+  ).join('\n')
+});
