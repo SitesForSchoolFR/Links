@@ -785,3 +785,200 @@ http://s3.us-east-2.amazonaws.com/algebrarelay/study
 http://algebrarelay.s3.us-east-2.amazonaws.com/index.xml
 http://s3.us-east-2.amazonaws.com/algebrarelay/index.xml`}
 );
+
+// Endereços separados da lista fornecida; nomes são preservados literalmente.
+const additions = {
+  Refract: `d65ntvxoot46b.cloudfront.net
+dolx69675hbws.cloudfront.net`,
+  Sumi: `sumimath.s3.us-east-1.amazonaws.com/index.html
+sumimath.s3.amazonaws.com/index.html
+sumimath.s3.dualstack.us-east-1.amazonaws.com/index.html
+sumimath.s3-fips.us-east-1.amazonaws.com/index.html
+sumimath.s3-fips.dualstack.us-east-1.amazonaws.com/index.html
+s3.amazonaws.com/sumimath/index.html
+s3.us-east-1.amazonaws.com/sumimath/index.html
+s3.dualstack.us-east-1.amazonaws.com/sumimath/index.html`,
+  StudyHub: `dzbjxct0c9fxq.cloudfront.net/
+brightdesk.s3.amazonaws.com/index.html
+dt7z8lnu7fv0r.cloudfront.net/
+s3.amazonaws.com/brightdesk/index.html
+brightdesk.s3.us-east-1.amazonaws.com/index.html
+s3.amazonaws.com/vellas/index.html
+s3.us-east-1.amazonaws.com/vellas/index.html`,
+  Glim: `s3.amazonaws.com/deskloft/index.html
+s3.us-east-1.amazonaws.com/deskloft/index.html
+s3-external-1.amazonaws.com/deskloft/index.html
+sz1n.s3.amazonaws.com/index.html
+s3.amazonaws.com/axk4/index.html
+deskloft.s3.amazonaws.com/index.html`,
+  Onyx: `s3.amazonaws.com/onyxstudy/index.html
+onyxstudy.s3.amazonaws.com/index.html
+s3.us-east-1.amazonaws.com/onyxstudy/index.html
+onyxstudy.s3.us-east-1.amazonaws.com/index.html`,
+  Lunar: `s3.amazonaws.com/fernprep/index.html
+s3.us-east-1.amazonaws.com/fernprep/index.html
+s3-external-1.amazonaws.com/fernprep/index.html
+fernprep.s3.amazonaws.com/index.html
+fernprep.s3.us-east-1.amazonaws.com/index.html`,
+  SolaraOS: `s3.amazonaws.com/quizharbor/index.svg
+s3.us-east-1.amazonaws.com/quizharbor/index.svg`,
+  Strawberri: `d3ff66h1gfilcx.cloudfront.net
+d27kls5vqpzzgb.cloudfront.net`,
+  Steobrrii: `s3.amazonaws.com/strawberrii/index.html`,
+  Rook: `s3.amazonaws.com/rookclass/index.html
+d3v9i36n9qwn0t.cloudfront.net/
+rookclass.s3.amazonaws.com/index.html
+rookclass.s3.amazonaws.com/index.svg`,
+  Kite: `s3.amazonaws.com/kitestudy/index.html
+kitestudy.s3.amazonaws.com/index.html`,
+  TungTung: `s3.amazonaws.com/vbzatuq/index.html
+vbzatuq.s3.amazonaws.com/index.html
+d12whv3rc86mrm.cloudfront.net
+tungtung.beauty
+tungtung.top`,
+  Interstellar: `zzqf.z19.web.core.windows.net/
+gnd9.z13.web.core.windows.net/`,
+  Solara: `solaraos.s3.amazonaws.com/index.html
+s3.amazonaws.com/solaraos/index.html
+quizharbor.s3.amazonaws.com/index.svg
+s3.amazonaws.com/quizharbor/index.svg`,
+  Rammerhead: `rammer.nana.englishrealm.ca/
+rammer.nana.spoofomatic.com/
+omg.wtf.ham.gd/`,
+  Desync: `cdn.jsdelivr.net/gh/omaristhefunny/desynctutorsyou@graphing/index.svg`,
+  Aether: `jensenresigned.nyc3.digitaloceanspaces.com/index.html
+nyc3.digitaloceanspaces.com/jensenresigned/index.html`,
+  Cherri: `saugatrcherri-qkyv.totallytutor.co.za/
+cherri.nwmteducationalcoop.org/
+yean.atlantapubliceducation.cfd/
+sudden.herbsbynorthdaysimage.ca/
+bitter.hotelupgrade.com/
+lasting.aussieflagsandflagpoles.com.au/`,
+  'TGLSC V5': `cdn.itcode.wiki/`,
+  'Galaxy V7': `ulyt.astraltech.org/
+vhffj.nm7.cc/
+mws.chanka.com/
+qxew.jbworks.com/
+xy.cardiovillamercedes.com.ar/
+xy.claudesteiner.ch/
+xy.infis.net.ru/
+xy.snapframework.com/
+xy.ricas.eu/
+xy.isylet.net/
+glxy.neator.site/
+mpidfhuvsl.raps.net.au/
+ltyophgiwz.pkdk-almuhammadi.com/
+lobiuoxesd.e-c-h-o.tw/
+knxlktugou.whatastupididea.com/
+galaxy.nwmteducationalcoop.org/
+wow.atlantapubliceducation.cfd/
+education.herbsbynorthdaysimage.ca/
+backup.hotelupgrade.com/
+bigger.aussieflagsandflagpoles.com.au/`,
+  Opium: `tinyurl.com/opiumdotbest
+opm.d2ftp8cchfyksh.amplifyapp.com/
+s3.amazonaws.com/cleverlearning/study
+storage.googleapis.com/gclassroom/study.html`,
+  Nexora: `nex-velo.up.railway.app/
+nex-velo.vercel.app/
+nex-velo.nexero.workers.dev/`,
+  Xylora: `xylora.nwmteducationalcoop.org/
+neator.site/
+atlantapubliceducation.cfd/
+seniorseducation.orbitnetworkss.org/
+senior.herbsbynorthdaysimage.ca/
+apples.hotelupgrade.com/
+kick.aussieflagsandflagpoles.com.au/`,
+  'Other Links': `rammer.nana.jonmills.org
+mathisfun.ebine-san.com
+openai.openchain.pt
+rammheadsharks.axsetubal.pt
+hiring.phire.ca
+homo.fomo.at
+duffy.optioflow.com
+newjersey.chc.ninja
+rammer.nana.null-t.org
+rammer.nana.fenix-soft.ru
+rammer.nana.die-pichlers.at
+saftey-check-info.govt.hu
+studyhub.8bit.ca
+uytgupokuiy7turydte.9dejulio.gob.ar
+uowotitukew.govt.hu
+error404.n43.pw
+julianis67.artycom.ru
+rammer.nana.chacman.ar
+rammerhead-nimono.sitaci.com
+rammer.nana.shluhi-msk.xyz
+rammer.nana.petefield.com
+rammer.nana.crnjanski.at
+clever.smelly.cc
+rc-1207.shiwo.org
+rammer.nana.ghettohotels.com
+rammer.nana.ext-clinicaavaria.cl
+yesssssss.okzk.com
+voya.elysiumeco.net
+sumi.elysiumeco.net
+kite.elysiumeco.net
+onyx.elysiumeco.net
+dogeub.elysiumeco.net
+tungtung.elysiumeco.net
+triplethd.elysiumeco.net
+strobi.elysiumeco.net
+studyhub.elysiumeco.net
+boba.elysiumeco.net
+space.elysiumeco.net
+solara.elysiumeco.net
+flver.elysiumeco.net
+interstellar.elysiumeco.net
+aurora.elysiumeco.net
+api.staging.arkonline.org.za
+totallynotaciahoneypot.blackbooty.international
+webmail.israelmail.motorcycles
+rammer.nana.admium.co
+rammer.nana.dennford.net
+rammer.nana.shiftmath.org
+ilove.mikata.ru
+rammer-nana.108.181.32.77.traefik.me
+rammer.nana.lordmarty.com
+rammer.nana.optima2017.cl
+rammer-02-nana.108.181.32.77.sslip.io
+rammer.nana.feedcube.org
+rammer.nana.rkopetzky.at
+rammer.nana.neognomon.gr
+rammer.nana.tsirepfirm.com
+rammer.nana.charbel.cl
+scrsa-studysupport.onthewifi.com
+rammer.nana.euro-net.ro
+rammer.nana.dinamica.ro
+mdootuck.precisewarehousing.com
+https://sktechproxies.blogspot.com
+http://sk-bytes.blogspot.com
+http://skeducationyt.blogspot.com/
+http://sktechhh.blogspot.com/`
+};
+for (const [name, text] of Object.entries(additions)) {
+  let group = LINK_GROUPS.find(item => item.name === name);
+  if (!group) {
+    group = { category: 'Mais links', name, links: '' };
+    LINK_GROUPS.push(group);
+  }
+  const destination = value => {
+    const stripped = value.replace(/^https?:\/\//i, '');
+    const match = stripped.match(/^([^/?#]+)(.*)$/);
+    const rest = match[2];
+    return match[1].toLowerCase() + (rest.startsWith('/') ? rest : '/' + rest);
+  };
+  const seen = new Set(group.links.split('\n').filter(Boolean).map(destination));
+  const fresh = text.split('\n').filter(link => {
+    const key = destination(link);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  group.links = [group.links, ...fresh].filter(Boolean).join('\n');
+}
+LINK_GROUPS.push({
+  category: 'Mais links',
+  name: 'Tung Tung Club',
+  links: Array.from({ length: 2500 }, (_, index) => `https://cdn.jsdelivr.net/gh/dxg-links/Dxglinkdrop@main/tungtunggroup.svg?creditstodxgforlinkslikethese!!${index + 1}link`).join('\n')
+});

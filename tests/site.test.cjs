@@ -228,3 +228,13 @@ test('BrowOS, Zodiac e Zaka preservam nomes e endereços fornecidos', () => {
     assert.deepEqual(Array.from(matching[0].links.split('\n')), addresses);
   }
 });
+
+test('novos grupos mantêm nomes literais e 2500 URLs numeradas', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  for (const name of ['SolaraOS', 'Strawberri', 'Steobrrii', 'TungTung', 'Rammerhead', 'Desync', 'TGLSC V5', 'Nexora', 'Other Links', 'Tung Tung Club']) {
+    assert.equal(groups.filter(group => group.name === name).length, 1, name);
+  }
+  const urls = groups.find(group => group.name === 'Tung Tung Club').links.split('\n');
+  assert.equal(urls.length, 2500);
+  for (let i = 0; i < urls.length; i++) assert.equal(urls[i], `https://cdn.jsdelivr.net/gh/dxg-links/Dxglinkdrop@main/tungtunggroup.svg?creditstodxgforlinkslikethese!!${i + 1}link`);
+});
