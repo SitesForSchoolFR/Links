@@ -982,3 +982,41 @@ LINK_GROUPS.push({
   name: 'Tung Tung Club',
   links: Array.from({ length: 2500 }, (_, index) => `https://cdn.jsdelivr.net/gh/dxg-links/Dxglinkdrop@main/tungtunggroup.svg?creditstodxgforlinkslikethese!!${index + 1}link`).join('\n')
 });
+
+// P2P: combinações exatamente presentes na lista compartilhada (v0001–v0100).
+const p2pQueries = [
+  'authuser=13833&resourcekey=UWLwqZ6e&usp=sharing&assignment_id=846',
+  'authuser=2172052&resourcekey=8McByshd&usp=sharing&assignment_id=596',
+  'authuser=4195411&resourcekey=MLe3kdbl&usp=sharing&assignment_id=228',
+  'authuser=9932216&resourcekey=3FL6ldWX&usp=sharing&assignment_id=892',
+  'id=111&edge=cf_f4ed3a&v=0797', 'id=226&edge=cf_4452e5&v=4351',
+  'id=43&key=108', 'id=44&key=609', 'id=550&key=629', 'id=585&key=688',
+  'id=587&key=563', 'id=685&key=429', 'id=721&key=215',
+  'id=9&edge=cf_b1aa5c&v=9628', 'id=983&edge=cf_abfca8&v=4284',
+  'submission_id=1048865&module_item_id=950&user_id=49777&download=1',
+  'submission_id=4594472&module_item_id=108&user_id=94502&download=1',
+  'submission_id=4954598&module_item_id=184&user_id=92092&download=1',
+  'submission_id=7058663&module_item_id=494&user_id=86371&download=1',
+  'submission_id=7565256&module_item_id=92&user_id=69613&download=1',
+  'submission_id=8154697&module_item_id=458&user_id=18330&download=1',
+  'usp=drive_web&authuser=1002907&resourcekey=5nzOVO1S&id=925',
+  'usp=drive_web&authuser=2443095&resourcekey=l4EHlTq8&id=909',
+  'usp=drive_web&authuser=4389579&resourcekey=r72WJjEc&id=230',
+  'usp=drive_web&authuser=4727528&resourcekey=CTYbknNo&id=287',
+  'usp=drive_web&authuser=5820642&resourcekey=Ul8umv10&id=988',
+  'usp=drive_web&authuser=7147287&resourcekey=w71XyRyG&id=339',
+  'usp=drive_web&authuser=8584034&resourcekey=7k9L8ix7&id=679',
+  'usp=drive_web&authuser=9195473&resourcekey=5P9vTot1&id=431',
+  'usp=drive_web&authuser=9810813&resourcekey=Yxo7YCSS&id=246'
+];
+const p2pGroup = LINK_GROUPS.find(group => group.name === 'P2P' && group.category === 'Jogos');
+const p2pExisting = new Set(p2pGroup.links.split('\n'));
+for (let version = 1; version <= 100; version++) {
+  for (const query of p2pQueries) {
+    const url = `https://cdn.jsdelivr.net/gh/xzvtps/index-dn372@main/v${String(version).padStart(4, '0')}/index.svg?${query}`;
+    if (!p2pExisting.has(url)) {
+      p2pGroup.links += `\n${url}`;
+      p2pExisting.add(url);
+    }
+  }
+}
