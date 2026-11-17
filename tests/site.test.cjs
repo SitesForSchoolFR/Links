@@ -238,3 +238,17 @@ test('novos grupos mantêm nomes literais e 2500 URLs numeradas', () => {
   assert.equal(urls.length, 2500);
   for (let i = 0; i < urls.length; i++) assert.equal(urls[i], `https://cdn.jsdelivr.net/gh/dxg-links/Dxglinkdrop@main/tungtunggroup.svg?creditstodxgforlinkslikethese!!${i + 1}link`);
 });
+
+test('P2P em Jogos contém as 3000 URLs da lista', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const group = groups.find(item => item.name === 'P2P' && item.category === 'Jogos');
+  assert.ok(group);
+  const links = group.links.split('\n').filter(link => link.startsWith('https://cdn.jsdelivr.net/gh/xzvtps/index-dn372@main/'));
+  assert.equal(links.length, 3000);
+  assert.equal(new Set(links).size, 3000);
+  for (let i = 1; i <= 100; i++) {
+    const prefix = `https://cdn.jsdelivr.net/gh/xzvtps/index-dn372@main/v${String(i).padStart(4, '0')}/index.svg?`;
+    assert.equal(links.filter(link => link.startsWith(prefix)).length, 30);
+  }
+  assert.ok(links.includes('https://cdn.jsdelivr.net/gh/xzvtps/index-dn372@main/v0100/index.svg?usp=drive_web&authuser=9810813&resourcekey=Yxo7YCSS&id=246'));
+});
