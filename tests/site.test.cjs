@@ -296,3 +296,30 @@ test('NYX em Jogos preserva as 2500 URLs na ordem fornecida', () => {
   assert.equal(new Set(links).size, 2500);
   assert.deepEqual(Array.from(links), expected);
 });
+
+test('IMPV2 em Jogos contém os 2500 links fornecidos', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const matching = groups.filter(group => group.name === 'IMPV2');
+  assert.equal(matching.length, 1);
+  assert.equal(matching[0].category, 'Jogos');
+  const urls = matching[0].links.split('\n');
+  assert.equal(urls.length, 2500);
+  assert.equal(new Set(urls).size, 2500);
+  const bases = [
+    'https://cdn.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+    'https://fastly.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+    'https://gcore.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+    'https://testingcf.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+    'https://rawcdn.githack.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+    'https://raw.githack.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+    'https://raw.githubusercontent.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+    'https://esm.sh/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?raw&',
+    'https://raw.esm.sh/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+    'https://cdn.staticdelivr.com/gh/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+    'https://ghproxy.net/https://raw.githubusercontent.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?'
+  ];
+  for (let id = 1; id <= 2500; id++) {
+    const mirror = id === 1 ? 2 : id <= 10 ? 1 : Math.ceil((id - 1) / 11) + 1;
+    assert.equal(urls[id - 1], `${bases[(id - 1) % 11]}id=${id}&mirror=v${mirror}`);
+  }
+});

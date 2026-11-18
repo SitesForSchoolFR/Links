@@ -1049,3 +1049,26 @@ LINK_GROUPS.push({
     )
   ).join('\n')
 });
+
+// IMPV2: endereços fornecidos, incluindo as exceções iniciais de mirror.
+const impV2Bases = [
+  'https://cdn.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+  'https://fastly.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+  'https://gcore.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+  'https://testingcf.jsdelivr.net/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+  'https://rawcdn.githack.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+  'https://raw.githack.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+  'https://raw.githubusercontent.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+  'https://esm.sh/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?raw&',
+  'https://raw.esm.sh/gh/donoEla/daily-linkdrops@main/Imp%20Games.svg?',
+  'https://cdn.staticdelivr.com/gh/donoEla/daily-linkdrops/main/Imp%20Games.svg?',
+  'https://ghproxy.net/https://raw.githubusercontent.com/donoEla/daily-linkdrops/main/Imp%20Games.svg?'
+];
+LINK_GROUPS.push({
+  category: 'Jogos', name: 'IMPV2',
+  links: Array.from({ length: 2500 }, (_, index) => {
+    const id = index + 1;
+    const mirror = id === 1 ? 2 : id <= 10 ? 1 : Math.floor((id - 2) / 11) + 2;
+    return `${impV2Bases[index % 11]}id=${id}&mirror=v${mirror}`;
+  }).join('\n')
+});
