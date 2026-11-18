@@ -1072,3 +1072,72 @@ LINK_GROUPS.push({
     return `${impV2Bases[index % 11]}id=${id}&mirror=v${mirror}`;
   }).join('\n')
 });
+
+// Coleções selecionadas para a aba Melhores.
+LINK_GROUPS.push(
+  { category: 'Melhores', name: 'Bull33', links: `http://hcxrt.sesaech.gob.mx/
+http://qqfum.sesaech.gob.mx/
+http://kmr.sesaech.gob.mx/
+http://aafxr.sesaech.gob.mx/
+http://gjlb.sesaech.gob.mx/
+http://superbull.s3.amazonaws.com/index.svg
+http://superbull.s3.us-east-1.amazonaws.com/index.svg
+http://superbull.s3.dualstack.us-east-1.amazonaws.com/index.svg
+http://s3.amazonaws.com/superbull/index.svg
+http://s3.us-east-1.amazonaws.com/superbull/index.svg
+http://s3.dualstack.us-east-1.amazonaws.com/superbull/index.svg` },
+  { category: 'Melhores', name: 'Cherri', links: `http://chrivtx.s3.amazonaws.com/index.html
+http://chrivtx.s3.us-east-1.amazonaws.com/index.html
+http://chrivtx.s3.dualstack.us-east-1.amazonaws.com/index.html
+http://s3.amazonaws.com/chrivtx/index.html
+http://s3.us-east-1.amazonaws.com/chrivtx/index.html
+http://s3.dualstack.us-east-1.amazonaws.com/chrivtx/index.html` },
+  { category: 'Melhores', name: 'Fern', links: `http://bulsobk.s3.amazonaws.com/index.html
+http://bulsobk.s3.us-east-1.amazonaws.com/index.html
+http://bulsobk.s3.dualstack.us-east-1.amazonaws.com/index.html
+http://s3.amazonaws.com/bulsobk/index.html
+http://s3.us-east-1.amazonaws.com/bulsobk/index.html
+http://s3.dualstack.us-east-1.amazonaws.com/bulsobk/index.html` },
+  { category: 'Melhores', name: 'Xylora', links: `http://education.slpssupersearch.com/
+http://meoww.rockinghameducationalfoundation.org/
+http://bees.pantaleonsoft.com/
+http://mathouyp.melandbri.net/
+http://proposal.ssurpropiedades.cl/` },
+  { category: 'Melhores', name: 'Frogiees arcade', links: `http://cvv.dpdenton.com/
+http://frogiee.slpssupersearch.com/
+http://wow.ssurpropiedades.cl/
+http://woah.rockinghameducationalfoundation.org/
+http://educationaljobs.pantaleonsoft.com/
+http://ext.thevoiceexchange.com/
+http://qfjun.dpdenton.com/
+http://wnpt.dpdenton.com/` },
+  { category: 'Melhores', name: 'Duckmath', links: `http://fbhoh.fuchs.com.ar/
+http://math.slpssupersearch.com/
+http://premium.ssurpropiedades.cl/
+http://lightworks.rockinghameducationalfoundation.org/
+http://day.pantaleonsoft.com/
+http://desync.thevoiceexchange.com/
+http://dgmqp.fuchs.com.ar/
+http://ptkpl.fuchs.com.ar/
+http://utsl.fuchs.com.ar/` },
+  { category: 'Melhores', name: 'Red Exploit', links: `http://rexploit.slpssupersearch.com/
+http://omg.ssurpropiedades.cl/
+http://base.rockinghameducationalfoundation.org/
+http://colors.pantaleonsoft.com/
+http://lowk.thevoiceexchange.com/` },
+  { category: 'Melhores', name: 'Refract', links: `cdn.jsdmirror.com/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg
+cdn.jsdelivr.net/gh/qsnt/youngkoala25@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg
+cdn.jsdelivr.net/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg
+http://s3.us-east-2.amazonaws.com/calmmarble80/index.html
+http://s3.us-east-2.amazonaws.com/gentlefalcon86/index.html
+http://s3.us-east-2.amazonaws.com/swiftmarble64/index.html
+http://s3.us-east-2.amazonaws.com/boldotter99/index.html
+http://s3.us-east-2.amazonaws.com/mellowpillow20/index.html
+http://s3.us-east-2.amazonaws.com/cleverribbon38/index.html` },
+  { category: 'Melhores', name: 'Truffled', links: `http://blaze519.b-cdn.net/
+http://amber819.b-cdn.net/
+http://cliff626.b-cdn.net/
+http://onyx973.b-cdn.net/
+http://atlas531.b-cdn.net/
+http://orbit300.b-cdn.net/` }
+);

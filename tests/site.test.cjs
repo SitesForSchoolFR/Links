@@ -323,3 +323,19 @@ test('IMPV2 em Jogos contém os 2500 links fornecidos', () => {
     assert.equal(urls[id - 1], `${bases[(id - 1) % 11]}id=${id}&mirror=v${mirror}`);
   }
 });
+
+test('aba Melhores mostra as coleções e os endereços informados', () => {
+  const { dom, document: d } = site();
+  try {
+    const button = [...d.querySelectorAll('#filters button')].find(b => b.textContent === 'Melhores');
+    assert.ok(button);
+    button.click();
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    const cards = [...d.querySelectorAll('#grid .card')];
+    assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Bull33', 'Cherri', 'Fern', 'Xylora', 'Frogiees arcade', 'Duckmath', 'Red Exploit', 'Refract', 'Truffled']);
+    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [11, 6, 6, 5, 8, 9, 5, 9, 6]);
+    assert.equal(cards[0].querySelector('a').getAttribute('href'), 'http://hcxrt.sesaech.gob.mx/');
+    assert.equal(cards[7].querySelector('a').getAttribute('href'), 'https://cdn.jsdmirror.com/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg');
+    assert.equal(cards[8].querySelector('li:last-child a').getAttribute('href'), 'http://orbit300.b-cdn.net/');
+  } finally { dom.window.close(); }
+});
