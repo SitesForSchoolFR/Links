@@ -332,10 +332,23 @@ test('aba Melhores mostra as coleções e os endereços informados', () => {
     button.click();
     assert.equal(button.getAttribute('aria-pressed'), 'true');
     const cards = [...d.querySelectorAll('#grid .card')];
-    assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Bull33', 'Cherri', 'Fern', 'Xylora', 'Frogiees arcade', 'Duckmath', 'Red Exploit', 'Refract', 'Truffled']);
-    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [11, 6, 6, 5, 8, 9, 5, 9, 6]);
+    assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Bull33', 'Cherri', 'Fern', 'Xylora', 'Frogiees arcade', 'Duckmath', 'Red Exploit', 'Refract', 'Gust']);
+    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [11, 6, 6, 5, 8, 9, 5, 9, 4999]);
     assert.equal(cards[0].querySelector('a').getAttribute('href'), 'http://hcxrt.sesaech.gob.mx/');
     assert.equal(cards[7].querySelector('a').getAttribute('href'), 'https://cdn.jsdmirror.com/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg');
-    assert.equal(cards[8].querySelector('li:last-child a').getAttribute('href'), 'http://orbit300.b-cdn.net/');
+    assert.equal(cards[8].querySelector('li:last-child a').getAttribute('href'), 'https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=5000');
   } finally { dom.window.close(); }
+});
+
+
+test('Gust preserva todos os 4999 links e Truffled foi removido de Melhores', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  assert.equal(groups.filter(g => g.category === 'Melhores' && g.name === 'Truffled').length, 0);
+  const matches = groups.filter(g => g.category === 'Melhores' && g.name === 'Gust');
+  assert.equal(matches.length, 1);
+  const urls = matches[0].links.split('\n');
+  assert.equal(urls.length, 4999);
+  for (let i = 0; i < urls.length; i++) {
+    assert.equal(urls[i], `https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=${i < 2088 ? i + 1 : i + 2}`);
+  }
 });
