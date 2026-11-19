@@ -1134,10 +1134,7 @@ http://s3.us-east-2.amazonaws.com/swiftmarble64/index.html
 http://s3.us-east-2.amazonaws.com/boldotter99/index.html
 http://s3.us-east-2.amazonaws.com/mellowpillow20/index.html
 http://s3.us-east-2.amazonaws.com/cleverribbon38/index.html` },
-  { category: 'Melhores', name: 'Truffled', links: `http://blaze519.b-cdn.net/
-http://amber819.b-cdn.net/
-http://cliff626.b-cdn.net/
-http://onyx973.b-cdn.net/
-http://atlas531.b-cdn.net/
-http://orbit300.b-cdn.net/` }
+  { category: 'Melhores', name: 'Gust', links: Array.from({ length: 4999 }, (_, index) =>
+    `https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=${index < 2088 ? index + 1 : index + 2}`
+  ).join('\n') }
 );
