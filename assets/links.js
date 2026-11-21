@@ -1138,3 +1138,125 @@ http://s3.us-east-2.amazonaws.com/cleverribbon38/index.html` },
     `https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=${index < 2088 ? index + 1 : index + 2}`
   ).join('\n') }
 );
+
+// Endereços adicionais agrupados pelos nomes fornecidos. Sem protocolo explícito,
+// a interface usa HTTPS; a disponibilidade e os recursos não foram verificados.
+const ADDITIONAL_LINKS = [
+  ['Mais links', 'Sumi', `quillstudy.s3.amazonaws.com/index.html
+s3.amazonaws.com/quillstudy/index.html
+sumimath.s3.us-east-1.amazonaws.com/index.html
+sumimath.s3.amazonaws.com/index.html
+sumi.magmaproject.net`],
+  ['Mais links', 'Rook', `aibabyy.s3-external-1.amazonaws.com/index.svg
+s3.amazonaws.com/aibabyy/index.html
+s3.amazonaws.com/aibabyy/index.svg
+aibabyy.s3.amazonaws.com/index.svg
+aibabyy.s3.amazonaws.com/index.html
+rooklesson.us-lax-4.linodeobjects.com/index.svg
+us-lax-4.linodeobjects.com/rook/index.svg
+rook.magmaproject.net
+rook.us-lax-4.linodeobjects.com/index.svg
+rookdesk.us-lax-4.linodeobjects.com/index.svg
+us-lax-4.linodeobjects.com/rookdesk/index.svg`],
+  ['Estudos', 'Tung Tung', `s3.amazonaws.com/thinkbabyy/index.html
+thinkbabyy.s3.amazonaws.com/index.html
+thinkbabyy.s3-external-1.amazonaws.com/index.html
+s3.us-east-1.amazonaws.com/thinkbabyy/index.html
+https://d39syz90mj03qm.cloudfront.net
+https://dxi6kxkjfsswh.cloudfront.net
+tungtung.magmaproject.net
+d2dqerhwqxradi.cloudfront.net`],
+  ['Mais links', 'Kite', `notewell.us-lax-4.linodeobjects.com/index.html
+studyloft.us-lax-4.linodeobjects.com/index.html
+us-lax-4.linodeobjects.com/notewell/index.html
+quizdesk.us-lax-4.linodeobjects.com/index.html
+kite.magmaproject.net
+us-lax-4.linodeobjects.com/quizdesk/index.html
+us-lax-4.linodeobjects.com/lessonhub/index.html
+us-lax-4.linodeobjects.com/studyloft/index.html`],
+  ['Mais links', 'Interstellar', `cedarloft.us-lax-4.linodeobjects.com/index.html
+oakprep.us-lax-4.linodeobjects.com/index.html
+interstellar.magmaproject.net`],
+  ['Mais links', 'DogeUB', `learnhive.us-lax-4.linodeobjects.com/index.html
+us-lax-4.linodeobjects.com/studygate/index.html
+us-lax-4.linodeobjects.com/learnhive/index.html
+dogeub.magmaproject.net
+studygate.us-lax-4.linodeobjects.com/index.html`],
+  ['Mais links', 'Achroma', `aokjezxu6bq.map.azionedge.net
+2rimjouwuyw.map.azionedge.net
+d1yd3j8ypn4f12.cloudfront.net
+d2md2bc53t43kn.cloudfront.net
+d3uzrhklzdl2e5.cloudfront.net
+dz2z1x7nmgnek.cloudfront.net
+d3acwuwzmsce84.cloudfront.net
+2bkyzwcgwsq.map.azionedge.net
+hk1mobtpluy.map.azionedge.net
+kjfexwdq6eg.map.azionedge.net
+judg0kzqjeu.map.azionedge.net`],
+  ['Estudos', 'Astral', `psatprep.s3.amazonaws.com/index.html
+s3.amazonaws.com/psatprep/index.html
+d12esrtqbw0ueh.cloudfront.net/`],
+  ['Estudos', 'Refract', `d65ntvxoot46b.cloudfront.net
+dolx69675hbws.cloudfront.net
+dbv5jzwuxfrc8.cloudfront.net
+d2psxljgjvhk1.cloudfront.net
+dpmfro18vgvab.cloudfront.net`],
+  ['Estudos', 'StudyHub', `dzbjxct0c9fxq.cloudfront.net/
+brightdesk.s3.amazonaws.com/index.html
+studyhub.magmaproject.net`],
+  ['Mais links', 'Glim', `s3.amazonaws.com/deskloft/index.html
+s3.us-east-1.amazonaws.com/deskloft/index.html
+s3-external-1.amazonaws.com/deskloft/index.html`],
+  ['Mais links', 'Onyx', `s3.amazonaws.com/onyxstudy/index.html
+onyxstudy.s3.amazonaws.com/index.html
+s3.us-east-1.amazonaws.com/onyxstudy/index.html
+onyx.magmaproject.net`],
+  ['Mais links', 'Lunar', `s3.us-east-1.amazonaws.com/fernprep/index.html
+fernprep.s3.amazonaws.com/index.html
+fernprep.s3.us-east-1.amazonaws.com/index.html
+lunar.magmaproject.net`],
+  ['Mais links', 'SolaraOS', `s3.amazonaws.com/quizharbor/index.svg
+s3.us-east-1.amazonaws.com/quizharbor/index.svg`],
+  ['Mais links', 'Strawberri', `d3ff66h1gfilcx.cloudfront.net
+d27kls5vqpzzgb.cloudfront.net
+d1hgfkw9ehuhoa.cloudfront.net
+strawberri123.s3-fips.us-west-1.amazonaws.com/index.html`],
+  ['Mais links', 'Flver', `flver.magmaproject.net`],
+  ['Mais links', 'Voya', `voya.magmaproject.net`],
+  ['Estudos', 'Aurora', `aurora.magmaproject.net`],
+  ['Mais links', 'Utopia', `utopia.magmaproject.net`],
+  ['Filmes e séries', 'Triple T HD', `triple.magmaproject.net`],
+  ['Estudos', 'Solara', `solara.magmaproject.net`],
+  ['Mais links', 'Space', `space.magmaproject.net`],
+  ['Filmes e séries', 'Cinera', `cinera.magmaproject.net`],
+  ['Mais links', 'Stroberri', `strob.magmaproject.net`],
+  ['Mais links', 'Boba', `boba.magmaproject.net`],
+  ['Mais links', 'Fern', `d2pve9ohgwdz6v.cloudfront.net
+fern123site.s3.us-west-1.amazonaws.com/index.html`],
+  ['Mais links', 'Xylora', `https://xylora.nwmteducationalcoop.org/
+https://neator.site/
+https://atlantapubliceducation.cfd/
+https://seniorseducation.orbitnetworkss.org/
+https://senior.herbsbynorthdaysimage.ca/
+https://apples.hotelupgrade.com/
+https://kick.aussieflagsandflagpoles.com.au/`],
+  ['Estudos', 'Galaxy V7', `https://galaxy.nwmteducationalcoop.org/
+http://wow.atlantapubliceducation.cfd/
+https://education.herbsbynorthdaysimage.ca/
+https://backup.hotelupgrade.com/
+https://bigger.aussieflagsandflagpoles.com.au/`],
+  ['Mais links', 'Cherri', `https://cherri.nwmteducationalcoop.org/
+http://yean.atlantapubliceducation.cfd/
+https://sudden.herbsbynorthdaysimage.ca/
+https://bitter.hotelupgrade.com/
+https://lasting.aussieflagsandflagpoles.com.au/`],
+  ['Estudos', 'Opium', `https://tinyurl.com/opiumdotbest
+https://opm.d2ftp8cchfyksh.amplifyapp.com/
+https://s3.amazonaws.com/cleverlearning/study
+https://storage.googleapis.com/gclassroom/study.html`]
+];
+for (const [category, name, links] of ADDITIONAL_LINKS) {
+  const group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  if (group) group.links += `\n${links}`;
+  else LINK_GROUPS.push({ category, name, links });
+}
