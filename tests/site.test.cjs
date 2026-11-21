@@ -352,3 +352,35 @@ test('Gust preserva todos os 4999 links e Truffled foi removido de Melhores', ()
     assert.equal(urls[i], `https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=${i < 2088 ? i + 1 : i + 2}`);
   }
 });
+
+test('novos endereços ficam nas coleções correspondentes sem assumir IA', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  for (const [category, name, url] of [
+    ['Mais links', 'Sumi', 'quillstudy.s3.amazonaws.com/index.html'],
+    ['Mais links', 'Rook', 'aibabyy.s3-external-1.amazonaws.com/index.svg'],
+    ['Estudos', 'Tung Tung', 'https://d39syz90mj03qm.cloudfront.net'],
+    ['Mais links', 'Achroma', 'judg0kzqjeu.map.azionedge.net'],
+    ['Estudos', 'Astral', 'psatprep.s3.amazonaws.com/index.html'],
+    ['Mais links', 'Xylora', 'https://kick.aussieflagsandflagpoles.com.au/'],
+    ['Estudos', 'Galaxy V7', 'http://wow.atlantapubliceducation.cfd/'],
+    ['Mais links', 'Cherri', 'http://yean.atlantapubliceducation.cfd/'],
+    ['Estudos', 'Opium', 'https://storage.googleapis.com/gclassroom/study.html']
+  ]) {
+    const group = groups.find(item => item.category === category && item.name === name);
+    assert.ok(group && group.links.split('\n').includes(url), `${name}: ${url}`);
+    assert.notEqual(group.aiVerified, true);
+  }
+});
+
+test('filtro IA só mostra coleções verificadas', () => {
+  const { dom, document: d } = site();
+  try {
+    const button = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'IA');
+    assert.ok(button);
+    button.click();
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    assert.equal(d.querySelectorAll('#grid .card').length, 0);
+    assert.match(d.querySelector('#empty').textContent, /Nenhuma coleção com IA verificada/);
+    assert.equal(d.querySelector('#empty').hidden, false);
+  } finally { dom.window.close(); }
+});
