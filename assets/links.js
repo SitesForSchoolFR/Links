@@ -1260,3 +1260,13 @@ for (const [category, name, links] of ADDITIONAL_LINKS) {
   if (group) group.links += `\n${links}`;
   else LINK_GROUPS.push({ category, name, links });
 }
+
+// IA informada pelo usuário para esta coleção específica; não se aplica aos outros links de Achroma.
+LINK_GROUPS.push({
+  category: 'Mais links',
+  name: 'Achroma (Oracle Cloud)',
+  aiConfirmed: true,
+  links: Array.from({ length: 5000 }, (_, index) =>
+    `https://objectstorage.uk-london-1.oraclecloud.com/n/lrqakfyhovf5/b/learn-maths-7k2/o/app.html?h=ExasTMlinks${index + 1}`
+  ).join('\n')
+});
