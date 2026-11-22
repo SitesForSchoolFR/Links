@@ -55,3 +55,4 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:10;op
 #links-site[data-art="08"] .hero{--theme-image:url("tomboy-08-new.jpg")}
 #links-site[data-art="09"] .hero{--theme-image:url("tomboy-09-new.jpg")}
 #links-site[data-art="10"] .hero{--theme-image:url("tomboy-10-new.jpg")}
+.card-note{margin:8px 0 0;color:#806d75;font-size:11px;line-height:1.6;overflow-wrap:anywhere}

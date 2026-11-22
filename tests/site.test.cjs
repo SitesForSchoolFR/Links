@@ -400,3 +400,23 @@ test('filtro IA mostra apenas coleções com IA confirmada', () => {
     assert.equal(cards[0].querySelector('li:last-child a').getAttribute('href'), 'https://objectstorage.uk-london-1.oraclecloud.com/n/lrqakfyhovf5/b/learn-maths-7k2/o/app.html?h=ExasTMlinks5000');
   } finally { dom.window.close(); }
 });
+
+test('seção Filmes apresenta YouShows e a frase como texto', () => {
+  const { dom, document: d } = site();
+  try {
+    const button = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'Filmes');
+    assert.ok(button);
+    button.click();
+    const cards = [...d.querySelectorAll('#grid .card')];
+    assert.equal(cards.length, 1);
+    assert.equal(cards[0].querySelector('h3').textContent, 'YouShows');
+    const details = cards[0].querySelector('details');
+    details.open = true;
+    assert.equal(details.querySelectorAll('a').length, 1);
+    assert.equal(details.querySelector('a').getAttribute('href'), 'https://youshows.org');
+    const note = details.querySelector('.card-note');
+    assert.equal(note.textContent, 'airport absent anger asset alter athlete brave assault amateur bullet camp awesome');
+    assert.equal(note.previousElementSibling.tagName, 'UL');
+    assert.equal(note.querySelector('a'), null);
+  } finally { dom.window.close(); }
+});

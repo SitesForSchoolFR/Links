@@ -7,7 +7,7 @@ const favoritesKey = 'links-for-me-favorites-v1';
 let favorites = new Set();
 try { const saved = JSON.parse(localStorage.getItem(favoritesKey) || '[]'); if (Array.isArray(saved)) favorites = new Set(saved.filter(item => typeof item === 'string')); } catch (_) { /* navegação privada ou armazenamento indisponível */ }
 const categories = ['Todos', 'Favoritos', 'IA', ...new Set(groups.map(g => g.category))];
-const icons = { 'Jogos': '✳', 'Estudos': '✿', 'Filmes e séries': '♡' };
+const icons = { 'Jogos': '✳', 'Estudos': '✿', 'Filmes e séries': '♡', 'Filmes': '♡' };
 for (const name of categories) {
   const button = document.createElement('button');
   button.textContent = name;
@@ -70,7 +70,12 @@ function render() {
       favorite.dataset.url = url;
       li.append(link, favorite); list.append(li);
     }
-    details.append(summary, list); card.append(head, details); grid.append(card);
+    details.append(summary, list);
+    if (group.note) {
+      const note = document.createElement('p'); note.className = 'card-note'; note.textContent = group.note;
+      details.append(note);
+    }
+    card.append(head, details); grid.append(card);
   }
   document.querySelector('#results').textContent = `${count} ${count === 1 ? 'coleção encontrada' : 'coleções encontradas'}`;
   document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : category === 'IA' && !query ? 'Nenhuma coleção com IA confirmada por enquanto. ♡' : 'Nenhum link encontrado. Tente outra busca ♡';
