@@ -372,15 +372,31 @@ test('novos endereços ficam nas coleções correspondentes sem assumir IA', () 
   }
 });
 
-test('filtro IA só mostra coleções verificadas', () => {
+test('Achroma Oracle Cloud preserva os 5000 links e aparece em IA', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  const group = groups.find(item => item.category === 'Mais links' && item.name === 'Achroma (Oracle Cloud)');
+  assert.ok(group);
+  assert.equal(group.aiConfirmed, true);
+  const urls = group.links.split('\n');
+  assert.equal(urls.length, 5000);
+  for (let i = 0; i < urls.length; i++) {
+    assert.equal(urls[i], `https://objectstorage.uk-london-1.oraclecloud.com/n/lrqakfyhovf5/b/learn-maths-7k2/o/app.html?h=ExasTMlinks${i + 1}`);
+  }
+  const old = groups.find(item => item.category === 'Mais links' && item.name === 'Achroma');
+  assert.ok(old);
+  assert.notEqual(old.aiConfirmed, true);
+});
+
+test('filtro IA mostra apenas coleções com IA confirmada', () => {
   const { dom, document: d } = site();
   try {
     const button = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'IA');
     assert.ok(button);
     button.click();
     assert.equal(button.getAttribute('aria-pressed'), 'true');
-    assert.equal(d.querySelectorAll('#grid .card').length, 0);
-    assert.match(d.querySelector('#empty').textContent, /Nenhuma coleção com IA verificada/);
-    assert.equal(d.querySelector('#empty').hidden, false);
+    const cards = [...d.querySelectorAll('#grid .card')];
+    assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Achroma (Oracle Cloud)']);
+    assert.equal(cards[0].querySelectorAll('li').length, 5000);
+    assert.equal(cards[0].querySelector('li:last-child a').getAttribute('href'), 'https://objectstorage.uk-london-1.oraclecloud.com/n/lrqakfyhovf5/b/learn-maths-7k2/o/app.html?h=ExasTMlinks5000');
   } finally { dom.window.close(); }
 });

@@ -23,7 +23,7 @@ function render() {
   grid.replaceChildren();
   let count = 0;
   for (const group of groups) {
-    if (category === 'IA' && group.aiVerified !== true) continue;
+    if (category === 'IA' && group.aiVerified !== true && group.aiConfirmed !== true) continue;
     if (category !== 'Todos' && category !== 'Favoritos' && category !== 'IA' && group.category !== category) continue;
     const matching = group.urls.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
     if (!matching.length) continue;
@@ -73,7 +73,7 @@ function render() {
     details.append(summary, list); card.append(head, details); grid.append(card);
   }
   document.querySelector('#results').textContent = `${count} ${count === 1 ? 'coleção encontrada' : 'coleções encontradas'}`;
-  document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : category === 'IA' && !query ? 'Nenhuma coleção com IA verificada por enquanto. ♡' : 'Nenhum link encontrado. Tente outra busca ♡';
+  document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : category === 'IA' && !query ? 'Nenhuma coleção com IA confirmada por enquanto. ♡' : 'Nenhum link encontrado. Tente outra busca ♡';
   document.querySelector('#empty').hidden = count !== 0;
 }
 search.addEventListener('input', render); render();
