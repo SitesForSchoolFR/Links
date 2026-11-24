@@ -109,7 +109,7 @@ test('ao remover favoritos, mantém cartões abertos e foco de teclado', () => {
 });
 
 test('todas as opções de tema apontam para imagens existentes', () => {
-  const { dom, document: d } = site({ 'links-theme-v1': 'void' });
+  const { dom, document: d } = site({ 'links-theme-v2': 'void' });
   try {
     assert.equal(d.querySelector('#links-site').dataset.theme, 'midnight');
     const css = load('assets/style.css');
@@ -419,4 +419,33 @@ test('seção Filmes apresenta YouShows e a frase como texto', () => {
     assert.equal(note.previousElementSibling.tagName, 'UL');
     assert.equal(note.querySelector('a'), null);
   } finally { dom.window.close(); }
+});
+
+test('minimalista é padrão e Shift K A restaura Kawaii sem trocar de modo', () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    assert.equal(d.documentElement.dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#links-site').dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#study').hidden, false);
+    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyK', key: 'K', shiftKey: true, bubbles: true }));
+    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyA', key: 'A', shiftKey: true, bubbles: true }));
+    assert.equal(d.documentElement.dataset.theme, 'kawaii');
+    assert.equal(d.querySelector('#links-site').dataset.theme, 'kawaii');
+    assert.equal(d.querySelector('#study').hidden, false);
+    assert.equal(w.localStorage.getItem('links-theme-v2'), 'kawaii');
+    d.querySelector('[data-theme-id="minimal"]').click();
+    assert.equal(d.documentElement.dataset.theme, 'minimal');
+    assert.equal(w.localStorage.getItem('links-theme-v2'), 'minimal');
+  } finally { dom.window.close(); }
+});
+
+test('imagens de O Mentalista estão disponíveis nos dois modos', () => {
+  const html = load('index.html');
+  for (const image of ['mentalista-01.jpg', 'mentalista-02.jpg']) {
+    assert.ok(fs.existsSync(path.join(root, 'assets', image)), image);
+    assert.ok(html.includes(`assets/${image}`), image);
+  }
+  const css = load('assets/minimal.css');
+  assert.match(css, /\.minimal-portrait\s*\{\s*display:none/);
+  assert.match(css, /html\[data-theme="minimal"\] \.minimal-portrait\s*\{\s*display:block/);
 });

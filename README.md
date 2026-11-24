@@ -41,3 +41,5 @@ A página inicial do modo de estudos oferece acesso rápido aos quizzes, pesquis
 Com Node.js 18 ou superior, execute `npm ci` e `npm test`. As dependências são necessárias apenas para os testes; o site publicado continua estático e não precisa de instalação ou compilação. Os testes verificam os principais fluxos, formatos de links, temas e cenários com armazenamento local bloqueado, mas não verificam a disponibilidade dos sites externos.
 
 Quando o usuário informar nomes para novas coleções, use exatamente esses nomes; não substitua por apelidos ou nomes semelhantes sem uma solicitação explícita.
+
+As imagens de *O Mentalista* no tema minimalista são reproduções de cenas da série, obtidas de [Collider](https://collider.com/the-mentalist-series-finale-lisbon-ending/). Os direitos das imagens pertencem aos respectivos titulares.
