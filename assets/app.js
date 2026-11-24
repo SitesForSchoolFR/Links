@@ -220,3 +220,34 @@ if (finePointer.matches) {
  window.addEventListener('blur', resetCursor);
  document.addEventListener('visibilitychange', () => { if (document.hidden) resetCursor(); });
 }
+
+// Sorteio uniforme entre coleções, seguido de sorteio uniforme entre seus links.
+const rouletteButtons = [document.querySelector('#random-game'), document.querySelector('#random-unblocker')];
+const rouletteStatus = document.querySelector('#roulette-status');
+const rouletteOpen = document.querySelector('#roulette-open');
+const rouletteWheel = document.querySelector('#roulette-wheel');
+function drawLink(kind) {
+  const candidates = groups.filter(group => group.urls.length && (kind === 'game'
+    ? group.category === 'Jogos'
+    : UNBLOCKER_COLLECTIONS.has(`${group.category}|${group.name}`)));
+  rouletteOpen.hidden = true;
+  rouletteOpen.removeAttribute('href');
+  if (!candidates.length) { rouletteStatus.textContent = 'Nenhuma coleção disponível para o sorteio.'; return; }
+  const group = candidates[Math.floor(Math.random() * candidates.length)];
+  const url = group.urls[Math.floor(Math.random() * group.urls.length)];
+  rouletteButtons.forEach(button => { button.disabled = true; });
+  rouletteStatus.textContent = 'Girando a roleta…';
+  rouletteWheel.classList.remove('spinning');
+  void rouletteWheel.offsetWidth;
+  rouletteWheel.classList.add('spinning');
+  const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1400;
+  window.setTimeout(() => {
+    rouletteWheel.classList.remove('spinning');
+    rouletteStatus.textContent = `${group.name} — ${url}`;
+    rouletteOpen.href = url;
+    rouletteOpen.hidden = false;
+    rouletteButtons.forEach(button => { button.disabled = false; });
+  }, duration);
+}
+rouletteButtons[0].addEventListener('click', () => drawLink('game'));
+rouletteButtons[1].addEventListener('click', () => drawLink('unblocker'));

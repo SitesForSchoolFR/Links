@@ -8,7 +8,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 
 const root = path.resolve(__dirname, '..');
 const load = name => fs.readFileSync(path.join(root, name), 'utf8');
-const scripts = ['links', 'study-extra', 'study', 'themes', 'app'].map(name => load(`assets/${name}.js`)).join('\n');
+const scripts = ['links', 'unblockers', 'study-extra', 'study', 'themes', 'app'].map(name => load(`assets/${name}.js`)).join('\n');
 function site(initial = {}) {
   const errors = [];
   const virtualConsole = new VirtualConsole();
@@ -448,4 +448,40 @@ test('imagens de O Mentalista estão disponíveis nos dois modos', () => {
   const css = load('assets/minimal.css');
   assert.match(css, /\.minimal-portrait\s*\{\s*display:none/);
   assert.match(css, /html\[data-theme="minimal"\] \.minimal-portrait\s*\{\s*display:block/);
+});
+
+test('menu ASCII usa apenas coleções selecionadas de unblockers', () => {
+  const list = spawnSync('node', ['scripts/unblockers-data.cjs', '--list'], { cwd: root, encoding: 'utf8' });
+  assert.equal(list.status, 0);
+  assert.match(list.stdout, /Achroma \(Mais links\)/);
+  assert.match(list.stdout, /Solara \(Estudos\)/);
+  assert.match(list.stdout, /SolaraOS \(Mais links\)/);
+  assert.match(list.stdout, /N7x \(Mais links\)/);
+  assert.match(list.stdout, /Gust \(Melhores\)/);
+  assert.doesNotMatch(list.stdout, /P2P|GN-Math|Eaglercraft/);
+  const invalid = spawnSync('node', ['scripts/unblockers-data.cjs', '--urls', '99999'], { cwd: root });
+  assert.notEqual(invalid.status, 0);
+  const output = spawnSync('bash', ['unblockers.sh'], { cwd: root, input: '0\n', encoding: 'utf8' });
+  assert.equal(output.status, 0);
+  assert.match(output.stdout, /U N B L O C K E R S/);
+});
+
+test('roletas sorteiam coleção e link e oferecem abertura segura', () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    w.setTimeout = callback => { callback(); return 1; };
+    w.Math.random = () => 0;
+    const open = d.querySelector('#roulette-open');
+    d.querySelector('#random-game').click();
+    assert.equal(open.hidden, false);
+    assert.equal(open.href, 'https://eaglercraft.com/');
+    assert.equal(open.target, '_blank');
+    assert.match(open.rel, /noopener/);
+    assert.match(d.querySelector('#roulette-status').textContent, /Eaglercraft/);
+    d.querySelector('#random-unblocker').click();
+    assert.equal(open.hidden, false);
+    assert.match(d.querySelector('#roulette-status').textContent, /Petezah/);
+    assert.ok(open.href.startsWith('https://'));
+    assert.equal(d.querySelector('#random-unblocker').disabled, false);
+  } finally { dom.window.close(); }
 });
