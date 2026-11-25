@@ -1970,3 +1970,59 @@ for (const [category, name, links] of DISCORD_LINKS) {
   const group = LINK_GROUPS.find(item => item.category === category && item.name === name);
   group.links += `\n${links}`;
 }
+
+// Reorganização de Other Links: só separa nomes explícitos ou lotes identificados.
+// Mantenha esta lista de coleções recentes manualmente e informe o usuário ao alterá-la.
+const RECENT_COLLECTIONS = new Set([
+  'Mais links|Other Links', 'Mais links|Rammerhead', 'Mais links|Edu Rocks',
+  'Mais links|Luna', 'Mais links|Void', 'Mais links|WeSlack', 'Mais links|Cat4z',
+  'Mais links|CatClass', 'Mais links|YukiEDU', 'Mais links|LuminalOS',
+  'Mais links|Ivy'
+]);
+const otherLinks = LINK_GROUPS.find(group => group.category === 'Mais links' && group.name === 'Other Links');
+const luminalHosts = new Set(`bbb6b099f5f6 5119ae25ef6b fc775b4a4b11 1f156cc0da7f c54726e8a5a4 b64b6d791df1 f50e6eadae16 f4d45a1c4723 10fabf77e3c8 5638846618a5 aeaf3b808dea 991bf586baed 9de40c919226 29327c102a9b 15bfdf200867 ba68562c2468 aaf2d3883468 580627468e38 3c319aa486d0 eab82eacc59b 944daf463d7a 11ff82d53350 68cdb3f69d27 d884d6bf0158 10456887ef72 8771143a15c6 cf0fcbb41c9f 8cfcd3607635 34f81f15071f 71d5d9db6dfd`.split(' '));
+const eduRocksBatch = new Set(`https://edu-rocks.tribeoftwo.com/
+https://rocks.tribeoftwo.com/
+https://w-game-library.tribeoftwo.com/
+https://w-pokerouge.tribeoftwo.com/
+https://why-is-this-not-popular.tribeoftwo.com/
+https://edu-rocks.rusticrivergear.com/
+https://mfmf.rusticrivergear.com/
+https://not-learning.rusticrivergear.com/
+https://pokerouge.rusticrivergear.com/
+https://this-is-not-edu.rusticrivergear.com/
+https://edu-rock.streetdirectory.sg/
+https://edu-rocks.streetdirectory.sg/
+https://edu-the-rock-gng.streetdirectory.sg/
+https://rock-edu.streetdirectory.sg/
+https://rocks-edu.streetdirectory.sg/`.split('\n'));
+function identifyOtherLink(link) {
+  const address = link.replace(/^https?:\/\//i, '').toLowerCase();
+  const slash = address.indexOf('/');
+  const host = slash < 0 ? address : address.slice(0, slash);
+  const path = slash < 0 ? '' : address.slice(slash).split(/[?#]/, 1)[0];
+  const first = host.split('.')[0];
+  if (/(^|[.\/_-])ivy([.\/_-]|$)/i.test(`${host}${path}`)) return 'Ivy';
+  if (first.startsWith('rammer') || first.startsWith('rammhead')) return 'Rammerhead';
+  if (eduRocksBatch.has(link) || /^edu-rocks?/.test(first)) return 'Edu Rocks';
+  if (/^luna(?:-\d+|-s)?$/.test(first)) return 'Luna';
+  if (/^void(?:-edu|istuff|s)?$/.test(first)) return 'Void';
+  if (/^(?:weslack|we-slack)$/.test(first)) return 'WeSlack';
+  if (/(^|[.\/])cat4z([.\/]|$)/.test(`${host}${path}`)) return 'Cat4z';
+  if (/(^|\/)catclass\//.test(path) || first === 'catclass') return 'CatClass';
+  if (/\/yukiedu-\d+\.svg$/.test(path)) return 'YukiEDU';
+  if ((host.endsWith('.surge.sh') && luminalHosts.has(first)) || /\/luminalos\.svg$/.test(path)) return 'LuminalOS';
+  return null;
+}
+const remainingOtherLinks = [];
+for (const link of otherLinks.links.split('\n').filter(Boolean)) {
+  const name = identifyOtherLink(link);
+  if (!name) { remainingOtherLinks.push(link); continue; }
+  let group = LINK_GROUPS.find(item => item.category === 'Mais links' && item.name === name);
+  if (!group) { group = { category: 'Mais links', name, links: '' }; LINK_GROUPS.push(group); }
+  group.links += `${group.links ? '\n' : ''}${link}`;
+}
+otherLinks.links = remainingOtherLinks.join('\n');
+for (const group of LINK_GROUPS) {
+  if (RECENT_COLLECTIONS.has(`${group.category}|${group.name}`)) group.recent = true;
+}

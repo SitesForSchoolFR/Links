@@ -478,9 +478,7 @@ test('links do Discord são preservados e distribuídos nas coleções', () => {
   const crypto = require('node:crypto');
   assert.equal(crypto.createHash('sha256').update([...all].sort().join('\n')).digest('hex'), 'cacb70fff160d006568bf066fefb1cba493ff9074d766048960f6c1a41c27cb9');
   for (const [category, name, links] of batch) {
-    const group = groups.find(item => item.category === category && item.name === name);
-    assert.ok(group);
-    for (const link of links.split('\n')) assert.ok(group.links.split('\n').includes(link), link);
+    for (const link of links.split('\n')) assert.ok(groups.some(group => group.links.split('\n').includes(link)), link);
   }
   for (const [category, name, url] of [
     ['Melhores', 'Bull33', 'https://bull-33.shentaichiacademy.co.uk/'],
@@ -494,4 +492,48 @@ test('links do Discord são preservados e distribuídos nas coleções', () => {
   ]) {
     assert.ok(groups.find(g => g.category === category && g.name === name).links.split('\n').includes(url), url);
   }
+});
+
+test('reorganização de Other Links preserva todos os endereços sem inventar Ivy', () => {
+  const source = load('assets/links.js');
+  const marker = '// Reorganização de Other Links:';
+  const before = vm.runInNewContext(source.split(marker)[0] + '\nLINK_GROUPS');
+  const after = vm.runInNewContext(source + '\nLINK_GROUPS');
+  const oldOther = before.find(group => group.name === 'Other Links').links.split('\n');
+  const allAfter = new Set(after.flatMap(group => group.links.split('\n')));
+  for (const link of oldOther) assert.ok(allAfter.has(link), link);
+  const newOther = after.find(group => group.name === 'Other Links').links.split('\n');
+  assert.ok(newOther.includes('https://a2f7ddcd320e.surge.sh/index.svg'));
+  for (const [name, url] of [
+    ['Rammerhead', 'rammer.nana.jonmills.org'],
+    ['Edu Rocks', 'https://w-game-library.tribeoftwo.com/'],
+    ['Luna', 'http://luna.govt.hu/'],
+    ['Void', 'https://void.bagatz.com/'],
+    ['WeSlack', 'https://weslack.govt.hu/'],
+    ['Cat4z', 'https://cat4z.s3.amazonaws.com/index.html'],
+    ['CatClass', 'https://catclass.lirr.space/'],
+    ['YukiEDU', 'https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-12.svg'],
+    ['LuminalOS', 'https://bbb6b099f5f6.surge.sh/index.svg']
+  ]) {
+    const group = after.find(item => item.category === 'Mais links' && item.name === name);
+    assert.ok(group && group.recent && group.links.split('\n').includes(url), name);
+    assert.ok(!newOther.includes(url), name);
+  }
+  assert.equal(after.some(group => group.name === 'Ivy'), false);
+});
+
+test('aba Novos mostra as coleções recentes sem duplicá-las no catálogo', () => {
+  const { dom, document: d } = site();
+  try {
+    const button = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'Novos');
+    assert.ok(button);
+    button.click();
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    const names = [...d.querySelectorAll('#grid .card h3')].map(item => item.textContent);
+    assert.deepEqual(names, ['Rammerhead', 'Other Links', 'LuminalOS', 'Edu Rocks', 'WeSlack', 'Luna', 'Void', 'CatClass', 'Cat4z', 'YukiEDU']);
+    assert.equal(new Set(names).size, names.length);
+    const oldTab = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'Mais links');
+    oldTab.click();
+    assert.ok([...d.querySelectorAll('#grid .card h3')].some(item => item.textContent === 'Other Links'));
+  } finally { dom.window.close(); }
 });

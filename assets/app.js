@@ -6,7 +6,7 @@ let category = 'Todos';
 const favoritesKey = 'links-for-me-favorites-v1';
 let favorites = new Set();
 try { const saved = JSON.parse(localStorage.getItem(favoritesKey) || '[]'); if (Array.isArray(saved)) favorites = new Set(saved.filter(item => typeof item === 'string')); } catch (_) { /* navegação privada ou armazenamento indisponível */ }
-const categories = ['Todos', 'Favoritos', 'IA', ...new Set(groups.map(g => g.category))];
+const categories = ['Todos', 'Favoritos', 'Novos', 'IA', ...new Set(groups.map(g => g.category))];
 const icons = { 'Jogos': '✳', 'Estudos': '✿', 'Filmes e séries': '♡', 'Filmes': '♡' };
 for (const name of categories) {
   const button = document.createElement('button');
@@ -23,8 +23,9 @@ function render() {
   grid.replaceChildren();
   let count = 0;
   for (const group of groups) {
+    if (category === 'Novos' && group.recent !== true) continue;
     if (category === 'IA' && group.aiVerified !== true && group.aiConfirmed !== true) continue;
-    if (category !== 'Todos' && category !== 'Favoritos' && category !== 'IA' && group.category !== category) continue;
+    if (category !== 'Todos' && category !== 'Favoritos' && category !== 'Novos' && category !== 'IA' && group.category !== category) continue;
     const matching = group.urls.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
     if (!matching.length) continue;
     count++;
