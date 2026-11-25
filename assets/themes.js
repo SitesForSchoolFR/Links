@@ -1,5 +1,6 @@
 // Uma arte original e nove ilustrações inspiradas em Tomo Aizawa, uma para cada tema.
 const themes = [
+  {id:'minimal',name:'Minimalista',note:'preto e branco',color:'#222222'},
   {id:'kawaii',name:'Kawaii original',note:'a clássica',color:'#e598aa'},
   {id:'catboy',name:'Tomboy Café',note:'energia de protagonista',color:'#bd8399',bg:'#fff3f1',panel:'#f3dee3',ink:'#573d50',accent:'#b96784',image:'01'},
   {id:'midnight',name:'Arcade à meia-noite',note:'mais uma ficha?',color:'#7b729d',bg:'#eae8f3',panel:'#dedbf0',ink:'#414061',accent:'#625786',image:'02'},
@@ -21,12 +22,13 @@ function applyTheme(id) {
  if (id === 'void') id = 'midnight';
  const theme = themes.find(item => item.id === id) || themes[0];
  linksShell.dataset.theme = theme.id;
+ document.documentElement.dataset.theme = theme.id;
  for (const [property, value] of Object.entries({'--theme-bg':theme.bg,'--theme-panel':theme.panel,'--theme-ink':theme.ink,'--theme-accent':theme.accent})) {
    if (value) linksShell.style.setProperty(property,value); else linksShell.style.removeProperty(property);
  }
  linksShell.dataset.art = theme.image || '';
  for (const button of themeOptions.children) button.setAttribute('aria-pressed', String(button.dataset.themeId === theme.id));
- try { localStorage.setItem('links-theme-v1', theme.id); } catch (_) {}
+ try { localStorage.setItem('links-theme-v1', theme.id); localStorage.setItem('links-theme-v2', theme.id); } catch (_) {}
 }
 for (const theme of themes) {
  const button = document.createElement('button'); button.type='button'; button.className='theme-choice'; button.dataset.themeId=theme.id;
@@ -36,5 +38,6 @@ for (const theme of themes) {
  button.addEventListener('click', () => applyTheme(theme.id)); themeOptions.append(button);
 }
 themeToggle.addEventListener('click', () => { const open=themeSettings.hidden; themeSettings.hidden=!open; themeToggle.setAttribute('aria-expanded',String(open)); });
-let savedTheme = 'kawaii'; try { savedTheme = localStorage.getItem('links-theme-v1') || 'kawaii'; } catch (_) {}
+// A nova versão inicia no minimalista; escolhas posteriores são mantidas.
+let savedTheme = 'minimal'; try { savedTheme = localStorage.getItem('links-theme-v2') || 'minimal'; } catch (_) {}
 applyTheme(savedTheme);

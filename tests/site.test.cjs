@@ -8,7 +8,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 
 const root = path.resolve(__dirname, '..');
 const load = name => fs.readFileSync(path.join(root, name), 'utf8');
-const scripts = ['links', 'study-extra', 'study', 'themes', 'app'].map(name => load(`assets/${name}.js`)).join('\n');
+const scripts = ['links', 'unblockers', 'study-extra', 'study', 'themes', 'app'].map(name => load(`assets/${name}.js`)).join('\n');
 function site(initial = {}) {
   const errors = [];
   const virtualConsole = new VirtualConsole();
@@ -109,7 +109,7 @@ test('ao remover favoritos, mantém cartões abertos e foco de teclado', () => {
 });
 
 test('todas as opções de tema apontam para imagens existentes', () => {
-  const { dom, document: d } = site({ 'links-theme-v1': 'void' });
+  const { dom, document: d } = site({ 'links-theme-v2': 'void' });
   try {
     assert.equal(d.querySelector('#links-site').dataset.theme, 'midnight');
     const css = load('assets/style.css');
@@ -225,7 +225,7 @@ test('BrowOS, Zodiac e Zaka preservam nomes e endereços fornecidos', () => {
   for (const [name, addresses] of Object.entries(expected)) {
     const matching = groups.filter(group => group.name === name);
     assert.equal(matching.length, 1, name);
-    assert.deepEqual(Array.from(matching[0].links.split('\n')), addresses);
+    assert.deepEqual(Array.from(matching[0].links.split('\n').slice(0, addresses.length)), addresses);
   }
 });
 
@@ -258,7 +258,7 @@ test('C00lKid Tech em Jogos preserva os 3459 links fornecidos', () => {
   const matching = groups.filter(group => group.name === 'C00lKid Tech');
   assert.equal(matching.length, 1);
   assert.equal(matching[0].category, 'Jogos');
-  const links = matching[0].links.split('\n');
+  const links = matching[0].links.split('\n').slice(0, 3459);
   assert.equal(links.length, 3459);
   assert.equal(new Set(links).size, 3459);
   for (let i = 0; i < links.length; i++) {
@@ -291,7 +291,7 @@ test('NYX em Jogos preserva as 2500 URLs na ordem fornecida', () => {
       }
     }
   }
-  const links = matching[0].links.split('\n');
+  const links = matching[0].links.split('\n').slice(0, 2500);
   assert.equal(links.length, 2500);
   assert.equal(new Set(links).size, 2500);
   assert.deepEqual(Array.from(links), expected);
@@ -302,7 +302,7 @@ test('IMPV2 em Jogos contém os 2500 links fornecidos', () => {
   const matching = groups.filter(group => group.name === 'IMPV2');
   assert.equal(matching.length, 1);
   assert.equal(matching[0].category, 'Jogos');
-  const urls = matching[0].links.split('\n');
+  const urls = matching[0].links.split('\n').slice(0, 2500);
   assert.equal(urls.length, 2500);
   assert.equal(new Set(urls).size, 2500);
   const bases = [
@@ -333,7 +333,7 @@ test('aba Melhores mostra as coleções e os endereços informados', () => {
     assert.equal(button.getAttribute('aria-pressed'), 'true');
     const cards = [...d.querySelectorAll('#grid .card')];
     assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Bull33', 'Cherri', 'Fern', 'Xylora', 'Frogiees arcade', 'Duckmath', 'Red Exploit', 'Refract', 'Gust']);
-    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [11, 6, 6, 5, 8, 9, 5, 9, 4999]);
+    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [24, 6, 6, 5, 8, 9, 5, 9, 4999]);
     assert.equal(cards[0].querySelector('a').getAttribute('href'), 'http://hcxrt.sesaech.gob.mx/');
     assert.equal(cards[7].querySelector('a').getAttribute('href'), 'https://cdn.jsdmirror.com/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg');
     assert.equal(cards[8].querySelector('li:last-child a').getAttribute('href'), 'https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=5000');
@@ -419,4 +419,79 @@ test('seção Filmes apresenta YouShows e a frase como texto', () => {
     assert.equal(note.previousElementSibling.tagName, 'UL');
     assert.equal(note.querySelector('a'), null);
   } finally { dom.window.close(); }
+});
+
+test('minimalista é padrão e Shift K A restaura Kawaii sem trocar de modo', () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    assert.equal(d.documentElement.dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#links-site').dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#study').hidden, false);
+    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyK', key: 'K', shiftKey: true, bubbles: true }));
+    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyA', key: 'A', shiftKey: true, bubbles: true }));
+    assert.equal(d.documentElement.dataset.theme, 'kawaii');
+    assert.equal(d.querySelector('#links-site').dataset.theme, 'kawaii');
+    assert.equal(d.querySelector('#study').hidden, false);
+    assert.equal(w.localStorage.getItem('links-theme-v2'), 'kawaii');
+    d.querySelector('[data-theme-id="minimal"]').click();
+    assert.equal(d.documentElement.dataset.theme, 'minimal');
+    assert.equal(w.localStorage.getItem('links-theme-v2'), 'minimal');
+  } finally { dom.window.close(); }
+});
+
+test('imagens de O Mentalista estão disponíveis nos dois modos', () => {
+  const html = load('index.html');
+  for (const image of ['mentalista-01.jpg', 'mentalista-02.jpg']) {
+    assert.ok(fs.existsSync(path.join(root, 'assets', image)), image);
+    assert.ok(html.includes(`assets/${image}`), image);
+  }
+  const css = load('assets/minimal.css');
+  assert.match(css, /\.minimal-portrait\s*\{\s*display:none/);
+  assert.match(css, /html\[data-theme="minimal"\] \.minimal-portrait\s*\{\s*display:block/);
+});
+
+test('roletas sorteiam coleção e link e oferecem abertura segura', () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    w.setTimeout = callback => { callback(); return 1; };
+    w.Math.random = () => 0;
+    const open = d.querySelector('#roulette-open');
+    d.querySelector('#random-game').click();
+    assert.equal(open.hidden, false);
+    assert.equal(open.href, 'https://eaglercraft.com/');
+    assert.equal(open.target, '_blank');
+    assert.match(open.rel, /noopener/);
+    assert.match(d.querySelector('#roulette-status').textContent, /Eaglercraft/);
+    d.querySelector('#random-unblocker').click();
+    assert.equal(open.hidden, false);
+    assert.match(d.querySelector('#roulette-status').textContent, /Petezah/);
+    assert.ok(open.href.startsWith('https://'));
+    assert.equal(d.querySelector('#random-unblocker').disabled, false);
+  } finally { dom.window.close(); }
+});
+
+test('links do Discord são preservados e distribuídos nas coleções', () => {
+  const { groups, batch } = vm.runInNewContext(load('assets/links.js') + '\n({ groups: LINK_GROUPS, batch: DISCORD_LINKS })');
+  const all = batch.flatMap(([, , links]) => links.split('\n'));
+  assert.equal(all.length, 685);
+  assert.equal(new Set(all).size, 685);
+  const crypto = require('node:crypto');
+  assert.equal(crypto.createHash('sha256').update([...all].sort().join('\n')).digest('hex'), 'cacb70fff160d006568bf066fefb1cba493ff9074d766048960f6c1a41c27cb9');
+  for (const [category, name, links] of batch) {
+    const group = groups.find(item => item.category === category && item.name === name);
+    assert.ok(group);
+    for (const link of links.split('\n')) assert.ok(group.links.split('\n').includes(link), link);
+  }
+  for (const [category, name, url] of [
+    ['Melhores', 'Bull33', 'https://bull-33.shentaichiacademy.co.uk/'],
+    ['Mais links', 'Other Links', 'https://a2f7ddcd320e.surge.sh/index.svg'],
+    ['Mais links', 'Other Links', 'https://gh-proxy.com/https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg'],
+    ['Mais links', 'Other Links', 'https://site-g6kxrd8n.myoxypages.com/AppStore%20[1.7.2]'],
+    ['Jogos', 'Duck Math', 'https://duck.edu.rusticrivergear.com/'],
+    ['Mais links', 'Achroma', 'http://learn-today.govt.hu/'],
+    ['Mais links', 'Cherri', 'https://cdn.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2'],
+    ['Estudos', 'Revault', 'https://revault.lirr.space/']
+  ]) {
+    assert.ok(groups.find(g => g.category === category && g.name === name).links.split('\n').includes(url), url);
+  }
 });

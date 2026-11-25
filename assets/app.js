@@ -142,7 +142,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(pointer: fine)');
 let lastSparkle = 0;
 document.addEventListener('pointermove', event => {
-  if (event.pointerType !== 'mouse' || reducedMotion.matches || !finePointer.matches || event.timeStamp - lastSparkle < 80) return;
+  if (document.documentElement.dataset.theme === 'minimal' || event.pointerType !== 'mouse' || reducedMotion.matches || !finePointer.matches || event.timeStamp - lastSparkle < 80) return;
   lastSparkle = event.timeStamp;
   const particle = document.createElement('span');
   particle.className = 'sparkle-particle'; particle.setAttribute('aria-hidden', 'true');
@@ -162,8 +162,10 @@ window.addEventListener('pageshow', event => { if (event.persisted) showMode(fal
 document.addEventListener('open-links', () => showMode(true));
 const heldKeys = new Set();
 document.addEventListener('keydown', event => {
-  if (['KeyA', 'KeyY', 'KeyP'].includes(event.code)) heldKeys.add(event.code);
-  if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyP') && !event.repeat) {
+  if (['KeyA', 'KeyY', 'KeyP', 'KeyK'].includes(event.code)) heldKeys.add(event.code);
+  if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyK') && !event.repeat && !(event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable="true"]'))) {
+    event.preventDefault(); heldKeys.clear(); applyTheme('kawaii');
+  } else if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyP') && !event.repeat) {
     event.preventDefault(); heldKeys.clear(); applyTheme('catboy'); showMode(true);
   } else if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyY') && !event.repeat) {
     event.preventDefault(); heldKeys.clear(); showMode(linksSite.hidden);
@@ -218,3 +220,34 @@ if (finePointer.matches) {
  window.addEventListener('blur', resetCursor);
  document.addEventListener('visibilitychange', () => { if (document.hidden) resetCursor(); });
 }
+
+// Sorteio uniforme entre coleções, seguido de sorteio uniforme entre seus links.
+const rouletteButtons = [document.querySelector('#random-game'), document.querySelector('#random-unblocker')];
+const rouletteStatus = document.querySelector('#roulette-status');
+const rouletteOpen = document.querySelector('#roulette-open');
+const rouletteWheel = document.querySelector('#roulette-wheel');
+function drawLink(kind) {
+  const candidates = groups.filter(group => group.urls.length && (kind === 'game'
+    ? group.category === 'Jogos'
+    : UNBLOCKER_COLLECTIONS.has(`${group.category}|${group.name}`)));
+  rouletteOpen.hidden = true;
+  rouletteOpen.removeAttribute('href');
+  if (!candidates.length) { rouletteStatus.textContent = 'Nenhuma coleção disponível para o sorteio.'; return; }
+  const group = candidates[Math.floor(Math.random() * candidates.length)];
+  const url = group.urls[Math.floor(Math.random() * group.urls.length)];
+  rouletteButtons.forEach(button => { button.disabled = true; });
+  rouletteStatus.textContent = 'Girando a roleta…';
+  rouletteWheel.classList.remove('spinning');
+  void rouletteWheel.offsetWidth;
+  rouletteWheel.classList.add('spinning');
+  const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1400;
+  window.setTimeout(() => {
+    rouletteWheel.classList.remove('spinning');
+    rouletteStatus.textContent = `${group.name} — ${url}`;
+    rouletteOpen.href = url;
+    rouletteOpen.hidden = false;
+    rouletteButtons.forEach(button => { button.disabled = false; });
+  }, duration);
+}
+rouletteButtons[0].addEventListener('click', () => drawLink('game'));
+rouletteButtons[1].addEventListener('click', () => drawLink('unblocker'));
