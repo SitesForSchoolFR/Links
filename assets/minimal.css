@@ -1,0 +1,45 @@
+/* Monocromático e reversível: o visual original permanece intacto nos outros temas. */
+html[data-theme="minimal"] { background:#080808; color-scheme:dark; }
+html[data-theme="minimal"] body { background:#080808; }
+html[data-theme="minimal"] #study,
+html[data-theme="minimal"] #links-site { filter:grayscale(1) invert(1); }
+html[data-theme="minimal"] #study .study-welcome-art,
+html[data-theme="minimal"] #links-site .hero-art,
+html[data-theme="minimal"] #links-site .hero:before,
+html[data-theme="minimal"] #links-site .hero:after,
+html[data-theme="minimal"] .sparkle-particle { display:none; }
+html[data-theme="minimal"] .study-welcome { grid-template-columns:1fr; }
+html[data-theme="minimal"] .study-welcome-copy { padding-right:8%; }
+html[data-theme="minimal"] #links-site .hero { background:#f1f1f1; }
+html[data-theme="minimal"] #links-site .hero h1,
+html[data-theme="minimal"] #links-site .hero h1 em,
+html[data-theme="minimal"] #links-site .hero .intro,
+html[data-theme="minimal"] #links-site .hero .eyebrow,
+html[data-theme="minimal"] #links-site .hero-bottom { color:#191919; }
+html[data-theme="minimal"] :is(.hero,.study-welcome,.card,.study-panel,.subject-card,.tool-card,.study-benefits,.study-community) { border-radius:4px; box-shadow:none; }
+html[data-theme="minimal"] :is(.card,.subject-card):hover { transform:none; animation:none; box-shadow:none; }
+html[data-theme="minimal"] :is(button,a,input,select,textarea,summary):focus-visible { outline:3px solid #777; outline-offset:3px; }
+@media (pointer:fine) {
+  html[data-theme="minimal"] .cursor-pointer { width:20px; height:20px; background:#fff; border:2px solid #111; border-radius:50%; }
+  html[data-theme="minimal"] .cursor-ring span { border-color:#fff; background:transparent; box-shadow:0 0 0 1px #111; }
+  html[data-theme="minimal"] .cursor-ring.is-interactive span { border-color:#fff; background:#ffffff20; }
+  html[data-theme="minimal"] .cursor-ring.is-pressed span { border-color:#fff; background:#ffffff55; }
+}
+
+.minimal-portrait { display:none; }
+html[data-theme="minimal"] .study-welcome { grid-template-columns:1fr 42%; }
+html[data-theme="minimal"] .minimal-portrait { display:block; position:relative; overflow:hidden; background:#ddd; }
+html[data-theme="minimal"] .minimal-portrait img { display:block; width:100%; height:100%; min-height:220px; object-fit:cover; filter:invert(1) grayscale(1); }
+html[data-theme="minimal"] .minimal-portrait span { position:absolute; right:16px; bottom:16px; padding:8px 10px; background:#fff; color:#111; font:700 9px/1 sans-serif; letter-spacing:.14em; }
+html[data-theme="minimal"] .minimal-links-portrait { width:38%; align-self:stretch; flex:none; }
+html[data-theme="minimal"] .minimal-links-portrait img { position:absolute; inset:0; }
+html[data-theme="minimal"] .hero-copy { max-width:58%; }
+@media (max-width:620px) {
+  html[data-theme="minimal"] .study-welcome { display:flex; }
+  html[data-theme="minimal"] .minimal-study-portrait { height:200px; }
+  html[data-theme="minimal"] .minimal-study-portrait img { min-height:0; }
+  html[data-theme="minimal"] .hero { display:flex; flex-direction:column; gap:24px; }
+  html[data-theme="minimal"] .hero-copy { max-width:none; }
+  html[data-theme="minimal"] .minimal-links-portrait { width:100%; height:180px; }
+  html[data-theme="minimal"] .minimal-links-portrait img { min-height:0; }
+}
