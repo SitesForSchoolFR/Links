@@ -43,7 +43,3 @@ Com Node.js 18 ou superior, execute `npm ci` e `npm test`. As dependências são
 Quando o usuário informar nomes para novas coleções, use exatamente esses nomes; não substitua por apelidos ou nomes semelhantes sem uma solicitação explícita.
 
 As imagens de *O Mentalista* no tema minimalista são reproduções de cenas da série, obtidas de [Collider](https://collider.com/the-mentalist-series-finale-lisbon-ending/). Os direitos das imagens pertencem aos respectivos titulares.
-
-### Menu ASCII de unblockers
-
-No terminal, execute `./unblockers.sh` (requer Node.js). Escolha uma coleção e depois um link. O menu e a roleta compartilham a seleção em `assets/unblockers.js`; os nomes são uma classificação inicial, não uma verificação de Ultraviolet, Scramjet ou disponibilidade. Coleções mistas foram excluídas para evitar incluir jogos por engano.
