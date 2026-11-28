@@ -51,3 +51,29 @@ test('seletor está visível no HTML real e permite escolher uma bandeira', () =
     assert.equal(d.querySelector('#language-menu').hidden, false);
   } finally { w.close(); }
 });
+
+test('traduções da página inicial, atributos e textos dinâmicos são reversíveis', async () => {
+  const html = fs.readFileSync('index.html', 'utf8');
+  const dom = new JSDOM(html, { url:'https://example.com/', runScripts:'outside-only' });
+  const w = dom.window, d = w.document;
+  try {
+    w.eval(fs.readFileSync('assets/language.js', 'utf8'));
+    d.querySelector('[data-lang="en-US"]').click();
+    assert.match(d.querySelector('#study-home').textContent, /Your next step/);
+    assert.match(d.querySelector('#study-home').textContent, /Made for you/);
+    assert.match(d.querySelector('#study-home').textContent, /Time to focus/);
+    assert.equal(d.querySelector('#study-notes').placeholder, 'What would you like to remember today?');
+    assert.equal(d.querySelector('#language-toggle span').textContent, 'Language');
+    d.querySelector('#progress-label').textContent = 'de 150 questões diferentes acertadas';
+    await new Promise(resolve => w.setTimeout(resolve, 0));
+    assert.equal(d.querySelector('#progress-label').textContent, 'of 150 different questions answered correctly');
+    d.querySelector('[data-lang="es-ES"]').click();
+    assert.match(d.querySelector('#study-home').textContent, /Tu próximo paso/);
+    assert.equal(d.querySelector('#study-notes').placeholder, '¿Qué quieres recordar hoy?');
+    assert.equal(d.querySelector('#progress-label').textContent, 'de 150 preguntas diferentes respondidas correctamente');
+    d.querySelector('[data-lang="pt-BR"]').click();
+    assert.match(d.querySelector('#study-home').textContent, /Seu próximo passo/);
+    assert.equal(d.querySelector('#study-notes').placeholder, 'O que você quer lembrar hoje?');
+    assert.equal(d.querySelector('#progress-label').textContent, 'de 150 questões diferentes acertadas');
+  } finally { w.close(); }
+});
