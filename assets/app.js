@@ -6,26 +6,40 @@ let category = 'Todos';
 const favoritesKey = 'links-for-me-favorites-v1';
 let favorites = new Set();
 try { const saved = JSON.parse(localStorage.getItem(favoritesKey) || '[]'); if (Array.isArray(saved)) favorites = new Set(saved.filter(item => typeof item === 'string')); } catch (_) { /* navegação privada ou armazenamento indisponível */ }
-const categories = ['Todos', 'Favoritos', 'IA', ...new Set(groups.map(g => g.category))];
+const priorityCategories = ['Novos', 'Jogos', 'Unblocker', 'Estudos'];
+const categories = [...priorityCategories, 'Todos', 'Favoritos', 'IA', ...new Set(groups.map(g => g.category).filter(name => !priorityCategories.includes(name))), 'Antigos'];
 const icons = { 'Jogos': '✳', 'Estudos': '✿', 'Filmes e séries': '♡', 'Filmes': '♡' };
 for (const name of categories) {
   const button = document.createElement('button');
   button.textContent = name;
+  button.dataset.category = name;
   button.type = 'button';
   button.setAttribute('aria-pressed', String(name === category));
   button.addEventListener('click', () => { category = name; for (const b of filters.children) b.setAttribute('aria-pressed', String(b === button)); render(); });
   filters.append(button);
 }
 document.querySelector('#total').textContent = `♡ ${groups.reduce((n,g) => n + g.urls.length, 0)} links na coleção`;
+async function copyLinks(text, successMessage, status) {
+  try {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Área de transferência indisponível');
+    await navigator.clipboard.writeText(text);
+    status.textContent = successMessage;
+  } catch (_) {
+    status.textContent = 'Não foi possível copiar. Verifique a permissão de acesso à área de transferência do navegador.';
+  }
+}
 function render() {
   const query = search.value.trim().toLocaleLowerCase('pt-BR');
   const openGroups = new Set([...grid.querySelectorAll('.card')].filter(card => card.querySelector('details').open).map(card => card.dataset.group));
   grid.replaceChildren();
   let count = 0;
   for (const group of groups) {
+    if (category === 'Novos' && group.recent !== true) continue;
     if (category === 'IA' && group.aiVerified !== true && group.aiConfirmed !== true) continue;
-    if (category !== 'Todos' && category !== 'Favoritos' && category !== 'IA' && group.category !== category) continue;
-    const matching = group.urls.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
+    if (category === 'Unblocker' && !UNBLOCKER_COLLECTIONS.has(`${group.category}|${group.name}`)) continue;
+    if (category !== 'Todos' && category !== 'Favoritos' && category !== 'Novos' && category !== 'IA' && category !== 'Unblocker' && category !== 'Antigos' && group.category !== category) continue;
+    const eligible = category === 'Antigos' ? group.urls.filter(url => isOldLink(url)) : category === 'Novos' ? group.urls.filter(url => !isOldLink(url)) : group.urls;
+    const matching = eligible.filter(url => (category !== 'Favoritos' || favorites.has(url)) && `${group.name} ${group.category} ${url}`.toLocaleLowerCase('pt-BR').includes(query));
     if (!matching.length) continue;
     count++;
     const card = document.createElement('article'); card.className = 'card'; card.dataset.group = JSON.stringify([group.category, group.name]);
@@ -37,6 +51,11 @@ function render() {
     info.append(tag, title); head.append(icon, info);
     const details = document.createElement('details'); details.open = openGroups.has(card.dataset.group);
     const summary = document.createElement('summary'); summary.textContent = `Ver ${matching.length} ${matching.length === 1 ? 'link' : 'links'}`;
+    const copyStatus = document.createElement('p'); copyStatus.className = 'copy-status'; copyStatus.setAttribute('role', 'status');
+    const copyAll = document.createElement('button'); copyAll.type = 'button'; copyAll.className = 'copy-all';
+    copyAll.textContent = category === 'Antigos' ? 'Copiar todos os links antigos' : 'Copiar todos os links';
+    copyAll.setAttribute('aria-label', `${category === 'Antigos' ? 'Copiar todos os links antigos' : 'Copiar todos os links'} da coleção ${group.name}`);
+    copyAll.addEventListener('click', () => copyLinks(eligible.join('\n'), category === 'Antigos' ? `Links antigos de ${group.name} foram copiados.` : `Todos os links de ${group.name} foram copiados.`, copyStatus));
     const list = document.createElement('ul');
     for (const url of matching) {
       const li = document.createElement('li'); const link = document.createElement('a');
@@ -62,15 +81,18 @@ function render() {
             const sameGroup = [...grid.querySelectorAll('.card')].find(item => item.dataset.group === groupKey);
             const next = sameGroup?.querySelector('.favorite') || grid.querySelector('.favorite');
             if (next) { next.closest('details').open = true; next.focus(); }
-            else [...filters.children].find(button => button.textContent === 'Favoritos')?.focus();
+            else [...filters.children].find(button => button.dataset.category === 'Favoritos')?.focus();
           }
         }
         else document.querySelectorAll('.favorite').forEach(button => { if (button.dataset.url === url) { const active = favorites.has(url); button.textContent = active ? '♥' : '♡'; button.setAttribute('aria-pressed', String(active)); button.setAttribute('aria-label', `${active ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}: ${link.textContent}`); } });
       });
       favorite.dataset.url = url;
-      li.append(link, favorite); list.append(li);
+      const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'copy-link';
+      copy.textContent = 'Copiar'; copy.setAttribute('aria-label', `Copiar link: ${url}`);
+      copy.addEventListener('click', () => copyLinks(url, 'Link copiado.', copyStatus));
+      li.append(link, copy, favorite); list.append(li);
     }
-    details.append(summary, list);
+    details.append(summary, copyAll, copyStatus, list);
     if (group.note) {
       const note = document.createElement('p'); note.className = 'card-note'; note.textContent = group.note;
       details.append(note);
@@ -78,7 +100,7 @@ function render() {
     card.append(head, details); grid.append(card);
   }
   document.querySelector('#results').textContent = `${count} ${count === 1 ? 'coleção encontrada' : 'coleções encontradas'}`;
-  document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : category === 'IA' && !query ? 'Nenhuma coleção com IA confirmada por enquanto. ♡' : 'Nenhum link encontrado. Tente outra busca ♡';
+  document.querySelector('#empty').textContent = category === 'Favoritos' && !query ? 'Você ainda não favoritou nenhum link. ♡' : category === 'IA' && !query ? 'Nenhuma coleção com IA confirmada por enquanto. ♡' : category === 'Antigos' && !query ? 'Ainda não há links antigos com data confirmada.' : 'Nenhum link encontrado. Tente outra busca ♡';
   document.querySelector('#empty').hidden = count !== 0;
 }
 search.addEventListener('input', render); render();
@@ -142,7 +164,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(pointer: fine)');
 let lastSparkle = 0;
 document.addEventListener('pointermove', event => {
-  if (event.pointerType !== 'mouse' || reducedMotion.matches || !finePointer.matches || event.timeStamp - lastSparkle < 80) return;
+  if (document.documentElement.dataset.theme === 'minimal' || event.pointerType !== 'mouse' || reducedMotion.matches || !finePointer.matches || event.timeStamp - lastSparkle < 80) return;
   lastSparkle = event.timeStamp;
   const particle = document.createElement('span');
   particle.className = 'sparkle-particle'; particle.setAttribute('aria-hidden', 'true');
@@ -160,11 +182,39 @@ function showMode(showLinks) {
 }
 window.addEventListener('pageshow', event => { if (event.persisted) showMode(false); });
 document.addEventListener('open-links', () => showMode(true));
+// Abre uma nova aba apenas após o clique; não redireciona se o navegador bloquear o pop-up.
+document.querySelector('#open-blank').addEventListener('click', () => {
+  const status = document.querySelector('#blank-status');
+  const blank = window.open('about:blank', '_blank');
+  if (!blank) { status.textContent = 'Permita pop-ups para abrir o site em about:blank.'; return; }
+  try {
+    const doc = blank.document;
+    doc.title = 'Links for me';
+    const favicon = doc.createElement('link'); favicon.rel = 'icon'; favicon.type = 'image/svg+xml';
+    favicon.href = new URL('assets/logo.svg', window.location.href).href; doc.head.append(favicon);
+    doc.documentElement.style.height = '100%';
+    doc.body.style.cssText = 'margin:0;height:100%;overflow:hidden';
+    const frame = doc.createElement('iframe');
+    frame.title = 'Links for me';
+    frame.style.cssText = 'border:0;width:100%;height:100%';
+    frame.addEventListener('load', () => {
+      try { frame.contentWindow.document.dispatchEvent(new frame.contentWindow.Event('open-links')); }
+      catch (_) { /* A página pode impedir acesso ou incorporação. */ }
+    });
+    frame.src = window.location.href;
+    doc.body.append(frame);
+  } catch (_) {
+    blank.close();
+    status.textContent = 'Não foi possível abrir a nova aba. Tente novamente.';
+    return;
+  }
+  window.location.href = 'https://www.google.com/';
+});
 const heldKeys = new Set();
 document.addEventListener('keydown', event => {
-  if (['KeyA', 'KeyY', 'KeyP'].includes(event.code)) heldKeys.add(event.code);
+  if (['KeyA', 'KeyY', 'KeyP', 'KeyK'].includes(event.code)) heldKeys.add(event.code);
   if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyP') && !event.repeat) {
-    event.preventDefault(); heldKeys.clear(); applyTheme('catboy'); showMode(true);
+    event.preventDefault(); heldKeys.clear(); showMode(true);
   } else if (event.shiftKey && heldKeys.has('KeyA') && heldKeys.has('KeyY') && !event.repeat) {
     event.preventDefault(); heldKeys.clear(); showMode(linksSite.hidden);
   }
@@ -200,7 +250,7 @@ if (finePointer.matches) {
    if (event.pointerType !== 'mouse') return;
    x = event.clientX; y = event.clientY;
    if (!visible) { ringX = x; ringY = y; visible = true; pointer.hidden = false; ring.hidden = false; document.documentElement.classList.add('custom-cursor-active'); }
-   pointer.style.transform = `translate(${x}px, ${y}px) translate(-10px, -10px)`;
+   pointer.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
    const interactive = event.target instanceof Element && !!event.target.closest('a,button,summary,select,input,textarea,label');
    ring.classList.toggle('is-interactive', interactive);
    if (frame === null) frame = requestAnimationFrame(draw);
@@ -218,3 +268,34 @@ if (finePointer.matches) {
  window.addEventListener('blur', resetCursor);
  document.addEventListener('visibilitychange', () => { if (document.hidden) resetCursor(); });
 }
+
+// Sorteio uniforme entre coleções, seguido de sorteio uniforme entre seus links.
+const rouletteButtons = [document.querySelector('#random-game'), document.querySelector('#random-unblocker')];
+const rouletteStatus = document.querySelector('#roulette-status');
+const rouletteOpen = document.querySelector('#roulette-open');
+const rouletteWheel = document.querySelector('#roulette-wheel');
+function drawLink(kind) {
+  const candidates = groups.filter(group => group.urls.length && (kind === 'game'
+    ? group.category === 'Jogos'
+    : UNBLOCKER_COLLECTIONS.has(`${group.category}|${group.name}`)));
+  rouletteOpen.hidden = true;
+  rouletteOpen.removeAttribute('href');
+  if (!candidates.length) { rouletteStatus.textContent = 'Nenhuma coleção disponível para o sorteio.'; return; }
+  const group = candidates[Math.floor(Math.random() * candidates.length)];
+  const url = group.urls[Math.floor(Math.random() * group.urls.length)];
+  rouletteButtons.forEach(button => { button.disabled = true; });
+  rouletteStatus.textContent = 'Girando a roleta…';
+  rouletteWheel.classList.remove('spinning');
+  void rouletteWheel.offsetWidth;
+  rouletteWheel.classList.add('spinning');
+  const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1400;
+  window.setTimeout(() => {
+    rouletteWheel.classList.remove('spinning');
+    rouletteStatus.textContent = `${group.name} — ${url}`;
+    rouletteOpen.href = url;
+    rouletteOpen.hidden = false;
+    rouletteButtons.forEach(button => { button.disabled = false; });
+  }, duration);
+}
+rouletteButtons[0].addEventListener('click', () => drawLink('game'));
+rouletteButtons[1].addEventListener('click', () => drawLink('unblocker'));

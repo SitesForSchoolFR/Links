@@ -28,7 +28,7 @@ Na coleção, o coração ao lado de cada endereço adiciona ou remove o favorit
 
 A estação oferece quizzes de matemática, português e ciências, seleção de ano, pontuação, pesquisa dos conteúdos da área de estudos e personagens fictícios identificados como tal. Português e ciências compartilham exercícios por etapa escolar; matemática tem exercícios específicos por ano. As preferências de ano e matéria ficam no navegador, mas não alteram o modo inicial de estudos.
 
-Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` continua alternando os modos; `Shift + A + P` abre a coleção com o tema Tomboy Café. Em Temas, há a opção Kawaii e dez variações Tomboy. Cada variação usa uma ilustração em estilo anime gerada para o projeto (uma original e nove inspiradas em Tomo Aizawa) e uma paleta própria; o tema é salvo localmente sem alterar o modo inicial.
+Na aba Pesquisar, enviar exatamente `Obrigado, Ryan` abre a coleção. **Esse atalho não é uma senha de segurança**: o código da página é público e executa no navegador. `Shift + A + Y` alterna os modos; `Shift + A + P` abre a coleção. O tema minimalista preto e branco é fixo em ambos os modos.
 
 Em dispositivos com mouse, um cursor personalizado substitui temporariamente o ponteiro nativo, com um anel que o segue e reage ao clique. O ponteiro nativo volta quando o mouse sai da página ou se o JavaScript estiver desativado. A preferência de movimento reduzido é respeitada.
 
@@ -41,3 +41,7 @@ A página inicial do modo de estudos oferece acesso rápido aos quizzes, pesquis
 Com Node.js 18 ou superior, execute `npm ci` e `npm test`. As dependências são necessárias apenas para os testes; o site publicado continua estático e não precisa de instalação ou compilação. Os testes verificam os principais fluxos, formatos de links, temas e cenários com armazenamento local bloqueado, mas não verificam a disponibilidade dos sites externos.
 
 Quando o usuário informar nomes para novas coleções, use exatamente esses nomes; não substitua por apelidos ou nomes semelhantes sem uma solicitação explícita.
+
+A aba **Novos** mostra as coleções marcadas em `RECENT_COLLECTIONS`, sem removê-las das abas originais. A lista é mantida manualmente: quando coleções forem adicionadas ou retiradas, informe essa mudança ao usuário; não há prazo automático de expiração.
+
+A aba **Antigos** reúne endereços com data confirmada em `DATED_LINK_BATCHES` ao completarem dois meses calendários, usando a data local do navegador. `OLD_LINKS` também permite registrar exceções de idade confirmada sem data exata. Links antigos são omitidos da aba Novos, mas permanecem nas categorias originais; não se presume a idade dos demais endereços. A aba **Unblocker** usa `UNBLOCKER_COLLECTIONS`, uma classificação não verificada.

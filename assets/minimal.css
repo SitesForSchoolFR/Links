@@ -1,0 +1,52 @@
+/* Visual monocromático permanente em ambos os modos. */
+html[data-theme="minimal"] { background:#080808; color-scheme:dark; }
+html[data-theme="minimal"] body { background:#080808; }
+html[data-theme="minimal"] #study,
+html[data-theme="minimal"] #links-site { filter:grayscale(1) invert(1); }
+html[data-theme="minimal"] #study .study-welcome-art,
+html[data-theme="minimal"] #links-site .hero-art,
+html[data-theme="minimal"] #links-site .hero:before,
+html[data-theme="minimal"] #links-site .hero:after,
+html[data-theme="minimal"] .sparkle-particle { display:none; }
+html[data-theme="minimal"] .study-welcome { grid-template-columns:1fr; }
+html[data-theme="minimal"] .study-welcome-copy { padding-right:8%; }
+html[data-theme="minimal"] #links-site .hero { background:#f1f1f1; }
+html[data-theme="minimal"] #links-site .hero h1,
+html[data-theme="minimal"] #links-site .hero h1 em,
+html[data-theme="minimal"] #links-site .hero .intro,
+html[data-theme="minimal"] #links-site .hero .eyebrow,
+html[data-theme="minimal"] #links-site .hero-bottom { color:#191919; }
+html[data-theme="minimal"] :is(.hero,.study-welcome,.card,.study-panel,.subject-card,.tool-card,.study-benefits,.study-community) { border-radius:4px; box-shadow:none; }
+html[data-theme="minimal"] :is(.card,.subject-card):hover { transform:none; animation:none; box-shadow:none; }
+html[data-theme="minimal"] :is(button,a,input,select,textarea,summary):focus-visible { outline:3px solid #777; outline-offset:3px; }
+@media (pointer:fine) {
+  html[data-theme="minimal"] .cursor-pointer { width:10px; height:10px; background:#fff; border:1px solid #111; border-radius:50%; }
+  html[data-theme="minimal"] .cursor-ring span { border-color:#fff; background:transparent; box-shadow:0 0 0 1px #111; }
+  html[data-theme="minimal"] .cursor-ring.is-interactive span { border-color:#fff; background:#ffffff20; }
+  html[data-theme="minimal"] .cursor-ring.is-pressed span { border-color:#fff; background:#ffffff55; }
+}
+
+/* Movimentos discretos, sem alterar o layout, com respeito a movimento reduzido. */
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  html[data-theme="minimal"] :is(button, .hero-button, .roulette-open) { transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+  html[data-theme="minimal"] :is(button, .hero-button, .roulette-open):not(:disabled):hover { transform:translateY(-2px); box-shadow:0 4px 12px #0002; }
+  html[data-theme="minimal"] :is(button, .hero-button, .roulette-open):not(:disabled):active { transform:translateY(0) scale(.98); }
+}
+
+/* Mantém a marca legível contra o cabeçalho escuro após a inversão. */
+html[data-theme="minimal"] :is(.brand-logo,.study-brand-logo) { filter:invert(1); }
+.language-control { position:fixed; z-index:1000; right:16px; bottom:16px; font: 14px system-ui,sans-serif; }
+.language-control > button { border:1px solid #aaa; border-radius:30px; background:#fff; color:#171717; padding:10px 15px; box-shadow:0 5px 20px #0002; cursor:pointer; }
+.language-menu { position:absolute; bottom:52px; right:0; width:min(340px,calc(100vw - 32px)); padding:18px; background:#fff; color:#171717; border:1px solid #ddd; border-radius:18px; box-shadow:0 15px 45px #0003; }
+.language-menu[hidden] { display:none; }
+.language-menu p { margin:0 0 14px; font-weight:600; }
+.language-flags { display:flex; gap:8px; perspective:500px; }
+.language-flags button { flex:1; background:#f5f5f5; border:1px solid #ddd; border-radius:12px; padding:12px 4px; font-size:32px; cursor:pointer; animation:flag-arrive .65s cubic-bezier(.2,.7,.2,1) both; }
+.language-flags button:nth-child(2) { animation-delay:.08s; }.language-flags button:nth-child(3) { animation-delay:.16s; }
+.language-flags button:hover,.language-flags button:focus-visible { transform:translateY(-4px); border-color:#555; }
+.language-flags button[aria-pressed=true] { outline:2px solid #171717; }
+.language-flags small { display:block; font-size:11px; margin-top:5px; }
+@keyframes flag-arrive { from { opacity:0; transform:translateZ(-240px) scale(.35); } to { opacity:1; transform:translateZ(0) scale(1); } }
+@media (prefers-reduced-motion:reduce) { .language-flags button { animation:none; } }
+
+.language-menu .language-note { font-size:11px; line-height:1.4; font-weight:400; color:#555; }

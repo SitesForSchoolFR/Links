@@ -1277,3 +1277,1030 @@ LINK_GROUPS.push({
   links: 'youshows.org',
   note: 'airport absent anger asset alter athlete brave assault amateur bullet camp awesome'
 });
+
+// Links recebidos: classificação por nome reconhecível ou contexto; destinos não verificados.
+const DISCORD_LINKS = [
+  ["Melhores", "Bull33", `https://bull-33.shentaichiacademy.co.uk/
+https://big-b.streetdirectory.sg/
+https://bu11.streetdirectory.sg/
+https://bull-books.streetdirectory.sg/
+https://bull-learning.streetdirectory.sg/
+https://super-b-learning.streetdirectory.sg/
+https://bull-33.belyfit.cl/
+http://bull-33.cobos.mx/
+https://bull-33.apexflightacademy.com/
+https://bull-33.bagatz.com/
+http://bull-33.olneybaptist.org/
+https://bull-33.lirr.space/
+https://bull-33.lakeballs.fi/`],
+  ["Mais links", "Other Links", `https://a2f7ddcd320e.surge.sh/index.svg
+https://0fd37c113f9b.surge.sh/index.svg
+https://674e3b2109bc.surge.sh/index.svg
+https://4adf89ac8de9.surge.sh/index.svg
+https://2bb13756b0e1.surge.sh/index.svg
+https://e47d27046020.surge.sh/index.svg
+https://81a310f9297b.surge.sh/index.svg
+https://93a5f72f2482.surge.sh/index.svg
+https://55ec984be1d2.surge.sh/index.svg
+https://5c2148b601e1.surge.sh/index.svg
+https://87bb10f76c67.surge.sh/index.svg
+https://8d2ef70cb97a.surge.sh/index.svg
+https://f0591b49d948.surge.sh/index.svg
+https://77a999db5986.surge.sh/index.svg
+https://d6568d179222.surge.sh/index.svg
+https://2081d70ef0b1.surge.sh/index.svg
+https://4c2c74de93b6.surge.sh/index.svg
+https://b78cb5944997.surge.sh/index.svg
+https://eec2c94446b5.surge.sh/index.svg
+https://4eccb7007316.surge.sh/index.svg
+https://961373fde239.surge.sh/index.svg
+https://fc8f3d1d54f8.surge.sh/index.svg
+https://8b26f0c299c7.surge.sh/index.svg
+https://4554feea5736.surge.sh/index.svg
+https://b9f216900663.surge.sh/index.svg
+https://b807e7f1d59e.surge.sh/index.svg
+https://b0b900ef0db2.surge.sh/index.svg
+https://65dc0a6e440a.surge.sh/index.svg
+https://39c5f66a64c0.surge.sh/index.svg
+https://7bf4aa3112dc.surge.sh/index.svg
+https://57cc3ee6dbdf.surge.sh/
+https://6fa5d0d66bf7.surge.sh/
+https://1a98e93bca71.surge.sh/
+https://c1f6d8235882.surge.sh/
+https://f8e686ed5878.surge.sh/
+https://5fdfab48801d.surge.sh/
+https://16aa7d156946.surge.sh/
+https://312afc3246ad.surge.sh/
+https://6766a59d47ef.surge.sh/
+https://7aa897322576.surge.sh/
+https://e94720552a96.surge.sh/
+https://f7d641b36661.surge.sh/
+https://7cb2f5563b44.surge.sh/
+https://c245b88f02f7.surge.sh/
+https://4b4d9cbb6875.surge.sh/
+https://c120495e4032.surge.sh/
+https://88d12470ca45.surge.sh/
+https://fa8692fbf950.surge.sh/
+https://284d243a3b46.surge.sh/
+https://d6b520712eb9.surge.sh/
+https://9e24e4461a8b.surge.sh/
+https://df58649ceba1.surge.sh/
+https://5327723657c3.surge.sh/
+https://e72eb098f5e9.surge.sh/
+https://36c2e915a18c.surge.sh/
+https://3bca2f62c4e0.surge.sh/
+https://9e421ff3619f.surge.sh/
+https://b978d2a27d2c.surge.sh/
+https://0859d8631167.surge.sh/
+https://a5ff0d8cf129.surge.sh/
+https://df.govt.hu/
+https://bu2133.mji.ro/
+https://edu.clever.com.bsfa.info/
+https://vc.bsfa.info/
+https://cleverlearning.edu.kwgranitecountertops.com/
+https://grammer.math.studynotes.homeworkhelp.studydesk.kwgranitecountertops.com/
+https://megalearning.kwgranitecountertops.com/
+https://zinkydinky.kwgranitecountertops.com/
+https://zn---2kd.kwgranitecountertops.com/
+https://zinktotheo.govt.hu/
+https://b9d4b9fff251.surge.sh/
+https://fb02baf2e781.surge.sh/
+https://aae284970a89.surge.sh/
+https://fd58567b3845.surge.sh/
+https://fb5e837e2e9f.surge.sh/
+https://eddf0ef1afdf.surge.sh/
+https://b1eb280f9b66.surge.sh/
+https://a973cf8d63f1.surge.sh/
+https://021b4d3f139b.surge.sh/
+https://58d36cf9a86f.surge.sh/
+https://e54f904c7e87.surge.sh/
+https://dd205836abbe.surge.sh/
+https://0cefa920ed1f.surge.sh/
+https://fd68c59fe7e9.surge.sh/
+https://f30e097251db.surge.sh/
+https://b25cac0f0823.surge.sh/
+https://7ce2cb775a02.surge.sh/
+https://8913cdccfecc.surge.sh/
+https://eef70108449c.surge.sh/
+https://2480b0ea09ae.surge.sh/
+https://71b26126825e.surge.sh/
+https://ca29a6d6e749.surge.sh/
+https://e84605e9762c.surge.sh/
+https://179bac4984c3.surge.sh/
+https://0deaf71e871c.surge.sh/
+https://fd61d2865f1c.surge.sh/
+https://75fc9cb7aeda.surge.sh/
+https://d3883215c9bf.surge.sh/
+https://50c6db7ab059.surge.sh/
+https://7f3c6c9e1b32.surge.sh/
+https://2ab54654d212.surge.sh/
+https://17a140e6b6df.surge.sh/
+https://85aa31b0b8fd.surge.sh/
+https://7a60879bf1b2.surge.sh/
+https://0bb595794519.surge.sh/
+https://18e03512f952.surge.sh/
+https://ee7f31141f97.surge.sh/
+https://226d4e5f9633.surge.sh/
+https://f5eee457a3cb.surge.sh/
+https://d9bab33d1785.surge.sh/
+https://b11ukl.govt.hu/index.html
+https://supermansuperserum.govt.hu/
+https://highschooltutoring.govt.hu/
+https://cat.govt.hu/
+https://lockersuplies.govt.hu/
+https://didthisatschoollol.govt.hu/
+https://overs.govt.hu/
+https://c80d1a9cb360.surge.sh/
+https://26a27089105d.surge.sh/
+https://78fc5961b96f.surge.sh/
+https://2af48b626ccb.surge.sh/
+https://8929c12f403f.surge.sh/
+https://36326612884d.surge.sh/
+https://855e6605b8d1.surge.sh/
+https://8ef4462f7925.surge.sh/
+https://54d8cfd3bda3.surge.sh/
+https://b920832b98cc.surge.sh/
+https://5ab6d8266a9b.surge.sh/
+https://9ee5697917b0.surge.sh/
+https://b37c3cbdd5a0.surge.sh/
+https://4abbebd8a272.surge.sh/
+https://f5eab3db7437.surge.sh/
+https://b56386995028.surge.sh/
+https://041a170b9d60.surge.sh/
+https://478339f9c468.surge.sh/
+https://3a7a82d4b58d.surge.sh/
+https://5bb1a2d3f0b6.surge.sh/
+https://c5e68515d823.surge.sh/
+https://295c8783fa96.surge.sh/
+https://67b66e6e1501.surge.sh/
+https://72f88b1e4929.surge.sh/
+https://ff697b53d3dd.surge.sh/
+https://8648805dcccf.surge.sh/
+https://8e92a7eff545.surge.sh/
+https://483f3f21a9c4.surge.sh/
+https://b623baa31054.surge.sh/
+https://f84837003615.surge.sh/
+https://9f511e9f74dc.surge.sh/
+https://6c90b0fa78d3.surge.sh/
+https://f195c4d60d0e.surge.sh/
+https://c359ceb01b64.surge.sh/
+https://ab6add339c33.surge.sh/
+https://197a51514131.surge.sh/
+https://1c872849fbb4.surge.sh/
+https://5b53cbf594af.surge.sh/
+https://b45069adf5c2.surge.sh/
+https://9202d4ffa35f.surge.sh/
+https://94ae78b0e976.surge.sh/
+https://5174e90edf8b.surge.sh/
+https://a1057e72451c.surge.sh/
+https://ef3ce25c7193.surge.sh/
+https://dfcb027afcd5.surge.sh/
+https://4696dca373d3.surge.sh/
+https://18429c51be60.surge.sh/
+https://c90afa8b7602.surge.sh/
+https://8daee990b4b8.surge.sh/
+https://f763bc98fb8b.surge.sh/
+https://4649951417cf.surge.sh/
+https://25408b0343a1.surge.sh/
+https://a48de1101437.surge.sh/
+https://6a1623b168ad.surge.sh/
+https://e4c05de7859d.surge.sh/
+https://951020a9be36.surge.sh/
+https://3ff16a4dbbdd.surge.sh/
+https://2aa795f5ab0b.surge.sh/
+https://85bf285f529c.surge.sh/
+https://809a36d146b3.surge.sh/
+https://a919decfac17.surge.sh/
+https://6f71850644cc.surge.sh/
+https://86a4a7370d60.surge.sh/
+https://9d911fe8cf0c.surge.sh/
+https://c6bc52e0a738.surge.sh/
+https://775246073459.surge.sh/
+https://06fa5413a9df.surge.sh/
+https://c5d56c021cbf.surge.sh/
+https://97ef102a8e77.surge.sh/
+https://4dd00bf4d7e2.surge.sh/
+https://bbb6b099f5f6.surge.sh/index.svg
+https://5119ae25ef6b.surge.sh/index.svg
+https://fc775b4a4b11.surge.sh/index.svg
+https://1f156cc0da7f.surge.sh/index.svg
+https://c54726e8a5a4.surge.sh/index.svg
+https://b64b6d791df1.surge.sh/index.svg
+https://f50e6eadae16.surge.sh/index.svg
+https://f4d45a1c4723.surge.sh/index.svg
+https://10fabf77e3c8.surge.sh/index.svg
+https://5638846618a5.surge.sh/index.svg
+https://aeaf3b808dea.surge.sh/index.svg
+https://991bf586baed.surge.sh/index.svg
+https://9de40c919226.surge.sh/index.svg
+https://29327c102a9b.surge.sh/index.svg
+https://15bfdf200867.surge.sh/index.svg
+https://ba68562c2468.surge.sh/index.svg
+https://aaf2d3883468.surge.sh/index.svg
+https://580627468e38.surge.sh/index.svg
+https://3c319aa486d0.surge.sh/index.svg
+https://eab82eacc59b.surge.sh/index.svg
+https://944daf463d7a.surge.sh/index.svg
+https://11ff82d53350.surge.sh/index.svg
+https://68cdb3f69d27.surge.sh/index.svg
+https://d884d6bf0158.surge.sh/index.svg
+https://10456887ef72.surge.sh/index.svg
+https://8771143a15c6.surge.sh/index.svg
+https://cf0fcbb41c9f.surge.sh/index.svg
+https://8cfcd3607635.surge.sh/index.svg
+https://34f81f15071f.surge.sh/index.svg
+https://71d5d9db6dfd.surge.sh/index.svg
+https://clever.ixl.learning.gov.nextcomm.com.ar/
+https://clever.ixl.learning.gov.school.nextcomm.com.ar/
+https://government.usa.gov.nextcomm.com.ar/
+https://megalearning.nextcomm.com.ar/
+https://ixl.com.pulsaudio.ro/
+https://learninghelp.edu.pulsaudio.ro/
+https://ddfg.pulsaudio.ro/
+https://wefr.pulsaudio.ro/
+http://grammer.learning.geometry.math.pulsaudio.ro/
+http://webackbaby.thefilmdatabase.com/
+https://6yearsandstillgoingstrong.edu.learning.thefilmdatabase.com/
+http://timetodomymagic.thefilmdatabase.com/
+http://learning.clever.nondestructivetesting.ca/
+http://ixl.edu.nondestructivetesting.ca/
+http://edu.edu.learning.streetdirectory.sg/
+http://superlearning.edu.streetdirectory.sg/
+http://cleverlearning.edu.nextcomm.com.ar/
+http://government.usa.gov.gov.nextcomm.com.ar/
+https://imps.rusticrivergear.com/
+https://intothestellar.rusticrivergear.com/
+https://newstudyguied.rusticrivergear.com/
+https://super.math.studyhelp.teachersforhire.rusticrivergear.com/
+https://xyalora.rusticrivergear.com/
+https://learninghelp.alte.ca/
+https://learninghelp.electricalone.com/
+https://learninghelp.hackershack.net/
+https://learninghelp.mindboggle.us/
+https://learninghelp.tribeoftwo.com/
+https://learninghelp.50friends.com.mx/
+https://didyoumissme.dila.cl/
+https://theynotlikeus.dila.cl/
+https://imback.nextcomm.com.ar/
+https://learninghelp.nextcomm.com.ar/
+https://learninghelp.gula.com.ar/
+https://learninghelp.manasit.com.ar/
+https://learninghelp.nondestructivetesting.ca/
+https://learninghelp.sanjayparajuli.com.np/
+https://learninghelp.streetdirectory.sg/
+https://learninghelp.c-abogados.com.ar/
+https://learninghelp.garymcgill.ca/
+https://learninghelp.gmk.cl/
+https://learninghelp.n43.pw/
+https://learninghelp.princesaleia.cl/
+https://site-g6kxrd8n.myoxypages.com/AppStore%20[1.7.2]
+https://site-g6kxrd8n.myoxypages.com/Balatro
+https://site-g6kxrd8n.myoxypages.com/alex
+https://site-g6kxrd8n.myoxypages.com/FLUX
+https://site-g6kxrd8n.myoxypages.com/cine
+https://site-g6kxrd8n.myoxypages.com/cindercloud
+https://site-g6kxrd8n.myoxypages.com/noahstoutering
+https://site-g6kxrd8n.myoxypages.com/melonsoda
+https://site-g6kxrd8n.myoxypages.com/
+https://site-g6kxrd8n.myoxypages.com/glalaxyyoutube
+https://site-g6kxrd8n.myoxypages.com/fuck-u
+https://site-g6kxrd8n.myoxypages.com/noctune
+https://site-g6kxrd8n.myoxypages.com/singlefile
+https://site-g6kxrd8n.myoxypages.com/SFoolsOS
+https://site-g6kxrd8n.myoxypages.com/quantumbrouser
+https://site-g6kxrd8n.myoxypages.com/swhelium
+https://site-g6kxrd8n.myoxypages.com/tobywebsinglefile
+https://site-g6kxrd8n.myoxypages.com/tundra
+https://site-g6kxrd8n.myoxypages.com/unblockzone%20v5
+https://site-g6kxrd8n.myoxypages.com/velcro
+https://site-g6kxrd8n.myoxypages.com/youtube
+https://site-49pbrdm9.myoxypages.com/aeos-v4.svg
+https://site-49pbrdm9.myoxypages.com/AppStore%20[2.0.0]/
+https://site-49pbrdm9.myoxypages.com/AppStore%20[1.7.2]/
+https://site-49pbrdm9.myoxypages.com/cloud.svg
+https://site-49pbrdm9.myoxypages.com/browser.svg
+https://site-49pbrdm9.myoxypages.com/axiomsvg-1.svg
+https://site-49pbrdm9.myoxypages.com/artic.svg
+https://site-49pbrdm9.myoxypages.com/games.svg
+https://site-49pbrdm9.myoxypages.com/eclipse.svg
+https://site-49pbrdm9.myoxypages.com/doesn.svg
+https://site-49pbrdm9.myoxypages.com/Deserted.svg
+https://site-49pbrdm9.myoxypages.com/DarkNUX.svg
+https://site-49pbrdm9.myoxypages.com/Luminal.svg
+https://site-49pbrdm9.myoxypages.com/helium.svg
+https://site-49pbrdm9.myoxypages.com/nikehub.svg
+https://site-49pbrdm9.myoxypages.com/luminalos.svg
+https://site-49pbrdm9.myoxypages.com/RUINS
+https://site-49pbrdm9.myoxypages.com/svguranium.svg
+https://site-49pbrdm9.myoxypages.com/UBGforever.svg
+https://site-49pbrdm9.myoxypages.com/tobywebsinglefile
+https://site-49pbrdm9.myoxypages.com/TimmyMathWork-1.svg
+https://site-cxegpaxk.myoxypages.com/xcloud-9002.svg
+https://site-cxegpaxk.myoxypages.com/tuff.svg
+https://site-cxegpaxk.myoxypages.com/PremiumHUB-27.svg
+https://site-cxegpaxk.myoxypages.com/pizza.svg
+https://site-cxegpaxk.myoxypages.com/old-nova-network(1)
+https://site-cxegpaxk.myoxypages.com/milk.svg
+https://site-cxegpaxk.myoxypages.com/melonsoda.svg
+https://site-cxegpaxk.myoxypages.com/
+https://site-cxegpaxk.myoxypages.com/index-10
+https://site-cxegpaxk.myoxypages.com/glalaxyyoutube
+https://site-cxegpaxk.myoxypages.com/gam3-ports.svg
+https://site-cxegpaxk.myoxypages.com/frozen.svg
+http://2001.streetdirectory.sg/
+http://financial-literacy-budgeting-and-personal-economics-learning.streetdirectory.sg/
+http://learning-argumentative-essay-structure-for-state-test-prep-unit.streetdirectory.sg/
+http://learning-how-to-structure-argumentative-essays-for-state-test.streetdirectory.sg/
+http://rendered-in-0.002-seconds.streetdirectory.sg/
+http://learning-help-help.choperascabodefrio.com.ar/
+http://super-learning-help-for-ap-stats.choperascabodefrio.com.ar/
+http://learning-help.dnswish.com/
+http://learning-help.my-ns.com/
+http://supermegaultraultimiteoppplearning.my-ns.com/
+http://help-learn.gatewaysuppliers.com.np/
+http://helping-learn.gatewaysuppliers.com.np/
+http://helping-learning.gatewaysuppliers.com.np/
+http://learn-help.gatewaysuppliers.com.np/
+http://learning-help.gatewaysuppliers.com.np/
+http://just-do-you-work-bro.dnswish.com/
+http://learn-today.dnswish.com/
+http://learning.dnswish.com/
+http://learning-tomorrow.dnswish.com/
+http://g-o-o-g-l-e.c-o-m.nextcomm.com.ar/
+http://gogle-search-caseoh-youtube.nextcomm.com.ar/
+http://learn-all-the-digits-of-pi-today-for-free-with-free-study-notes.nextcomm.com.ar/
+http://learn-how-to-write-better-essay-today-for-free-free-study-notes.nextcomm.com.ar/
+http://learning-tomorrow.nextcomm.com.ar/
+https://cdn.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://fastly.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://gcore.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://testingcf.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://quantil.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://originfastly.jsdelivr.net/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://cdn.staticdelivr.com/gh/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://jsd.onmicrosoft.cn/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://cdn.jsdmirror.com/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://githubraw.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://cdn.githubraw.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://raw.githack.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://rawcdn.githack.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://cdn.statically.io/gh/studyyard/67@8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://gh-proxy.com/https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://ghproxy.net/https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://gh.llkk.cc/https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://ghfast.top/https://raw.githubusercontent.com/studyyard/67/8804b901f6fcbad0e10294fbf05d019269f2258a/index.svg
+https://declaration-of-independence.tribeoftwo.com/
+https://essay-help.tribeoftwo.com/
+https://free.afraid.org.tribeoftwo.com/
+https://sh.surge.tribeoftwo.com/
+https://surge.sh.tribeoftwo.com/
+https://blooket.com.tribeoftwo.com/
+https://go0gle.com.tribeoftwo.com/
+https://ts-is-tuff.tribeoftwo.com/
+https://wait-a-minute-who-are-you.tribeoftwo.com/
+https://youtube.com.tribeoftwo.com/
+https://ajh.solidaritysafaris.com/
+https://ajh-please-halloween-update.solidaritysafaris.com/
+https://dns-auth-trace.solidaritysafaris.com/
+https://im-so-bad-with-linux.solidaritysafaris.com/
+https://w-update.solidaritysafaris.com/
+https://help-me-learn.govt.hu/
+https://learn-help-me.govt.hu/
+https://learn-bro-please.rusticrivergear.com/
+https://learn-tommorow-or-else-evil-laugh.rusticrivergear.com/
+https://mr.g-is-the-tuffest-teacher.rusticrivergear.com/
+https://use.gov.gov.trump.jimmy.gov.rusticrivergear.com/
+https://where-my-holloween-update.rusticrivergear.com/
+https://help-me-learn.nextcomm.com.ar/
+https://learn-help-me.nextcomm.com.ar/
+https://learn-me-help.nextcomm.com.ar/
+https://15.204.254.75.streetdirectory.sg/
+https://anything-but-work.streetdirectory.sg/
+https://idk-what-to-name.streetdirectory.sg/
+https://just-do-your-work-gng.streetdirectory.sg/
+https://this-is-learning.streetdirectory.sg/
+https://halloween-update-when.streetdirectory.sg/
+https://i-need-new-domains.streetdirectory.sg/
+https://im-not-cooking.streetdirectory.sg/
+https://im-really-learning.streetdirectory.sg/
+https://link-maker.streetdirectory.sg/
+https://edu-rocks.tribeoftwo.com/
+https://rocks.tribeoftwo.com/
+https://w-game-library.tribeoftwo.com/
+https://w-pokerouge.tribeoftwo.com/
+https://why-is-this-not-popular.tribeoftwo.com/
+https://edu-rocks.rusticrivergear.com/
+https://mfmf.rusticrivergear.com/
+https://not-learning.rusticrivergear.com/
+https://pokerouge.rusticrivergear.com/
+https://this-is-not-edu.rusticrivergear.com/
+https://edu-rock.streetdirectory.sg/
+https://edu-rocks.streetdirectory.sg/
+https://edu-the-rock-gng.streetdirectory.sg/
+https://rock-edu.streetdirectory.sg/
+https://rocks-edu.streetdirectory.sg/
+http://c00l-learning.govt.hu/
+http://c00l-lightspeed.govt.hu/
+http://c000-learning.nextcomm.com.ar/
+http://c00l-learning.edu.rusticrivergear.com/
+http://c00l-learning.edu.streetdirectory.sg/
+https://weslack.govt.hu/
+https://we-slack.nextcomm.com.ar/
+https://we-slack.rusticrivergear.com/
+https://we-slack.streetdirectory.sg/
+https://we-slack.tribeoftwo.com/
+https://learning-help.bashundharafoundation.org.np/
+https://haven-learning.dikpalkc.com.np/
+https://essay-writing.govt.hu/
+https://essay-writing-test.govt.hu/
+https://learning-help-edu.edu.metropolitanstaffingsolutions.com/
+http://luna.govt.hu/
+http://luna.rusticrivergear.com/
+http://luna.solidaritysafaris.com/
+http://luna.streetdirectory.sg/
+http://luna.tribeoftwo.com/
+http://luna.champagnewishesandrvdreams.com/
+http://luna.cobos.mx/
+http://luna.gatewaysuppliers.com.np/
+http://luna.lakeballs.fi/
+http://luna.thefilmdatabase.com/
+http://luna-2.streetdirectory.sg/
+http://luna-3.streetdirectory.sg/
+http://luna-4.streetdirectory.sg/
+https://edu-rocks.eglobaltravelmedia.asia/
+https://edu-rocks.sunil7.com.np/
+https://edu-rocks.belyfit.cl/
+https://ddidd.eglobaltravelmedia.asia/
+https://oooooo.eglobaltravelmedia.asia/
+http://bromine.solidaritysafaris.com/
+http://luna-s.solidaritysafaris.com/
+http://void.solidaritysafaris.com/
+https://truffled.apexflightacademy.com/
+https://cheesy.apexflightacademy.com/
+https://ink.apexflightacademy.com/
+https://krypton.apexflightacademy.com/
+https://j-m-w.apexflightacademy.com/
+https://luna.apexflightacademy.com/
+https://other.apexflightacademy.com/
+https://celo-ai.apexflightacademy.com/
+https://classroom-spot.apexflightacademy.com/
+https://equinox.apexflightacademy.com/
+https://mono-math.apexflightacademy.com/
+https://nexus.apexflightacademy.com/
+https://void.apexflightacademy.com/
+https://edu-rocks.apexflightacademy.com/
+https://flare.apexflightacademy.com/
+https://reds.apexflightacademy.com/
+https://edu-rocks.bagatz.com/
+https://luna.bagatz.com/
+https://void.bagatz.com/
+https://edu-rocks.voudouris.org/
+https://luna.voudouris.org/
+https://void.voudouris.org/
+http://nexus.olneybaptist.org/
+http://reds.olneybaptist.org/
+http://void.olneybaptist.org/
+https://axiom.lirr.space/
+https://catclass.lirr.space/
+https://study-tutors.lirr.space/
+https://void.latinliturgy.com/
+https://arch.nothingbox.net/
+https://edu-rocks.nothingbox.net/
+https://luna.nothingbox.net/
+https://edu-rocks.lakeballs.fi/
+https://flare.lakeballs.fi/
+https://void.lakeballs.fi/
+https://aerggre.tribeoftwo.com/
+https://edu-rockss.tribeoftwo.com/
+https://pokerouges.tribeoftwo.com/
+https://rocks-edusssss.tribeoftwo.com/
+https://weffe.tribeoftwo.com/
+https://6tothe7.solidaritysafaris.com/
+https://vex-parts.solidaritysafaris.com/
+https://void-edu.solidaritysafaris.com/
+https://voidistuff.solidaritysafaris.com/
+https://voids.solidaritysafaris.com/
+https://pagelive.space/p/k683joig
+https://pagelive.space/p/1b9243cw
+http://edu-rocks.rave.ar/
+http://luna.rave.ar/
+http://void.rave.ar/
+https://objectstorage.us-sanjose-1.oraclecloud.com/n/axjcou67ax5a/b/mathlearning/o/index.svg
+https://lunaris.bagatz.com/
+https://argumentative-essay.1776arms.com/
+https://the-outsiders.olneybaptist.org/
+https://lanaris.voudouris.org/
+https://cat4z.s3.amazonaws.com/index.html
+https://cat4z.s3.us-east-1.amazonaws.com/index.html
+https://cat4z.s3-external-1.amazonaws.com/index.html
+https://s3.amazonaws.com/cat4z/index.html
+https://s3.us-east-1.amazonaws.com/cat4z/index.html
+https://s3-external-1.amazonaws.com/cat4z/index.html
+https://storage.googleapis.com/cat4z/index.html
+https://cat4z.storage.googleapis.com/index.html
+https://objectstorage.eu-amsterdam-1.oraclecloud.com/n/axzqmye6oppx/b/cat4z/o/index.html
+https://lizz.voudouris.org/
+https://cvv.voudouris.org/
+https://quuqb.voudouris.org/
+https://pffs.voudouris.org/
+https://zsu.voudouris.org/
+https://h118fb3.chloechu.com/
+https://hb29e4f.branzcatarroja.com/
+https://hd1fac7.tosochilemat.cl/
+https://hb713c4.imobilandconfort.ro/
+https://h114a0e.htcengineers.com/
+https://hb1ce54.htcengineers.com/
+https://box-school98.fukushimastudy.org/
+https://cdn.esm.sh/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.esm.sh/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://cdn.jsdeliver.us/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.jsdeliver.us/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://cdn.jsdelivr.net.cn/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.jsdelivr.net.cn/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://cdn.jsdelivr.net/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.jsdelivr.net/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://cdn.jsdmirror.com/gh/task4z/classroom-15x/files/catclass/index.svg
+https://cdn.jsdmirror.com/gh/task4z/classroom-15x/files/catclass/logo.svg
+https://cdn.statically.io/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.statically.io/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://cdn.staticdelivr.com/gh/task4z/classroom-15x/9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://cdn.staticdelivr.com/gh/task4z/classroom-15x/9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://dean-mew78.mathmatics.ccwu.cc/
+https://esm.sh/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://esm.sh/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/logo.svg
+https://fastly.jsdelivr.net/gh/task4z/classroom-15x@9bcc6db6e5d4046811588d61ed0f1a6ed8d5dd9c/files/catclass/index.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-2.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-3.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-4.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-5.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-6.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-7.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-8.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-9.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-10.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-11.svg
+https://esm.sh/gh/Mtreasur0133-bit/yukiyukiyooo-m9o-1@main/yukiEDU-12.svg`],
+  ["Estudos", "Revault", `https://revault.nextcomm.com.ar/
+https://books-edu.gov.edu.gov.edu.tribeoftwo.com/
+https://chrome-newtab.tribeoftwo.com/
+https://clever.com.ixl.com.tribeoftwo.com/
+https://im-out-of-domains-ngl.tribeoftwo.com/
+https://learning-using-clever-edu.gov.edu.tribeoftwo.com/
+https://re-vault.apexflightacademy.com/
+https://revault.lirr.space/
+http://revault.rave.ar/
+https://re-vault.bagatz.com/
+https://revault.olneybaptist.org/
+https://re-vault.voudouris.org/`],
+  ["Mais links", "Fern", `https://site-g6kxrd8n.myoxypages.com/Fern`],
+  ["Mais links", "Zaka", `https://site-g6kxrd8n.myoxypages.com/zaka
+https://site-49pbrdm9.myoxypages.com/Zaka.svg
+https://site-cxegpaxk.myoxypages.com/zaka.svg
+https://site-cxegpaxk.myoxypages.com/zaka%20copy.svg
+https://zaka.apexflightacademy.com/`],
+  ["Jogos", "IMPV2", `https://site-49pbrdm9.myoxypages.com/Imp%20Games.svg
+https://imp-v2.apexflightacademy.com/`],
+  ["Jogos", "NYX", `https://site-49pbrdm9.myoxypages.com/nyx.svg
+https://site-cxegpaxk.myoxypages.com/nyx.svg`],
+  ["Mais links", "Selenite", `https://idk-anymore-names.rusticrivergear.com/
+https://idk-bro.rusticrivergear.com/
+https://selling-education-free.rusticrivergear.com/
+https://super-learnin.rusticrivergear.com/
+https://the-tine.rusticrivergear.com/
+https://seletine.apexflightacademy.com/`],
+  ["Jogos", "Duck Math", `https://duck.edu.rusticrivergear.com/
+https://duckmath.rusticrivergear.com/
+https://independent-reading-test.solidaritysafaris.com/
+https://mega-duck.solidaritysafaris.com/
+https://the-hunger-games-reading.solidaritysafaris.com/
+https://duck.apexflightacademy.com/
+http://duck.olneybaptist.org/
+https://duck.lirr.space/
+https://duck.latinliturgy.com/
+https://duck.lakeballs.fi/
+https://duck.tribeoftwo.com/
+https://ducking-tard.tribeoftwo.com/
+https://duckmath.tribeoftwo.com/
+https://ducks.tribeoftwo.com/
+https://what-the-duck.tribeoftwo.com/
+http://duck.rave.ar/
+https://objectstorage.us-sanjose-1.oraclecloud.com/n/axjcou67ax5a/b/mathlearning/o/duckmath.svg
+https://duck.rigaprecast.com/`],
+  ["Mais links", "Achroma", `http://learn-today.govt.hu/
+http://essay-map-test.nextcomm.com.ar/
+http://essay-learning.rusticrivergear.com/
+http://idk-bro-just-do-your-work.solidaritysafaris.com/
+http://yo-give-me-link-droper-role.streetdirectory.sg/
+https://achcroma.bagatz.com/
+https://achcroma.voudouris.org/
+https://achcroma.latinliturgy.com/`],
+  ["Jogos", "C00lKid Tech", `http://tech-the-kidd-that-is-cool.gatewaysuppliers.com.np/
+http://cool-kidd-tech.solidaritysafaris.com/
+http://is-this-tuff-enough.solidaritysafaris.com/
+http://c00l-learning.edu.tribeoftwo.com/
+http://coolkiddtech.tribeoftwo.com/
+https://c00lkidtechh.eglobaltravelmedia.asia/`],
+  ["Mais links", "C00lKid", `https://c00lkid.belyfit.cl/
+https://c00lkid.sunil7.com.np/
+https://c00lkid.eglobaltravelmedia.asia/
+https://c00lkid.ansoft.cl/
+https://c00lkid.armeniaincentives.com/
+https://c00lkid.majoitus.ee/
+https://c00lkid.rigaprecast.com/
+https://c00lkid.starnightimport.com/
+http://c00lkid.hosteriafutaleufu.cl/
+http://c00lkid.hotel-am-brillantengrund.at/
+http://c00lkid.manoahinvest.com/
+http://c00lkid.rednutricional.cl/
+http://c00lkid.scarboroughgymelites.ca/
+https://c00lkid.apexflightacademy.com/
+https://c00lkid.voudouris.org/
+https://c00lkid.latinliturgy.com/`],
+  ["Mais links", "TGLSC V5", `http://tglsc.cobos.mx/
+http://tglsc.starnightimport.com/
+http://tglsc.thefilmdatabase.com/
+http://tglsc-is-back.tribeoftwo.com/
+http://tglsc.solidaritysafaris.com/`],
+  ["Estudos", "Galaxy V7", `http://galaxy.solidaritysafaris.com/
+https://galaxy.apexflightacademy.com/
+https://galaxy.lirr.space/
+https://galaxy.latinliturgy.com/`],
+  ["Filmes e séries", "Triple T HD", `https://triple-t-hd.apexflightacademy.com/`],
+  ["Estudos", "Tung Tung", `https://tungtung.apexflightacademy.com/`],
+  ["Estudos", "Solara", `https://solara.apexflightacademy.com/
+https://solara.lirr.space/`],
+  ["Mais links", "Space", `https://space.apexflightacademy.com/`],
+  ["Estudos", "StudyHub", `https://study-hub.apexflightacademy.com/`],
+  ["Mais links", "Xylora", `https://xylora.apexflightacademy.com/
+https://xylora.lirr.space/`],
+  ["Estudos", "Astra", `https://astra.apexflightacademy.com/`],
+  ["Estudos", "Aurora", `https://aurora.apexflightacademy.com/`],
+  ["Mais links", "Aether", `https://ather.apexflightacademy.com/
+https://ather.lirr.space/
+https://aetherbeta.storage.googleapis.com/study.html
+https://aetherinstitution.storage.googleapis.com/study.html
+https://aetherschools.storage.googleapis.com/study.html
+https://apresources.storage.googleapis.com/study.html
+https://apushistory.storage.googleapis.com/study.html
+https://atlantak12.storage.googleapis.com/study.html`],
+  ["Mais links", "Desync", `https://desync.apexflightacademy.com/`],
+  ["Mais links", "Interstellar", `https://interstellar.apexflightacademy.com/`],
+  ["Mais links", "Zodiac", `https://zodiac.nothingbox.net/`],
+  ["Mais links", "Cherri", `https://objectstorage.us-sanjose-1.oraclecloud.com/n/axjcou67ax5a/b/ilovecherri/o/index.svg
+https://cdn.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://fastly.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://gcore.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://quantil.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://jsdelivr.b-cdn.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://originfastly.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://testingcf.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://rawcdn.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?1
+https://unpkg.com/username9927282/cherrisvg/index.svg?1
+https://cdn.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2
+https://fastly.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2
+https://gcore.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2
+https://quantil.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2
+https://jsdelivr.b-cdn.net/gh/username9927282/cherrisvg@main/index.svg?2
+https://originfastly.jsdelivr.net/gh/username9927282/cherrisvg@main/index.svg?2`],
+  ["Estudos", "Opium", `https://objectstorage.us-sanjose-1.oraclecloud.com/n/axjcou67ax5a/b/mathlearning/o/singlefile.svg`],
+  ["Jogos", "GN-Math", `https://gn-math.1776arms.com/`],
+];
+for (const [category, name, links] of DISCORD_LINKS) {
+  const group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  group.links += `\n${links}`;
+}
+
+// Reorganização de Other Links: só separa nomes explícitos ou lotes identificados.
+// Mantenha esta lista de coleções recentes manualmente e informe o usuário ao alterá-la.
+const RECENT_COLLECTIONS = new Set([
+  'Mais links|Other Links', 'Mais links|Rammerhead', 'Mais links|Edu Rocks',
+  'Mais links|Luna', 'Mais links|Void', 'Mais links|WeSlack', 'Mais links|Cat4z',
+  'Mais links|CatClass', 'Mais links|YukiEDU', 'Mais links|LuminalOS',
+  'Mais links|Ivy', 'Melhores|Bull33', 'Jogos|GGR', 'Estudos|CalcSolver'
+]);
+const otherLinks = LINK_GROUPS.find(group => group.category === 'Mais links' && group.name === 'Other Links');
+const luminalHosts = new Set(`bbb6b099f5f6 5119ae25ef6b fc775b4a4b11 1f156cc0da7f c54726e8a5a4 b64b6d791df1 f50e6eadae16 f4d45a1c4723 10fabf77e3c8 5638846618a5 aeaf3b808dea 991bf586baed 9de40c919226 29327c102a9b 15bfdf200867 ba68562c2468 aaf2d3883468 580627468e38 3c319aa486d0 eab82eacc59b 944daf463d7a 11ff82d53350 68cdb3f69d27 d884d6bf0158 10456887ef72 8771143a15c6 cf0fcbb41c9f 8cfcd3607635 34f81f15071f 71d5d9db6dfd`.split(' '));
+const eduRocksBatch = new Set(`https://edu-rocks.tribeoftwo.com/
+https://rocks.tribeoftwo.com/
+https://w-game-library.tribeoftwo.com/
+https://w-pokerouge.tribeoftwo.com/
+https://why-is-this-not-popular.tribeoftwo.com/
+https://edu-rocks.rusticrivergear.com/
+https://mfmf.rusticrivergear.com/
+https://not-learning.rusticrivergear.com/
+https://pokerouge.rusticrivergear.com/
+https://this-is-not-edu.rusticrivergear.com/
+https://edu-rock.streetdirectory.sg/
+https://edu-rocks.streetdirectory.sg/
+https://edu-the-rock-gng.streetdirectory.sg/
+https://rock-edu.streetdirectory.sg/
+https://rocks-edu.streetdirectory.sg/`.split('\n'));
+function identifyOtherLink(link) {
+  const address = link.replace(/^https?:\/\//i, '').toLowerCase();
+  const slash = address.indexOf('/');
+  const host = slash < 0 ? address : address.slice(0, slash);
+  const path = slash < 0 ? '' : address.slice(slash).split(/[?#]/, 1)[0];
+  const first = host.split('.')[0];
+  if (/(^|[.\/_-])ivy([.\/_-]|$)/i.test(`${host}${path}`)) return 'Ivy';
+  if (first.startsWith('rammer') || first.startsWith('rammhead')) return 'Rammerhead';
+  if (eduRocksBatch.has(link) || /^edu-rocks?/.test(first)) return 'Edu Rocks';
+  if (/^luna(?:-\d+|-s)?$/.test(first)) return 'Luna';
+  if (/^void(?:-edu|istuff|s)?$/.test(first)) return 'Void';
+  if (/^(?:weslack|we-slack)$/.test(first)) return 'WeSlack';
+  if (/(^|[.\/])cat4z([.\/]|$)/.test(`${host}${path}`)) return 'Cat4z';
+  if (/(^|\/)catclass\//.test(path) || first === 'catclass') return 'CatClass';
+  if (/\/yukiedu-\d+\.svg$/.test(path)) return 'YukiEDU';
+  if ((host.endsWith('.surge.sh') && luminalHosts.has(first)) || /\/luminalos\.svg$/.test(path)) return 'LuminalOS';
+  return null;
+}
+const remainingOtherLinks = [];
+for (const link of otherLinks.links.split('\n').filter(Boolean)) {
+  const name = identifyOtherLink(link);
+  if (!name) { remainingOtherLinks.push(link); continue; }
+  let group = LINK_GROUPS.find(item => item.category === 'Mais links' && item.name === name);
+  if (!group) { group = { category: 'Mais links', name, links: '' }; LINK_GROUPS.push(group); }
+  group.links += `${group.links ? '\n' : ''}${link}`;
+}
+otherLinks.links = remainingOtherLinks.join('\n');
+// Links de agosto/setembro cuja página carregou durante a conferência.
+const verifiedBull = LINK_GROUPS.find(group => group.category === 'Melhores' && group.name === 'Bull33');
+verifiedBull.links += `\nhttps://readinghelpsyouthink.ignorelist.com/
+https://startreading.ixl.alternative.ignorelist.com/`;
+LINK_GROUPS.push({ category: 'Jogos', name: 'GGR', links: `https://7f46b2c01843.surge.sh/` });
+LINK_GROUPS.push({ category: 'Estudos', name: 'CalcSolver', links: `https://14323d3bde03.surge.sh/
+https://20a453e8c30a.surge.sh/
+https://38c87152b008.surge.sh/
+https://d40ce1de60c0.surge.sh/
+https://d24619d23ccb.surge.sh/
+https://fd56e50c46ad.surge.sh/
+https://deb917181091.surge.sh/
+https://bc15f12ecb4d.surge.sh/
+https://929375be38c2.surge.sh/
+https://a04407240d38.surge.sh/
+https://9b56600bacc9.surge.sh/
+https://91141126ca16.surge.sh/
+https://fd97d07f16c3.surge.sh/
+https://611a1127052d.surge.sh/
+https://bf36bd434e2d.surge.sh/
+https://afe4e1596794.surge.sh/
+https://7dab44104b92.surge.sh/
+https://8596d39d222f.surge.sh/
+https://2d0dda36c7da.surge.sh/
+https://f3625891a185.surge.sh/
+https://862238f2e011.surge.sh/
+https://35d3ec334204.surge.sh/
+https://568643737cc8.surge.sh/
+https://f363e7c5549e.surge.sh/
+https://f09d175a3cb5.surge.sh/
+https://c71423e52d32.surge.sh/
+https://21ce4830865f.surge.sh/
+https://d01d8f3d34f1.surge.sh/
+https://44896422c497.surge.sh/
+https://2f127d49218c.surge.sh/` });
+// As páginas de jogos sem coleção identificada permanecem em Other Links.
+otherLinks.links += `\nhttps://8be6b8adc2f3.surge.sh/
+https://a16a268ef7e9.surge.sh/
+https://b11e8f18863e.surge.sh/
+https://83fe71b658bf.surge.sh/
+https://b86a4d8aa10f.surge.sh/
+https://053355681a62.surge.sh/
+https://1db6393886e8.surge.sh/
+https://137b4aa26d0f.surge.sh/
+https://44f71fd7c3a2.surge.sh/
+https://ed47b693e9d2.surge.sh/
+https://c2fc7155b6b7.surge.sh/
+https://d6e2acdc4352.surge.sh/
+https://368e09e56a48.surge.sh/
+https://4a3faada6a37.surge.sh/
+https://3bd2866c1ec1.surge.sh/
+https://ff6afc263cfc.surge.sh/
+https://8246d4116801.surge.sh/
+https://7be2e4798e8e.surge.sh/
+https://a413f9b47dd7.surge.sh/
+https://53bec4a0dc3a.surge.sh/
+https://5ae281b07a11.surge.sh/
+https://abe846609336.surge.sh/
+https://17a5ca215d87.surge.sh/
+https://5ac28973cb0b.surge.sh/
+https://8d26364385f0.surge.sh/
+https://79b9637133eb.surge.sh/
+https://26dadd391010.surge.sh/`;
+
+for (const group of LINK_GROUPS) {
+  if (RECENT_COLLECTIONS.has(`${group.category}|${group.name}`)) group.recent = true;
+}
+
+// Datas das mensagens originais: somente os endereços que carregaram na conferência.
+// Não se presume data para links antigos sem origem documentada.
+const DATED_LINK_BATCHES = [
+  // A interface StudyHub carregou; o trecho "Page Unavailable" pode ser um estado interno.
+  ['Estudos', 'StudyHub', '2026-08-27', `https://tungy.s3.amazonaws.com/index.html
+https://tungy.s3.us-east-1.amazonaws.com/index.html
+https://tungy.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/tungy/index.html
+https://s3.us-east-1.amazonaws.com/tungy/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/tungy/index.html
+https://studyhubapp.s3.amazonaws.com/index.html
+https://studyhubapp.s3.us-east-1.amazonaws.com/index.html
+https://studyhubapp.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/studyhubapp/index.html
+https://s3.us-east-1.amazonaws.com/studyhubapp/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/studyhubapp/index.html
+https://mathshelp.s3.amazonaws.com/index.html
+https://mathshelp.s3.us-east-1.amazonaws.com/index.html
+https://mathshelp.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/mathshelp/index.html
+https://s3.us-east-1.amazonaws.com/mathshelp/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/mathshelp/index.html`],
+  ['Estudos', 'StudyHub', '2026-08-29', `https://study-with-the-hub.adfos.com/
+https://study-with-the-hub.bsmart-solutions.com.my/
+https://study-with-the-hub.dayspringeugene.com/
+https://study-with-the-hub.gd1code.com/
+https://study-with-the-hub.kennesawcommons.com/
+https://study-with-the-hub.breadtime.com.my/
+https://study-with-the-hub.noordware.com/`],
+  ['Mais links', 'Strawberri', '2026-09-01', `https://strawberri.lol/`],
+  ['Estudos', 'Tung Tung', '2026-09-01', `https://lightspeeds.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-09-02', `https://s3.amazonaws.com/ttbest/index.html
+https://ttbest.s3.amazonaws.com/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-04', `https://zoxh.s3.amazonaws.com/index.html
+https://zoxh.s3.us-east-1.amazonaws.com/index.html
+https://zoxh.s3-external-1.amazonaws.com/index.html
+https://s3.amazonaws.com/zoxh/index.html
+https://s3.us-east-1.amazonaws.com/zoxh/index.html
+https://s3-external-1.amazonaws.com/zoxh/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-14', `https://albins.cfd/
+https://lolration.cfd/`],
+  ['Estudos', 'StudyHub', '2026-09-14', `https://stdyhb.jurematoz.com/
+https://stdyhb.secureip.org/
+https://stdyhb.the-network-expert.ca/
+https://stdyhb.towerchile.cl/
+https://stdyhb.becktothegarden.com/
+https://stdyhb.japan.is/
+https://stdyhb.latine.ca/
+https://stdyhb.salavat.ru/
+https://stdyhb.scarboroughgymelites.ca/
+https://stdyhb.blog-guru.web.id/
+https://stdyhb.dm-sch09.org.ru/
+https://stdyhb.ioa.com.ar/
+https://stdyhb.geamurionline.ro/
+https://stdyhb.municipalidadtimaukel.cl/
+https://stdyhb.nischalchhetri.com.np/
+https://stdyhb.openmouth.com.ar/`],
+  ['Estudos', 'Tung Tung', '2026-09-18', `https://s3.amazonaws.com/ralsei-nth1/math.html
+https://s3.us-east-1.amazonaws.com/ralsei-nth1/math.html
+https://s3.dualstack.us-east-1.amazonaws.com/ralsei-nth1/math.html
+https://ralsei-nth1.s3.amazonaws.com/math.html
+https://ralsei-nth1.s3.us-east-1.amazonaws.com/math.html
+https://ralsei-nth1.s3.dualstack.us-east-1.amazonaws.com/math.html
+https://sorryforlate.extratechsolutions.com/
+https://schooledu.cerejadoboloreceitas.com.br/`],
+  ['Estudos', 'Tung Tung', '2026-09-22', `https://s3.amazonaws.com/melanie-16am/index.html
+https://melanie-16am.s3.amazonaws.com/index.html
+https://s3.us-east-1.amazonaws.com/melanie-16am/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/melanie-16am/index.html
+https://melanie-16am.s3.us-east-1.amazonaws.com/index.html
+https://melanie-16am.s3.dualstack.us-east-1.amazonaws.com/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-23', `https://schoooollledu.bookworm.com.np/`],
+  ['Estudos', 'Tung Tung', '2026-08-21', `https://kaydes.cfd/
+https://kaev.kaydes.cfd/
+https://schoolisnice.coral-shop.ro/
+https://weloveschool.embeddedonline.org/
+https://schoolisnice.faverybishop.com/
+https://schoolisnice.feedcube.org/
+https://weloveschoolguys.windowpublication.com.np/
+https://weloveschoolguys.oldsouthmarlinclub.com/
+https://weloveschoolguys.patelmortgage.com/
+https://weloveschoolguys.wiki.gd/`],
+  ['Estudos', 'Tung Tung', '2026-08-23', `https://choso.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-08-26', `https://tungtutoring.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-08-29', `https://toong.breadtime.com.my/
+https://toong.noordware.com/`],
+  ['Estudos', 'Tung Tung', '2026-08-31', `https://bumeducation.cfd/`],
+  ['Mais links', 'Strawberri', '2026-08-24', `https://strawberri.best/
+https://comeme.pittentrepreneur.com/
+https://strobe.seanbrogan.xyz/
+https://atm.fizicamedicala.ro/
+https://been.gigaportal.pl/
+https://cash.dineskhatri.com.np/
+https://chores.stegi-chorus.gr/
+https://are.pydabogados.com.ar/
+https://he.linijasigurnosti.hr/
+https://math.martinpascal.cl/
+https://busy.birusainju.com.np/
+https://window.vindavaktin.is/
+https://by.gorich.hk/
+https://bird.national-birdshow.com/
+https://strip.9dejulio.gob.ar/
+https://stroberii.texmotive.com/
+https://stroberii.garymcgill.ca/
+https://stroberii.chocopicacho.com/
+https://stroberii.espacoextra.pt/
+https://stroberii.benmussi.com/`],
+  ['Mais links', 'Strawberri', '2026-08-29', `https://borri.adfos.com/
+https://borri.bsmart-solutions.com.my/
+https://borri.dayspringeugene.com/
+https://borri.gd1code.com/
+https://borri.kennesawcommons.com/
+https://borri.breadtime.com.my/
+https://borri.noordware.com/`]
+];
+const LINK_DATES = new Map();
+for (const [category, name, date, lines] of DATED_LINK_BATCHES) {
+  const group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  const existing = new Set(group.links.split('\n').map(url => /^https?:\/\//i.test(url) ? url : `https://${url}`));
+  for (const url of lines.split('\n')) {
+    if (!existing.has(url)) { group.links += `\n${url}`; existing.add(url); }
+    const previous = LINK_DATES.get(url);
+    if (!previous || date < previous) LINK_DATES.set(url, date);
+  }
+}
+// Exceções com idade confirmada, mas sem data precisa, podem ser registradas aqui.
+const OLD_LINKS = new Set([]);
+function isOldLink(url, today = new Date()) {
+  if (OLD_LINKS.has(url)) return true;
+  const date = LINK_DATES.get(url);
+  if (!date) return false;
+  const year = today.getFullYear(), month = today.getMonth();
+  const lastDay = new Date(year, month - 1, 0).getDate();
+  const cutoff = new Date(year, month - 2, Math.min(today.getDate(), lastDay));
+  const iso = [cutoff.getFullYear(), String(cutoff.getMonth() + 1).padStart(2, '0'), String(cutoff.getDate()).padStart(2, '0')].join('-');
+  return date <= iso;
+}
+
+// Endereços fornecidos sem data: somente páginas cuja interface carregou na verificação.
+const VERIFIED_UNDATED_BATCHES = [
+  ['Mais links', 'Vale', `http://vale5.tbt.mx/
+http://vale5.g2g.asia/
+http://securly-vale.3d-mart.ru/
+http://vibed-forever.g2g.my/
+http://vale5.tb2.net/
+https://surreal.today/`],
+  ['Estudos', 'Tung Tung', `https://science-tungtung.shor.ch/
+https://science-tungtung.handfolding.com/
+https://science-tungtung.govt.hu/
+https://science-tungtung.avenuecarriagecrossing.com/
+https://goodtung.roje.com.br/
+https://amazingtt.krepche.com/
+https://ttpscience.mantavyagajjar.com/
+https://formula.glamourfreaks.com/
+https://new.streetdirectory.sg/
+https://killl.nondestructivetesting.ca/
+https://tt.meridiano.com.br/
+https://thay.aidbayarea.org/
+https://butter.shor.ch/
+https://nocaptions.cfd/
+https://ifdont.krepche.com/
+https://science.happy0.co.uk/
+https://newprof.ctrlalt-code.com/
+https://questionme.brianneburnell.com/`],
+  ['Estudos', 'StudyHub', `https://well.roje.com.br/
+https://studyhub.mantavyagajjar.com/
+https://allow.krepche.com/
+https://lesson.glamourfreaks.com/
+https://kill.streetdirectory.sg/
+https://tt.nondestructivetesting.ca/
+https://zsch.meridiano.com.br/
+https://would.aidbayarea.org/`],
+  ['Mais links', 'Strawberri', `https://schools.roje.com.br/
+https://xoeand.glamourfreaks.com/
+https://area.mantavyagajjar.com/
+https://mathsri.krepche.com/`],
+  ['Filmes e séries', 'Triple T HD', `https://triple.nondestructivetesting.ca/`]
+];
+for (const [category, name, lines] of VERIFIED_UNDATED_BATCHES) {
+  let group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  if (!group) { group = { category, name, links: '' }; LINK_GROUPS.push(group); }
+  const known = new Set(group.links.split('\n').filter(Boolean).map(url => url.replace(/^https?:\/\//, '').replace(/\/$/, '')));
+  for (const url of lines.split('\n')) {
+    const key = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    if (!known.has(key)) { group.links += `${group.links ? '\n' : ''}${url}`; known.add(key); }
+  }
+}
+
+// Publicações verificadas: a data é da postagem, não necessariamente da criação.
+const FERN_CHERRI_POSTS = [
+  ['Mais links', 'Fern', '2026-10-13', 'https://ferndc.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-13', 'https://ferndc.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-14', 'https://frnbk.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-14', 'https://bullbk.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://chrisets.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://chrisets.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://s3.amazonaws.com/chrisets/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://cmathhub2.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://cmathhub2.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://mathhub2.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://mathhub2.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-30', 'https://readingsets.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-30', 'https://readingsets.s3.amazonaws.com/index.html']
+];
+for (const [cat, name, date, url] of FERN_CHERRI_POSTS) {
+  const group = LINK_GROUPS.find(item => item.category === cat && item.name === name);
+  const canonical = value => value.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+  const existing = group.links.split('\n').find(value => canonical(value) === canonical(url));
+  const address = existing ? (/^https?:\/\//i.test(existing) ? existing : `https://${existing}`) : url;
+  if (!existing) group.links += `\n${url}`;
+  const previous = LINK_DATES.get(address);
+  if (!previous || date < previous) LINK_DATES.set(address, date);
+}
