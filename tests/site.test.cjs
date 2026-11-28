@@ -651,3 +651,17 @@ test('links datados de agosto chegam a Antigos após dois meses calendários', (
   assert.ok(data.groups.find(g => g.category === 'Estudos' && g.name === 'Tung Tung').links.includes('https://kaydes.cfd/'));
   assert.ok(data.groups.find(g => g.category === 'Mais links' && g.name === 'Strawberri').links.includes('https://strawberri.best/'));
 });
+
+test('calculadora Difficult abre a coleção somente com entrada exata', () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    w.eval(load('assets/calculator.js'));
+    const press = key => d.querySelector(`[data-calc="${key}"]`).click();
+    ['6','7','0','0','='].forEach(press);
+    assert.equal(d.querySelector('#links-site').hidden, true);
+    d.querySelector('#calculator-difficult').click();
+    ['6','7','0','0','='].forEach(press);
+    assert.equal(d.querySelector('#links-site').hidden, false);
+    assert.equal(d.querySelector('#study').hidden, true);
+  } finally { dom.window.close(); }
+});

@@ -45,3 +45,5 @@ Quando o usuário informar nomes para novas coleções, use exatamente esses nom
 A aba **Novos** mostra as coleções marcadas em `RECENT_COLLECTIONS`, sem removê-las das abas originais. A lista é mantida manualmente: quando coleções forem adicionadas ou retiradas, informe essa mudança ao usuário; não há prazo automático de expiração.
 
 A aba **Antigos** reúne endereços com data confirmada em `DATED_LINK_BATCHES` ao completarem dois meses calendários, usando a data local do navegador. `OLD_LINKS` também permite registrar exceções de idade confirmada sem data exata. Links antigos são omitidos da aba Novos, mas permanecem nas categorias originais; não se presume a idade dos demais endereços. A aba **Unblocker** usa `UNBLOCKER_COLLECTIONS`, uma classificação não verificada.
+
+A página de estudos inclui uma calculadora local. O modo Difficult oferece operações científicas (incluindo trigonometria em graus); desativá-lo retorna ao modo padrão e limpa o visor. No modo Difficult, digitar exatamente `6700` e pressionar `=` abre a coleção. Como o código é público, esse atalho não é uma senha de segurança.
