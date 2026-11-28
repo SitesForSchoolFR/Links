@@ -1977,7 +1977,7 @@ const RECENT_COLLECTIONS = new Set([
   'Mais links|Other Links', 'Mais links|Rammerhead', 'Mais links|Edu Rocks',
   'Mais links|Luna', 'Mais links|Void', 'Mais links|WeSlack', 'Mais links|Cat4z',
   'Mais links|CatClass', 'Mais links|YukiEDU', 'Mais links|LuminalOS',
-  'Mais links|Ivy'
+  'Mais links|Ivy', 'Melhores|Bull33', 'Jogos|GGR', 'Estudos|CalcSolver'
 ]);
 const otherLinks = LINK_GROUPS.find(group => group.category === 'Mais links' && group.name === 'Other Links');
 const luminalHosts = new Set(`bbb6b099f5f6 5119ae25ef6b fc775b4a4b11 1f156cc0da7f c54726e8a5a4 b64b6d791df1 f50e6eadae16 f4d45a1c4723 10fabf77e3c8 5638846618a5 aeaf3b808dea 991bf586baed 9de40c919226 29327c102a9b 15bfdf200867 ba68562c2468 aaf2d3883468 580627468e38 3c319aa486d0 eab82eacc59b 944daf463d7a 11ff82d53350 68cdb3f69d27 d884d6bf0158 10456887ef72 8771143a15c6 cf0fcbb41c9f 8cfcd3607635 34f81f15071f 71d5d9db6dfd`.split(' '));
@@ -2023,6 +2023,284 @@ for (const link of otherLinks.links.split('\n').filter(Boolean)) {
   group.links += `${group.links ? '\n' : ''}${link}`;
 }
 otherLinks.links = remainingOtherLinks.join('\n');
+// Links de agosto/setembro cuja página carregou durante a conferência.
+const verifiedBull = LINK_GROUPS.find(group => group.category === 'Melhores' && group.name === 'Bull33');
+verifiedBull.links += `\nhttps://readinghelpsyouthink.ignorelist.com/
+https://startreading.ixl.alternative.ignorelist.com/`;
+LINK_GROUPS.push({ category: 'Jogos', name: 'GGR', links: `https://7f46b2c01843.surge.sh/` });
+LINK_GROUPS.push({ category: 'Estudos', name: 'CalcSolver', links: `https://14323d3bde03.surge.sh/
+https://20a453e8c30a.surge.sh/
+https://38c87152b008.surge.sh/
+https://d40ce1de60c0.surge.sh/
+https://d24619d23ccb.surge.sh/
+https://fd56e50c46ad.surge.sh/
+https://deb917181091.surge.sh/
+https://bc15f12ecb4d.surge.sh/
+https://929375be38c2.surge.sh/
+https://a04407240d38.surge.sh/
+https://9b56600bacc9.surge.sh/
+https://91141126ca16.surge.sh/
+https://fd97d07f16c3.surge.sh/
+https://611a1127052d.surge.sh/
+https://bf36bd434e2d.surge.sh/
+https://afe4e1596794.surge.sh/
+https://7dab44104b92.surge.sh/
+https://8596d39d222f.surge.sh/
+https://2d0dda36c7da.surge.sh/
+https://f3625891a185.surge.sh/
+https://862238f2e011.surge.sh/
+https://35d3ec334204.surge.sh/
+https://568643737cc8.surge.sh/
+https://f363e7c5549e.surge.sh/
+https://f09d175a3cb5.surge.sh/
+https://c71423e52d32.surge.sh/
+https://21ce4830865f.surge.sh/
+https://d01d8f3d34f1.surge.sh/
+https://44896422c497.surge.sh/
+https://2f127d49218c.surge.sh/` });
+// As páginas de jogos sem coleção identificada permanecem em Other Links.
+otherLinks.links += `\nhttps://8be6b8adc2f3.surge.sh/
+https://a16a268ef7e9.surge.sh/
+https://b11e8f18863e.surge.sh/
+https://83fe71b658bf.surge.sh/
+https://b86a4d8aa10f.surge.sh/
+https://053355681a62.surge.sh/
+https://1db6393886e8.surge.sh/
+https://137b4aa26d0f.surge.sh/
+https://44f71fd7c3a2.surge.sh/
+https://ed47b693e9d2.surge.sh/
+https://c2fc7155b6b7.surge.sh/
+https://d6e2acdc4352.surge.sh/
+https://368e09e56a48.surge.sh/
+https://4a3faada6a37.surge.sh/
+https://3bd2866c1ec1.surge.sh/
+https://ff6afc263cfc.surge.sh/
+https://8246d4116801.surge.sh/
+https://7be2e4798e8e.surge.sh/
+https://a413f9b47dd7.surge.sh/
+https://53bec4a0dc3a.surge.sh/
+https://5ae281b07a11.surge.sh/
+https://abe846609336.surge.sh/
+https://17a5ca215d87.surge.sh/
+https://5ac28973cb0b.surge.sh/
+https://8d26364385f0.surge.sh/
+https://79b9637133eb.surge.sh/
+https://26dadd391010.surge.sh/`;
+
 for (const group of LINK_GROUPS) {
   if (RECENT_COLLECTIONS.has(`${group.category}|${group.name}`)) group.recent = true;
+}
+
+// Datas das mensagens originais: somente os endereços que carregaram na conferência.
+// Não se presume data para links antigos sem origem documentada.
+const DATED_LINK_BATCHES = [
+  // A interface StudyHub carregou; o trecho "Page Unavailable" pode ser um estado interno.
+  ['Estudos', 'StudyHub', '2026-08-27', `https://tungy.s3.amazonaws.com/index.html
+https://tungy.s3.us-east-1.amazonaws.com/index.html
+https://tungy.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/tungy/index.html
+https://s3.us-east-1.amazonaws.com/tungy/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/tungy/index.html
+https://studyhubapp.s3.amazonaws.com/index.html
+https://studyhubapp.s3.us-east-1.amazonaws.com/index.html
+https://studyhubapp.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/studyhubapp/index.html
+https://s3.us-east-1.amazonaws.com/studyhubapp/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/studyhubapp/index.html
+https://mathshelp.s3.amazonaws.com/index.html
+https://mathshelp.s3.us-east-1.amazonaws.com/index.html
+https://mathshelp.s3.dualstack.us-east-1.amazonaws.com/index.html
+https://s3.amazonaws.com/mathshelp/index.html
+https://s3.us-east-1.amazonaws.com/mathshelp/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/mathshelp/index.html`],
+  ['Estudos', 'StudyHub', '2026-08-29', `https://study-with-the-hub.adfos.com/
+https://study-with-the-hub.bsmart-solutions.com.my/
+https://study-with-the-hub.dayspringeugene.com/
+https://study-with-the-hub.gd1code.com/
+https://study-with-the-hub.kennesawcommons.com/
+https://study-with-the-hub.breadtime.com.my/
+https://study-with-the-hub.noordware.com/`],
+  ['Mais links', 'Strawberri', '2026-09-01', `https://strawberri.lol/`],
+  ['Estudos', 'Tung Tung', '2026-09-01', `https://lightspeeds.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-09-02', `https://s3.amazonaws.com/ttbest/index.html
+https://ttbest.s3.amazonaws.com/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-04', `https://zoxh.s3.amazonaws.com/index.html
+https://zoxh.s3.us-east-1.amazonaws.com/index.html
+https://zoxh.s3-external-1.amazonaws.com/index.html
+https://s3.amazonaws.com/zoxh/index.html
+https://s3.us-east-1.amazonaws.com/zoxh/index.html
+https://s3-external-1.amazonaws.com/zoxh/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-14', `https://albins.cfd/
+https://lolration.cfd/`],
+  ['Estudos', 'StudyHub', '2026-09-14', `https://stdyhb.jurematoz.com/
+https://stdyhb.secureip.org/
+https://stdyhb.the-network-expert.ca/
+https://stdyhb.towerchile.cl/
+https://stdyhb.becktothegarden.com/
+https://stdyhb.japan.is/
+https://stdyhb.latine.ca/
+https://stdyhb.salavat.ru/
+https://stdyhb.scarboroughgymelites.ca/
+https://stdyhb.blog-guru.web.id/
+https://stdyhb.dm-sch09.org.ru/
+https://stdyhb.ioa.com.ar/
+https://stdyhb.geamurionline.ro/
+https://stdyhb.municipalidadtimaukel.cl/
+https://stdyhb.nischalchhetri.com.np/
+https://stdyhb.openmouth.com.ar/`],
+  ['Estudos', 'Tung Tung', '2026-09-18', `https://s3.amazonaws.com/ralsei-nth1/math.html
+https://s3.us-east-1.amazonaws.com/ralsei-nth1/math.html
+https://s3.dualstack.us-east-1.amazonaws.com/ralsei-nth1/math.html
+https://ralsei-nth1.s3.amazonaws.com/math.html
+https://ralsei-nth1.s3.us-east-1.amazonaws.com/math.html
+https://ralsei-nth1.s3.dualstack.us-east-1.amazonaws.com/math.html
+https://sorryforlate.extratechsolutions.com/
+https://schooledu.cerejadoboloreceitas.com.br/`],
+  ['Estudos', 'Tung Tung', '2026-09-22', `https://s3.amazonaws.com/melanie-16am/index.html
+https://melanie-16am.s3.amazonaws.com/index.html
+https://s3.us-east-1.amazonaws.com/melanie-16am/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/melanie-16am/index.html
+https://melanie-16am.s3.us-east-1.amazonaws.com/index.html
+https://melanie-16am.s3.dualstack.us-east-1.amazonaws.com/index.html`],
+  ['Estudos', 'Tung Tung', '2026-09-23', `https://schoooollledu.bookworm.com.np/`],
+  ['Estudos', 'Tung Tung', '2026-08-21', `https://kaydes.cfd/
+https://kaev.kaydes.cfd/
+https://schoolisnice.coral-shop.ro/
+https://weloveschool.embeddedonline.org/
+https://schoolisnice.faverybishop.com/
+https://schoolisnice.feedcube.org/
+https://weloveschoolguys.windowpublication.com.np/
+https://weloveschoolguys.oldsouthmarlinclub.com/
+https://weloveschoolguys.patelmortgage.com/
+https://weloveschoolguys.wiki.gd/`],
+  ['Estudos', 'Tung Tung', '2026-08-23', `https://choso.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-08-26', `https://tungtutoring.cfd/`],
+  ['Estudos', 'Tung Tung', '2026-08-29', `https://toong.breadtime.com.my/
+https://toong.noordware.com/`],
+  ['Estudos', 'Tung Tung', '2026-08-31', `https://bumeducation.cfd/`],
+  ['Mais links', 'Strawberri', '2026-08-24', `https://strawberri.best/
+https://comeme.pittentrepreneur.com/
+https://strobe.seanbrogan.xyz/
+https://atm.fizicamedicala.ro/
+https://been.gigaportal.pl/
+https://cash.dineskhatri.com.np/
+https://chores.stegi-chorus.gr/
+https://are.pydabogados.com.ar/
+https://he.linijasigurnosti.hr/
+https://math.martinpascal.cl/
+https://busy.birusainju.com.np/
+https://window.vindavaktin.is/
+https://by.gorich.hk/
+https://bird.national-birdshow.com/
+https://strip.9dejulio.gob.ar/
+https://stroberii.texmotive.com/
+https://stroberii.garymcgill.ca/
+https://stroberii.chocopicacho.com/
+https://stroberii.espacoextra.pt/
+https://stroberii.benmussi.com/`],
+  ['Mais links', 'Strawberri', '2026-08-29', `https://borri.adfos.com/
+https://borri.bsmart-solutions.com.my/
+https://borri.dayspringeugene.com/
+https://borri.gd1code.com/
+https://borri.kennesawcommons.com/
+https://borri.breadtime.com.my/
+https://borri.noordware.com/`]
+];
+const LINK_DATES = new Map();
+for (const [category, name, date, lines] of DATED_LINK_BATCHES) {
+  const group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  const existing = new Set(group.links.split('\n').map(url => /^https?:\/\//i.test(url) ? url : `https://${url}`));
+  for (const url of lines.split('\n')) {
+    if (!existing.has(url)) { group.links += `\n${url}`; existing.add(url); }
+    const previous = LINK_DATES.get(url);
+    if (!previous || date < previous) LINK_DATES.set(url, date);
+  }
+}
+// Exceções com idade confirmada, mas sem data precisa, podem ser registradas aqui.
+const OLD_LINKS = new Set([]);
+function isOldLink(url, today = new Date()) {
+  if (OLD_LINKS.has(url)) return true;
+  const date = LINK_DATES.get(url);
+  if (!date) return false;
+  const year = today.getFullYear(), month = today.getMonth();
+  const lastDay = new Date(year, month - 1, 0).getDate();
+  const cutoff = new Date(year, month - 2, Math.min(today.getDate(), lastDay));
+  const iso = [cutoff.getFullYear(), String(cutoff.getMonth() + 1).padStart(2, '0'), String(cutoff.getDate()).padStart(2, '0')].join('-');
+  return date <= iso;
+}
+
+// Endereços fornecidos sem data: somente páginas cuja interface carregou na verificação.
+const VERIFIED_UNDATED_BATCHES = [
+  ['Mais links', 'Vale', `http://vale5.tbt.mx/
+http://vale5.g2g.asia/
+http://securly-vale.3d-mart.ru/
+http://vibed-forever.g2g.my/
+http://vale5.tb2.net/
+https://surreal.today/`],
+  ['Estudos', 'Tung Tung', `https://science-tungtung.shor.ch/
+https://science-tungtung.handfolding.com/
+https://science-tungtung.govt.hu/
+https://science-tungtung.avenuecarriagecrossing.com/
+https://goodtung.roje.com.br/
+https://amazingtt.krepche.com/
+https://ttpscience.mantavyagajjar.com/
+https://formula.glamourfreaks.com/
+https://new.streetdirectory.sg/
+https://killl.nondestructivetesting.ca/
+https://tt.meridiano.com.br/
+https://thay.aidbayarea.org/
+https://butter.shor.ch/
+https://nocaptions.cfd/
+https://ifdont.krepche.com/
+https://science.happy0.co.uk/
+https://newprof.ctrlalt-code.com/
+https://questionme.brianneburnell.com/`],
+  ['Estudos', 'StudyHub', `https://well.roje.com.br/
+https://studyhub.mantavyagajjar.com/
+https://allow.krepche.com/
+https://lesson.glamourfreaks.com/
+https://kill.streetdirectory.sg/
+https://tt.nondestructivetesting.ca/
+https://zsch.meridiano.com.br/
+https://would.aidbayarea.org/`],
+  ['Mais links', 'Strawberri', `https://schools.roje.com.br/
+https://xoeand.glamourfreaks.com/
+https://area.mantavyagajjar.com/
+https://mathsri.krepche.com/`],
+  ['Filmes e séries', 'Triple T HD', `https://triple.nondestructivetesting.ca/`]
+];
+for (const [category, name, lines] of VERIFIED_UNDATED_BATCHES) {
+  let group = LINK_GROUPS.find(item => item.category === category && item.name === name);
+  if (!group) { group = { category, name, links: '' }; LINK_GROUPS.push(group); }
+  const known = new Set(group.links.split('\n').filter(Boolean).map(url => url.replace(/^https?:\/\//, '').replace(/\/$/, '')));
+  for (const url of lines.split('\n')) {
+    const key = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    if (!known.has(key)) { group.links += `${group.links ? '\n' : ''}${url}`; known.add(key); }
+  }
+}
+
+// Publicações verificadas: a data é da postagem, não necessariamente da criação.
+const FERN_CHERRI_POSTS = [
+  ['Mais links', 'Fern', '2026-10-13', 'https://ferndc.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-13', 'https://ferndc.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-14', 'https://frnbk.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-14', 'https://bullbk.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://chrisets.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://chrisets.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Cherri', '2026-10-22', 'https://s3.amazonaws.com/chrisets/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://cmathhub2.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://cmathhub2.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://mathhub2.s3.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-27', 'https://mathhub2.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-30', 'https://readingsets.s3.us-east-1.amazonaws.com/index.html'],
+  ['Mais links', 'Fern', '2026-10-30', 'https://readingsets.s3.amazonaws.com/index.html']
+];
+for (const [cat, name, date, url] of FERN_CHERRI_POSTS) {
+  const group = LINK_GROUPS.find(item => item.category === cat && item.name === name);
+  const canonical = value => value.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+  const existing = group.links.split('\n').find(value => canonical(value) === canonical(url));
+  const address = existing ? (/^https?:\/\//i.test(existing) ? existing : `https://${existing}`) : url;
+  if (!existing) group.links += `\n${url}`;
+  const previous = LINK_DATES.get(address);
+  if (!previous || date < previous) LINK_DATES.set(address, date);
 }

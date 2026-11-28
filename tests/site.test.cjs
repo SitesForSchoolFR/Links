@@ -9,7 +9,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 const root = path.resolve(__dirname, '..');
 const load = name => fs.readFileSync(path.join(root, name), 'utf8');
 const scripts = ['links', 'unblockers', 'study-extra', 'study', 'themes', 'app'].map(name => load(`assets/${name}.js`)).join('\n');
-function site(initial = {}) {
+function site(initial = {}, setup = '') {
   const errors = [];
   const virtualConsole = new VirtualConsole();
   virtualConsole.on('jsdomError', error => errors.push(error.message));
@@ -20,7 +20,7 @@ function site(initial = {}) {
   window.HTMLElement.prototype.scrollIntoView = () => {};
   window.confirm = () => true;
   for (const [key, value] of Object.entries(initial)) window.localStorage.setItem(key, value);
-  window.eval(scripts);
+  window.eval(scripts.replace("const grid = document.querySelector('#grid');", `${setup}\nconst grid = document.querySelector('#grid');`));
   return { dom, window, document: window.document, errors };
 }
 function submit(window, value) {
@@ -108,14 +108,12 @@ test('ao remover favoritos, mantém cartões abertos e foco de teclado', () => {
   } finally { dom.window.close(); }
 });
 
-test('todas as opções de tema apontam para imagens existentes', () => {
+test('preferências antigas não mudam o tema minimalista', () => {
   const { dom, document: d } = site({ 'links-theme-v2': 'void' });
   try {
-    assert.equal(d.querySelector('#links-site').dataset.theme, 'midnight');
-    const css = load('assets/style.css');
-    const images = [...css.matchAll(/data-art="(\d\d)"\] \.hero\{--theme-image:url\("([^"]+)"\)/g)];
-    assert.equal(images.length, 10);
-    for (const [, , image] of images) assert.ok(fs.existsSync(path.join(root, 'assets', image)), image);
+    assert.equal(d.documentElement.dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#links-site').dataset.theme, 'minimal');
+    assert.equal(d.querySelector('#theme-settings'), null);
   } finally { dom.window.close(); }
 });
 
@@ -333,7 +331,7 @@ test('aba Melhores mostra as coleções e os endereços informados', () => {
     assert.equal(button.getAttribute('aria-pressed'), 'true');
     const cards = [...d.querySelectorAll('#grid .card')];
     assert.deepEqual(cards.map(card => card.querySelector('h3').textContent), ['Bull33', 'Cherri', 'Fern', 'Xylora', 'Frogiees arcade', 'Duckmath', 'Red Exploit', 'Refract', 'Gust']);
-    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [24, 6, 6, 5, 8, 9, 5, 9, 4999]);
+    assert.deepEqual(cards.map(card => card.querySelectorAll('li').length), [26, 6, 6, 5, 8, 9, 5, 9, 4999]);
     assert.equal(cards[0].querySelector('a').getAttribute('href'), 'http://hcxrt.sesaech.gob.mx/');
     assert.equal(cards[7].querySelector('a').getAttribute('href'), 'https://cdn.jsdmirror.com/gh/qsnt/tinythunder46@c15440c436ad8ee3c34576f27dcb1666606da545/refract.svg');
     assert.equal(cards[8].querySelector('li:last-child a').getAttribute('href'), 'https://gcore.jsdelivr.net/gh/mayhem221-tech/gust@main/svg/site.svg?submission_id=89989977&module_item_id=8429&user_id=44192510&download=5000');
@@ -421,33 +419,23 @@ test('seção Filmes apresenta YouShows e a frase como texto', () => {
   } finally { dom.window.close(); }
 });
 
-test('minimalista é padrão e Shift K A restaura Kawaii sem trocar de modo', () => {
-  const { dom, window: w, document: d } = site();
+test('tema minimalista é permanente e não contém imagens da série', () => {
+  const { dom, window: w, document: d } = site({ 'links-theme-v2': 'kawaii' });
   try {
+    for (const code of ['KeyK', 'KeyA']) d.dispatchEvent(new w.KeyboardEvent('keydown', { code, shiftKey: true, bubbles: true }));
     assert.equal(d.documentElement.dataset.theme, 'minimal');
     assert.equal(d.querySelector('#links-site').dataset.theme, 'minimal');
-    assert.equal(d.querySelector('#study').hidden, false);
-    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyK', key: 'K', shiftKey: true, bubbles: true }));
-    d.dispatchEvent(new w.KeyboardEvent('keydown', { code: 'KeyA', key: 'A', shiftKey: true, bubbles: true }));
-    assert.equal(d.documentElement.dataset.theme, 'kawaii');
-    assert.equal(d.querySelector('#links-site').dataset.theme, 'kawaii');
-    assert.equal(d.querySelector('#study').hidden, false);
-    assert.equal(w.localStorage.getItem('links-theme-v2'), 'kawaii');
-    d.querySelector('[data-theme-id="minimal"]').click();
+    d.dispatchEvent(new w.KeyboardEvent('keyup', { code: 'KeyA', bubbles: true }));
+    d.dispatchEvent(new w.KeyboardEvent('keyup', { code: 'KeyK', bubbles: true }));
+    for (const code of ['KeyP', 'KeyA']) d.dispatchEvent(new w.KeyboardEvent('keydown', { code, shiftKey: true, bubbles: true }));
+    assert.equal(d.querySelector('#links-site').hidden, false);
     assert.equal(d.documentElement.dataset.theme, 'minimal');
-    assert.equal(w.localStorage.getItem('links-theme-v2'), 'minimal');
+    assert.doesNotMatch(load('index.html'), /mentalista/i);
+    assert.doesNotMatch(load('assets/minimal.css'), /mentalista/i);
+    assert.match(load('assets/minimal.css'), /prefers-reduced-motion:no-preference/);
+    assert.ok(d.querySelector('.cursor-pointer'));
+    assert.ok(d.querySelector('.cursor-ring'));
   } finally { dom.window.close(); }
-});
-
-test('imagens de O Mentalista estão disponíveis nos dois modos', () => {
-  const html = load('index.html');
-  for (const image of ['mentalista-01.jpg', 'mentalista-02.jpg']) {
-    assert.ok(fs.existsSync(path.join(root, 'assets', image)), image);
-    assert.ok(html.includes(`assets/${image}`), image);
-  }
-  const css = load('assets/minimal.css');
-  assert.match(css, /\.minimal-portrait\s*\{\s*display:none/);
-  assert.match(css, /html\[data-theme="minimal"\] \.minimal-portrait\s*\{\s*display:block/);
 });
 
 test('roletas sorteiam coleção e link e oferecem abertura segura', () => {
@@ -530,10 +518,136 @@ test('aba Novos mostra as coleções recentes sem duplicá-las no catálogo', ()
     button.click();
     assert.equal(button.getAttribute('aria-pressed'), 'true');
     const names = [...d.querySelectorAll('#grid .card h3')].map(item => item.textContent);
-    assert.deepEqual(names, ['Rammerhead', 'Other Links', 'LuminalOS', 'Edu Rocks', 'WeSlack', 'Luna', 'Void', 'CatClass', 'Cat4z', 'YukiEDU']);
+    assert.deepEqual(names, ['Rammerhead', 'Other Links', 'Bull33', 'LuminalOS', 'Edu Rocks', 'WeSlack', 'Luna', 'Void', 'CatClass', 'Cat4z', 'YukiEDU', 'GGR', 'CalcSolver']);
     assert.equal(new Set(names).size, names.length);
     const oldTab = [...d.querySelectorAll('#filters button')].find(item => item.textContent === 'Mais links');
     oldTab.click();
     assert.ok([...d.querySelectorAll('#grid .card h3')].some(item => item.textContent === 'Other Links'));
   } finally { dom.window.close(); }
+});
+
+test('links recentes confirmados estão nas coleções corretas', () => {
+  const groups = vm.runInNewContext(load('assets/links.js') + '\nLINK_GROUPS');
+  for (const [category, name, count] of [['Jogos', 'GGR', 1], ['Estudos', 'CalcSolver', 30]]) {
+    const group = groups.find(g => g.category === category && g.name === name);
+    assert.ok(group && group.recent);
+    assert.equal(group.links.split('\n').length, count);
+  }
+  const other = groups.find(g => g.category === 'Mais links' && g.name === 'Other Links');
+  assert.ok(other.links.includes('https://8be6b8adc2f3.surge.sh/'));
+  assert.ok(other.links.includes('https://26dadd391010.surge.sh/'));
+  const bull = groups.find(g => g.category === 'Melhores' && g.name === 'Bull33');
+  assert.ok(bull.recent);
+  assert.ok(bull.links.includes('https://readinghelpsyouthink.ignorelist.com/'));
+  assert.ok(bull.links.includes('https://startreading.ixl.alternative.ignorelist.com/'));
+});
+
+test('copia links individuais e toda a coleção mesmo com filtro, e informa falhas', async () => {
+  const { dom, window: w, document: d } = site();
+  try {
+    const copied = [];
+    Object.defineProperty(w.navigator, 'clipboard', { configurable: true, value: { writeText: async text => { copied.push(text); } } });
+    const search = d.querySelector('#search');
+    search.value = 'readinghelpsyouthink.ignorelist.com';
+    search.dispatchEvent(new w.Event('input'));
+    const card = [...d.querySelectorAll('.card')].find(c => c.querySelector('h3').textContent === 'Bull33');
+    assert.ok(card);
+    assert.equal(card.querySelectorAll('li').length, 1);
+    card.querySelector('.copy-link').click();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(copied[0], 'https://readinghelpsyouthink.ignorelist.com/');
+    assert.equal(card.querySelector('.copy-status').textContent, 'Link copiado.');
+    card.querySelector('.copy-all').click();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(copied[1].split('\n').length, 26);
+    assert.ok(copied[1].includes('https://startreading.ixl.alternative.ignorelist.com/'));
+    assert.match(card.querySelector('.copy-status').textContent, /Todos os links de Bull33/);
+    w.navigator.clipboard.writeText = async () => { throw new Error('denied'); };
+    card.querySelector('.copy-link').click();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.match(card.querySelector('.copy-status').textContent, /Não foi possível copiar/);
+    Object.defineProperty(w.navigator, 'clipboard', { configurable: true, value: undefined });
+    card.querySelector('.copy-all').click();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.match(card.querySelector('.copy-status').textContent, /Não foi possível copiar/);
+  } finally { dom.window.close(); }
+});
+
+test('abre o site em about:blank e trata bloqueio de pop-up', () => {
+  const { dom, window: w, document: d } = site();
+  const popup = new JSDOM('<!doctype html><html><head></head><body></body></html>', { url: 'about:blank' });
+  try {
+    let args;
+    w.open = (...values) => { args = values; return null; };
+    d.querySelector('#open-blank').click();
+    assert.deepEqual(args, ['about:blank', '_blank']);
+    assert.match(d.querySelector('#blank-status').textContent, /Permita pop-ups/);
+    assert.equal(w.location.hostname, 'sitesforschoolfr.github.io');
+    w.open = () => popup.window;
+    d.querySelector('#open-blank').click();
+    const frame = popup.window.document.querySelector('iframe');
+    assert.ok(frame);
+    assert.equal(frame.src, 'https://sitesforschoolfr.github.io/Links/');
+    assert.equal(frame.title, 'Links for me');
+    assert.equal(popup.window.document.title, 'Links for me');
+    assert.ok(d.querySelector('.brand-logo').getAttribute('src').endsWith('logo.svg'));
+    assert.ok(d.querySelector('.study-brand-logo').getAttribute('src').endsWith('logo.svg'));
+    assert.equal(popup.window.document.querySelector('link[rel=icon]').href, 'https://sitesforschoolfr.github.io/Links/assets/logo.svg');
+  } finally { popup.window.close(); dom.window.close(); }
+});
+
+
+test('abas prioritárias e Antigos por endereço confirmado', async () => {
+  const { dom, window: w, document: d } = site({}, "OLD_LINKS.add('https://readinghelpsyouthink.ignorelist.com/');");
+  try {
+    const buttons = [...d.querySelectorAll('#filters button')];
+    assert.deepEqual(buttons.slice(0, 4).map(b => b.textContent), ['Novos', 'Jogos', 'Unblocker', 'Estudos']);
+    assert.equal(buttons.at(-1).textContent, 'Antigos');
+    buttons.find(b => b.textContent === 'Unblocker').click();
+    assert.ok([...d.querySelectorAll('#grid h3')].some(h => h.textContent === 'Petezah'));
+    assert.ok(![...d.querySelectorAll('#grid h3')].some(h => h.textContent === 'Eaglercraft'));
+    buttons.at(-1).click();
+    const search = d.querySelector('#search');
+    search.value = 'readinghelpsyouthink.ignorelist.com';
+    search.dispatchEvent(new w.Event('input'));
+    assert.deepEqual([...d.querySelectorAll('#grid h3')].map(h => h.textContent), ['Bull33']);
+    assert.equal(d.querySelectorAll('#grid li').length, 1);
+    assert.equal(d.querySelector('#grid li a').href, 'https://readinghelpsyouthink.ignorelist.com/');
+    let copied;
+    Object.defineProperty(w.navigator, 'clipboard', { configurable: true, value: { writeText: async value => { copied = value; } } });
+    d.querySelector('.copy-all').click();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(copied, 'https://readinghelpsyouthink.ignorelist.com/');
+    search.value = '';
+    search.dispatchEvent(new w.Event('input'));
+    buttons[0].click();
+    assert.ok([...d.querySelectorAll('#grid h3')].some(h => h.textContent === 'Other Links'));
+  } finally { dom.window.close(); }
+});
+
+test('Antigos não presume datas não informadas', () => {
+  const { dom, document: d } = site({}, 'LINK_DATES.clear();');
+  try {
+    [...d.querySelectorAll('#filters button')].find(b => b.textContent === 'Antigos').click();
+    assert.equal(d.querySelectorAll('#grid .card').length, 0);
+    assert.match(d.querySelector('#empty').textContent, /data confirmada/);
+  } finally { dom.window.close(); }
+});
+
+
+test('links datados de agosto chegam a Antigos após dois meses calendários', () => {
+  const source = load('assets/links.js');
+  const data = vm.runInNewContext(source + `
+({ groups: LINK_GROUPS, dates: LINK_DATES, isOldLink })`);
+  assert.equal(data.dates.size, 123);
+  assert.equal(data.isOldLink('https://kaydes.cfd/', new Date(2026, 9, 20)), false);
+  assert.equal(data.isOldLink('https://kaydes.cfd/', new Date(2026, 9, 21)), true);
+  assert.equal(data.isOldLink('https://kaydes.cfd/', new Date(2026, 10, 14)), true);
+  assert.equal(data.isOldLink('https://unknown.example/', new Date(2026, 10, 14)), false);
+  assert.equal(data.dates.has('https://schoolisnice.labgarreguevara.com.ar/'), false);
+  assert.equal(data.dates.get('https://strawberri.lol/'), '2026-09-01');
+  assert.equal(data.isOldLink('https://schoooollledu.bookworm.com.np/', new Date(2026, 10, 22)), false);
+  assert.equal(data.isOldLink('https://schoooollledu.bookworm.com.np/', new Date(2026, 10, 23)), true);
+  assert.ok(data.groups.find(g => g.category === 'Estudos' && g.name === 'Tung Tung').links.includes('https://kaydes.cfd/'));
+  assert.ok(data.groups.find(g => g.category === 'Mais links' && g.name === 'Strawberri').links.includes('https://strawberri.best/'));
 });
