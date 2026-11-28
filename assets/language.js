@@ -81,6 +81,18 @@
     'Navegação de estudos': ['Study navigation', 'Navegación de estudios'], 'Pesquisa de estudos': ['Search studies', 'Búsqueda de estudios'],
     'Study Hobby, ir para início': ['Study Hobby, go home', 'Study Hobby, ir al inicio']
   });
+  Object.assign(dictionary, {
+    'FERRAMENTA DE ESTUDO': ['STUDY TOOL', 'HERRAMIENTA DE ESTUDIO'], 'Calculadora': ['Calculator', 'Calculadora'],
+    'Faça suas contas sem sair da página.': ['Do your calculations without leaving the page.', 'Haz tus cálculos sin salir de la página.'],
+    'Modo Difficult': ['Difficult mode', 'Modo Difficult'], 'Visor da calculadora': ['Calculator display', 'Pantalla de la calculadora'],
+    'Trigonometria em graus': ['Trigonometry in degrees', 'Trigonometría en grados'], 'Raiz quadrada': ['Square root', 'Raíz cuadrada'],
+    'Ao quadrado': ['Square', 'Al cuadrado'], 'Potência': ['Power', 'Potencia'], 'Inverso': ['Reciprocal', 'Inverso'],
+    'Porcentagem': ['Percentage', 'Porcentaje'], 'Fatorial': ['Factorial', 'Factorial'], 'Apagar último caractere': ['Delete last character', 'Borrar último carácter'],
+    'Trocar sinal': ['Change sign', 'Cambiar signo'], 'Dividir': ['Divide', 'Dividir'], 'Multiplicar': ['Multiply', 'Multiplicar'], 'Subtrair': ['Subtract', 'Restar'], 'Somar': ['Add', 'Sumar'],
+    'Conta inválida ou resultado indefinido.': ['Invalid calculation or undefined result.', 'Cálculo inválido o resultado indefinido.'],
+    'Fatorial exige um inteiro entre 0 e 170.': ['Factorial requires an integer between 0 and 170.', 'El factorial requiere un entero entre 0 y 170.'],
+    'Expressão longa demais.': ['Expression is too long.', 'La expresión es demasiado larga.']
+  });
   const toggle = document.querySelector('#language-toggle'), menu = document.querySelector('#language-menu');
   const originals = new WeakMap();
   let language = 'pt-BR';
